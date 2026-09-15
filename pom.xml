@@ -15,4 +15,35 @@
         <sonar.projectKey>prone21_PartyFlow</sonar.projectKey>
         <sonar.organization>partyflow</sonar.organization>
     </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>26</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>26</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>it.uniroma2.partyflow.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>
