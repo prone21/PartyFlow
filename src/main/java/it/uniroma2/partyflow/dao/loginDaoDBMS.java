@@ -15,6 +15,6 @@ public class loginDaoDBMS {
 
     public AccountType checkCredentials() throws SQLException {
         SessionManager.getSessionManager();
-        return null;
+        return AccountType.Participant;
     }
 }
