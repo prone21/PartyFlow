@@ -9,6 +9,7 @@ import java.io.IOException;
 public class NavigatorSingleton {
     private static NavigatorSingleton instance = null;
     private Stage stage;
+    private Scene prevScene;
 
     private NavigatorSingleton(Stage stage){
         this.stage = stage;
@@ -21,9 +22,15 @@ public class NavigatorSingleton {
         return NavigatorSingleton.instance;
     }
 
-    public void gotoView(String view) throws IOException {
+    public static NavigatorSingleton getInstance(){
+        return NavigatorSingleton.instance;
+    }
+
+    public void gotoView(String viewPath) throws IOException {
+        prevScene = stage.getScene();
+
         FXMLLoader loader =
-                new FXMLLoader(getClass().getResource(view));
+                new FXMLLoader(getClass().getResource(viewPath));
 
         Scene scene = new Scene(loader.load());
 
@@ -31,6 +38,20 @@ public class NavigatorSingleton {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    public void gotoView(Scene scene) throws IOException {
+
+        stage.setTitle("PartyFlow");
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
+
+    public void goBackward() throws IOException {
+        NavigatorSingleton nav = NavigatorSingleton.getInstance();
+        nav.gotoView(prevScene);
     }
 
 }
