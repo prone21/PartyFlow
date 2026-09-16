@@ -10,6 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -47,7 +48,7 @@ public class SignUpGraphicControllerGUI {
 
 
     @FXML
-    public void createAccount() {
+    public void createAccount() throws SQLException {
 
         signUpCredentialsBean signUpBean = new signUpCredentialsBean();
         DateTimeFormatter formatter =
