@@ -29,7 +29,7 @@ public class loginDaoDBMS {
                 return AccountType.PartyPlanner;
             } else {
                 System.out.println("non ci sta sto account");
-                return null;
+                return AccountType.NULLO;
             }
         }
     }
