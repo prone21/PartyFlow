@@ -20,7 +20,7 @@ public class loginappController {
                 break;
 
             case PartyPlanner:
-                System.out.println("è un partplanner");
+                System.out.println("è un partyplanner");
                 break;
 
             default:
