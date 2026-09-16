@@ -1,24 +1,43 @@
 package it.uniroma2.partyflow.graphic_controller;
 
+import it.uniroma2.partyflow.app_controller.loginappController;
+import it.uniroma2.partyflow.beans.loginCredentialsBean;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginGraphicControllerGUI {
+
+     @FXML
+     private TextField emailField;
+     @FXML
+     private TextField pwdField;
+
 
     @FXML
     public void goBackward() throws IOException {
         NavigatorSingleton nav = NavigatorSingleton.getInstance();
-        nav.goBackward();
+        nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
     }
 
     @FXML
-    public void submitCredentials(){
-        System.out.println("Hola boludo!");
+    public void submitCredentials() throws SQLException {
+        String email = emailField.getText();
+        String pwd = pwdField.getText();
+
+        loginCredentialsBean loginBean = new loginCredentialsBean();
+        loginBean.setEmail(email);
+        loginBean.setPwd(pwd);
+
+        loginappController loginController = new loginappController();
+        loginController.login(loginBean);
     }
 
     @FXML

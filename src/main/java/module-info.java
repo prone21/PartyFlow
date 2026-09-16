@@ -3,6 +3,7 @@ module it.uniroma2.partyflow {
     // Without this, I can't use the classes defined in these module.
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
     // Without this, JavaFX cannot instantiate GuiApplication.
     exports it.uniroma2.partyflow.launcher to javafx.graphics;

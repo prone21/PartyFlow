@@ -12,12 +12,12 @@ public class FirstSceneGraphicControllerIGUI {
     @FXML
     public void login() throws IOException {
         NavigatorSingleton nav = NavigatorSingleton.getInstance();
-        nav.gotoView("it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
+        nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/login.fxml");
     }
 
     @FXML
     public void signUp () throws IOException {
         NavigatorSingleton nav = NavigatorSingleton.getInstance();
-        nav.gotoView("it/uniroma2/partyflow/view/view_in_common/hangoutNotificationViewer.fxml");
+        nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
     }
 }
