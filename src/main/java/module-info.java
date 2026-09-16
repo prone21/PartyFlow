@@ -4,6 +4,7 @@ module it.uniroma2.partyflow {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires mysql.connector.j;
 
     // Without this, JavaFX cannot instantiate GuiApplication.
     exports it.uniroma2.partyflow.launcher to javafx.graphics;

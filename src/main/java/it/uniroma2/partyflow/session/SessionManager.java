@@ -1,7 +1,5 @@
 package it.uniroma2.partyflow.session;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SessionManager {
     private static SessionManager instance = null;
@@ -25,6 +23,10 @@ public class SessionManager {
             instance  = new SessionManager();
         }
         return instance;
+    }
+
+    public Connection getConnection(){
+        return conn;
     }
 
 }
