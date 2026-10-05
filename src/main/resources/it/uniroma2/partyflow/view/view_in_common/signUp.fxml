@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controller.SignUpGraphicControllerGUI">
+   <top>
+      <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: FFD700; -fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="11.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="31.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="341.0" layoutY="27.0" style="-fx-font-weight: bold;" text="Sign up" textAlignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="backwardButton" layoutX="711.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#goBackward" prefHeight="18.0" prefWidth="61.0" style="-fx-font-weight: bold; -fx-font-size: 15; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-background-radius: 20; -fx-border-radius: 20;" text="←">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+           
+            <!-- AccountType Options -->
+
+            <AnchorPane layoutX="37.0" layoutY="11.0" prefHeight="61.0" prefWidth="340.0" style="-fx-background-color: FFD700; -fx-border-radius: 5; -fx-background-radius: 5;">
+
+               <fx:define>
+                  <ToggleGroup fx:id="accountTypeGroup" />
+               </fx:define>
+
+
+               <children>
+                  <TextField fx:id="nameField" layoutX="125.0" layoutY="9.0" prefHeight="44.0" prefWidth="192.0" promptText="name" style="-fx-background-color: FFD700; -fx-prompt-text-fill: #666666; -fx-font-size: 18; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                  <Text layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Name:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="417.0" layoutY="161.0" prefHeight="74.0" prefWidth="340.0" style="-fx-background-color: FFD700; -fx-background-radius: 5; -fx-border-radius: 5;">
+               <children>
+                  <Text layoutX="6.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Account type:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <RadioButton fx:id="partyPlannerOption" layoutX="190.0" layoutY="8.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17;" text="Party Planner">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="accountTypeGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="participantOption" layoutX="189.0" layoutY="43.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17;" text="Participant" toggleGroup="$accountTypeGroup">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </AnchorPane>
+
+            <!-- FINE ACCOUNTTYPE OPTIONS -->
+
+            <!-- GENDER OPTIONS -->
+            
+            <AnchorPane layoutX="37.0" layoutY="249.0" prefHeight="113.0" prefWidth="290.0" style="-fx-background-color: FFD700; -fx-border-radius: 5; -fx-background-radius: 5;">
+
+               <fx:define>
+                  <ToggleGroup fx:id="genderGroup" />
+               </fx:define>
+
+               <children>
+                  <Text layoutX="6.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Gender:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <RadioButton fx:id="maleOption" layoutX="108.0" layoutY="5.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17;" text="Male">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="genderGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="femaleOption" layoutX="108.0" layoutY="45.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17;" text="Female" toggleGroup="$genderGroup">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="pntsOption" layoutX="107.0" layoutY="84.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17;" text="Prefer not to say" toggleGroup="$genderGroup">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </AnchorPane>
+            
+            <!-- FINE GENDER OPTION -->
+
+            <AnchorPane layoutX="37.0" layoutY="87.0" prefHeight="61.0" prefWidth="340.0" style="-fx-background-color: FFD700; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <TextField fx:id="surnameField" layoutX="125.0" layoutY="9.0" prefHeight="44.0" prefWidth="192.0" promptText="surname" style="-fx-background-color: FFD700; -fx-prompt-text-fill: #666666; -fx-font-size: 18; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                  <Text layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Surname:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="37.0" layoutY="162.0" prefHeight="61.0" prefWidth="340.0" style="-fx-background-color: FFD700; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <TextField fx:id="dateField" layoutX="174.0" layoutY="9.0" prefHeight="44.0" prefWidth="139.0" promptText="DD/MM/YYYY" style="-fx-background-color: FFD700; -fx-prompt-text-fill: #666666; -fx-font-size: 18; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                  <Text layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Date of birth:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="416.0" layoutY="11.0" prefHeight="61.0" prefWidth="340.0" style="-fx-background-color: FFD700; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <TextField fx:id="emailField" layoutX="145.0" layoutY="9.0" prefHeight="44.0" prefWidth="139.0" promptText="email" style="-fx-background-color: FFD700; -fx-prompt-text-fill: #666666; -fx-font-size: 18; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                  <Text layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Email:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="416.0" layoutY="87.0" prefHeight="61.0" prefWidth="340.0" style="-fx-background-color: FFD700; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <TextField fx:id="pwdField" layoutX="144.0" layoutY="9.0" prefHeight="44.0" prefWidth="187.0" promptText="password" style="-fx-background-color: FFD700; -fx-prompt-text-fill: #666666; -fx-font-size: 18; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                  <Text layoutX="7.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Password:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Button fx:id="createAccountButton" layoutX="264.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#createAccount" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-background-color: FFD700; -fx-background-radius: 20; -fx-border-radius: 20;" text="Create Account">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
