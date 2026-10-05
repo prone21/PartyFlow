@@ -75,8 +75,7 @@ public class CredentialsBean {
             this.dateOfBirth = dateOfBirth;
         }
         else{
-            SignUpException exc = new SignUpException("Invalid date format. Please use DD/MM/YYYY.",0);
-            throw exc;
+            throw new SignUpException("Invalid date format. Please use DD/MM/YYYY.",0);
         }
     }
     //---------------------------------------------------------------------
@@ -101,8 +100,7 @@ public class CredentialsBean {
             this.email = email;
         }
         else{
-            SignUpException exc = new SignUpException("Invalid email",0);
-            throw exc;
+            throw new SignUpException("Invalid email",0);
         }
     }
     //----------------------------------------------------------------------
@@ -114,7 +112,7 @@ public class CredentialsBean {
     }
 
     private boolean isValidPwd(String pwd){
-        return pwd.length()<8?false:true;
+        return pwd.length()>=8;
     }
 
     public void setPassword(String password) throws SignUpException, EmptyException {
@@ -125,8 +123,7 @@ public class CredentialsBean {
             this.password = password;
         }
         else{
-            SignUpException exc = new SignUpException("The password must be at least 8 characters long.",0);
-            throw exc;
+            throw new SignUpException("The password must be at least 8 characters long.",0);
         }
     }
     //----------------------------------------------------------------------
