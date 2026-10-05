@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class SignUpGraphicControllerGUI {
@@ -47,7 +46,17 @@ public class SignUpGraphicControllerGUI {
     private RadioButton participantOption;
 
 
-    public void goBackward() throws IOException {
+    private final TextField[] fields = {
+            nameField,
+            surnameField,
+            dateField,
+            emailField,
+            pwdField
+    };
+
+
+
+    public void goBackward() {
         NavigatorSingleton nav = NavigatorSingleton.getInstance();
         nav.goBackward();
     }
@@ -94,36 +103,7 @@ public class SignUpGraphicControllerGUI {
                     "-fx-background-color: transparent;" + "-fx-font-size: 18px;"+
                     "-fx-prompt-text-fill:  #666666;";
 
-            switch (e.getType()){
-                case 0 :
-                    nameField.setStyle(style);
-                    break;
-
-                case 1 :
-                    surnameField.setStyle(style);
-                    break;
-
-                case 2 :
-                    dateField.setStyle(style);
-                    break;
-
-                case 3 :
-                    emailField.setStyle(style);
-                    break;
-
-                case 4 :
-                    pwdField.setStyle(style);
-                    break;
-
-                case 5 :
-                    //nameField.setStyle(style);
-                    break;
-
-                case 6 :
-                    //nameField.setStyle(style);
-                    break;
-            }
-
+            this.fields[e.getType()].setStyle(style);
         }
 
     }

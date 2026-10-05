@@ -70,9 +70,6 @@
                      <font>
                         <Font size="17.0" />
                      </font>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="accountTypeGroup" />
-                     </toggleGroup>
                   </RadioButton>
                   <RadioButton fx:id="participantOption" layoutX="189.0" layoutY="43.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17;" text="Participant" toggleGroup="$accountTypeGroup">
                      <font>
@@ -102,9 +99,6 @@
                      <font>
                         <Font size="17.0" />
                      </font>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="genderGroup" />
-                     </toggleGroup>
                   </RadioButton>
                   <RadioButton fx:id="femaleOption" layoutX="108.0" layoutY="45.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17;" text="Female" toggleGroup="$genderGroup">
                      <font>
