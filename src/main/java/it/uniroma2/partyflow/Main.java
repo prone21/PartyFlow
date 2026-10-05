@@ -3,13 +3,15 @@ import it.uniroma2.partyflow.launcher.GuiApplication;
 import javafx.application.Application;
 
 public class Main {
+    //software configuration variables
+
     private static final String DEFAULT_PERSISTENCE = "mysql";
     private static final String DEFAULT_INTERFACE = "gui";
 
-    private static final String PERSISTENCE_MYSQL = "mysql";
+   /* private static final String PERSISTENCE_MYSQL = "mysql";
     private static final String PERSISTENCE_CSV = "csv";
     private static final String PERSISTENCE_INMEMORY = "inmemory";
-
+*/
     private static final String INTERFACE_GUI = "gui";
     private static final String INTERFACE_CLI = "cli";
 

@@ -1,8 +1,6 @@
 package it.uniroma2.partyflow.launcher;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 

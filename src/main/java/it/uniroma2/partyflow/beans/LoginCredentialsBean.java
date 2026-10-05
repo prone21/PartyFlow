@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.beans;
 
-public class loginCredentialsBean {
+public class LoginCredentialsBean {
     private String email;
     private String pwd;
 

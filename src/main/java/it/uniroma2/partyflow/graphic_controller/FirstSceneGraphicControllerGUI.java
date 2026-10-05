@@ -1,14 +1,9 @@
 package it.uniroma2.partyflow.graphic_controller;
-
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import java.io.IOException;
 
-public class FirstSceneGraphicControllerIGUI {
+public class FirstSceneGraphicControllerGUI {
     @FXML
     public void login() throws IOException {
         NavigatorSingleton nav = NavigatorSingleton.getInstance();

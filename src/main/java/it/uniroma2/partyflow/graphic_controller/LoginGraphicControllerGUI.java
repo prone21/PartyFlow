@@ -1,14 +1,12 @@
 package it.uniroma2.partyflow.graphic_controller;
 
-import it.uniroma2.partyflow.app_controller.loginappController;
-import it.uniroma2.partyflow.beans.loginCredentialsBean;
+import it.uniroma2.partyflow.app_controller.LoginappController;
+import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,11 +30,11 @@ public class LoginGraphicControllerGUI {
         String email = emailField.getText();
         String pwd = pwdField.getText();
 
-        loginCredentialsBean loginBean = new loginCredentialsBean();
+        LoginCredentialsBean loginBean = new LoginCredentialsBean();
         loginBean.setEmail(email);
         loginBean.setPwd(pwd);
 
-        loginappController loginController = new loginappController();
+        LoginappController loginController = new LoginappController();
         loginController.login(loginBean);
     }
 
