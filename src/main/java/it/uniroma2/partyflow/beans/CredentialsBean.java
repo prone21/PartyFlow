@@ -149,6 +149,7 @@ public class CredentialsBean {
 
     public void setAccountType(AccountType accountType) throws EmptyException {
        if(accountType == null){
+           System.out.println("la puta madre que de pariò");
            throw new EmptyException(6);
        }
        else {

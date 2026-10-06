@@ -8,9 +8,14 @@ import it.uniroma2.partyflow.exceptions.EmptyException;
 import it.uniroma2.partyflow.exceptions.SignUpException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class SignUpGraphicControllerGUI {
@@ -28,7 +33,7 @@ public class SignUpGraphicControllerGUI {
     private TextField emailField;
 
     @FXML
-    private TextField pwdField;
+    private PasswordField pwdField;
 
     @FXML
     private RadioButton maleOption;
@@ -45,16 +50,15 @@ public class SignUpGraphicControllerGUI {
     @FXML
     private RadioButton participantOption;
 
+    @FXML
+    private AnchorPane genderPane;
 
-    private final TextField[] fields = {
-            nameField,
-            surnameField,
-            dateField,
-            emailField,
-            pwdField
-    };
+    @FXML
+    private AnchorPane accountTypePane;
 
+    private Node errorField;
 
+    private String oldStyleField;
 
     public void goBackward() {
         NavigatorSingleton nav = NavigatorSingleton.getInstance();
@@ -62,7 +66,21 @@ public class SignUpGraphicControllerGUI {
     }
 
     @FXML
-    public void createAccount() throws SQLException {
+    public void createAccount() throws SQLException, NoSuchAlgorithmException {
+         Node[] nodes = {
+                 nameField,
+                 surnameField,
+                 dateField,
+                 emailField,
+                 pwdField,
+                 genderPane,
+                 accountTypePane
+        };
+
+        if (errorField != null){
+            this.errorField.setStyle(this.oldStyleField);
+        }
+
         try {
             CredentialsBean signUpBean = new CredentialsBean();
 
@@ -81,11 +99,18 @@ public class SignUpGraphicControllerGUI {
             } else if (pntsOption.isSelected()) {
                 signUpBean.setGender(Gender.PNTS);
             }
+            else{
+                signUpBean.setGender(null);
+            }
 
             if (partyPlannerOption.isSelected()) {
                 signUpBean.setAccountType(AccountType.PartyPlanner);
             } else if (participantOption.isSelected()) {
                 signUpBean.setAccountType(AccountType.Participant);
+            }
+            else{
+                System.out.println("e dio cane");
+                signUpBean.setAccountType(null);
             }
 
             SignUpController signUpController = new SignUpController();
@@ -99,11 +124,12 @@ public class SignUpGraphicControllerGUI {
             alert.showAndWait();
         }
         catch (EmptyException e){
-            String style = "-fx-border-color: red;" +
-                    "-fx-background-color: transparent;" + "-fx-font-size: 18px;"+
-                    "-fx-prompt-text-fill:  #666666;";
+            this.oldStyleField = nodes[e.getType()].getStyle();
+            System.out.println(e.getType());
+            System.out.println(nodes[e.getType()].getId());
+            nodes[e.getType()].setStyle(this.oldStyleField + "-fx-border-color: red;");
+            this.errorField = nodes[e.getType()];
 
-            this.fields[e.getType()].setStyle(style);
         }
 
     }

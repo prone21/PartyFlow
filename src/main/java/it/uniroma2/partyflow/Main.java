@@ -1,27 +1,36 @@
 package it.uniroma2.partyflow;
 import it.uniroma2.partyflow.launcher.GuiApplication;
+import it.uniroma2.partyflow.utilities.Configurator;
 import javafx.application.Application;
+
+import java.io.IOException;
 
 public class Main {
     //software configuration variables
 
-    private static final String DEFAULT_PERSISTENCE = "mysql";
-    private static final String DEFAULT_INTERFACE = "gui";
+    private static final String DEFAULT_PERSISTENCE = "dbms-mysql";
+    private static final String DEFAULT_INTERFACE = "gui-javafx";
 
    /* private static final String PERSISTENCE_MYSQL = "mysql";
     private static final String PERSISTENCE_CSV = "csv";
     private static final String PERSISTENCE_INMEMORY = "inmemory";
 */
-    private static final String INTERFACE_GUI = "gui";
+    private static final String INTERFACE_GUI = "gui-javafx";
     private static final String INTERFACE_CLI = "cli";
 
 
     public static void main(String[] args) {
-        // Parse command-line arguments
-        String persistenceType = args.length > 0 ? args[0].toLowerCase() : DEFAULT_PERSISTENCE;
-        String interfaceType = args.length > 1 ? args[1].toLowerCase() : DEFAULT_INTERFACE;
 
-        launchInterface(interfaceType);
+        try {
+            Configurator cr = Configurator.getConfigurator();
+            launchInterface(cr.getUI());
+
+        }
+        catch (IOException e){
+            System.out.println("l");
+        }
+
+
 
     }
 
@@ -38,4 +47,7 @@ public class Main {
         }
 
     }
+
+
+
 }
