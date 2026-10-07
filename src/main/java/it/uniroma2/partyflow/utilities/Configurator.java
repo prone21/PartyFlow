@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Properties;
 
 public class Configurator {
-    private Properties properties = new Properties();
+    private final Properties properties = new Properties();
     private static Configurator confInstance = null;
 
     private Configurator() throws IOException {
         FileInputStream input =
-                new FileInputStream("config.properties");
+                new FileInputStream("src/main/resources/it/uniroma2/partyflow/config.ini");
 
         properties.load(input);
     }
@@ -27,7 +27,7 @@ public class Configurator {
     }
 
     public String getPersistenceLayer(){
-        return this.properties.getProperty("persistence");
+        return this.properties.getProperty("persistence") ;
     }
 
     public String getUI(){
@@ -35,7 +35,7 @@ public class Configurator {
     }
 
     public List<String> getDBMSConnectionParameter(){
-        if(this.getPersistenceLayer()=="DBMS") {
+        if(this.getPersistenceLayer().equals("DBMS")) {
             List<String> DBMSConnproperties = new ArrayList<>();
             DBMSConnproperties.add(this.properties.getProperty("url"));
             DBMSConnproperties.add(this.properties.getProperty("username"));
@@ -52,7 +52,7 @@ public class Configurator {
     }
 
     public String getdirectoryCSVDB(){
-        if (this.getPersistenceLayer() == "CSV"){
+        if (this.getPersistenceLayer().equals("CSV")){
             return this.properties.getProperty("directoryCSVDB");
         }
         else {

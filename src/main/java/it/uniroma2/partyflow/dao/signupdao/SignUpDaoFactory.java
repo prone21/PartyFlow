@@ -1,5 +1,7 @@
 package it.uniroma2.partyflow.dao.signupdao;
 
+import it.uniroma2.partyflow.model.User;
+
 public class SignUpDaoFactory {
     static private SignUpDaoFactory instance;
     String persistenceLayerType;
@@ -14,12 +16,12 @@ public class SignUpDaoFactory {
         return instance;
     }
 
-    public SignUpDaoInterface getDao(){
-        if (persistenceLayerType == "DBMS"){
-            return new SignUpDaoDBMS();
+    public SignUpDaoInterface getDao(User user){
+        if (persistenceLayerType.equals("DBMS")){
+            return new SignUpDaoDBMS(user);
         }
-        else if (persistenceLayerType == "CSV"){
-            return new SignUpDaoCSV();
+        else if (persistenceLayerType.equals("CSV")){
+            return new SignUpDaoCSV(user);
         }
         else{
             return null;

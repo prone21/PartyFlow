@@ -8,8 +8,6 @@ import java.sql.*;
 public class SignUpDaoDBMS implements SignUpDaoInterface {
     User cred;
 
-
-    public SignUpDaoDBMS() {}
     public void setCredentials(User user){
         this.cred = user;
     }

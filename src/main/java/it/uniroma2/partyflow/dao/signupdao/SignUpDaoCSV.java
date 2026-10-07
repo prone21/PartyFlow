@@ -11,7 +11,6 @@ public class SignUpDaoCSV implements SignUpDaoInterface {
     private static final Path FILE_PATH =
             Path.of("data", "users.csv");
 
-    public SignUpDaoCSV() {}
     public void setCredentials(User user){
         this.user = user;
     }

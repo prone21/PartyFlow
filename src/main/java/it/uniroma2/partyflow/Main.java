@@ -19,7 +19,7 @@ public class Main {
     private static final String INTERFACE_CLI = "cli";
 
 
-    public static void main(String[] args) {
+    public static void main() {
 
         try {
             Configurator cr = Configurator.getConfigurator();
@@ -27,7 +27,8 @@ public class Main {
 
         }
         catch (IOException e){
-            System.out.println("l");
+            System.out.println("Oye maestro! No te olvidaremos");
+            e.printStackTrace();
         }
 
 

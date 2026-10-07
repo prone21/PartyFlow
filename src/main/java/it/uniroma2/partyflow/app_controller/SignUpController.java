@@ -2,14 +2,12 @@ package it.uniroma2.partyflow.app_controller;
 
 import it.uniroma2.partyflow.beans.CredentialsBean;
 import it.uniroma2.partyflow.dao.signupdao.SignUpDaoFactory;
-import it.uniroma2.partyflow.dao.signupdao.SignUpDaoDBMS;
 import it.uniroma2.partyflow.dao.signupdao.SignUpDaoInterface;
 import it.uniroma2.partyflow.model.User;
 import it.uniroma2.partyflow.utilities.Configurator;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 public class SignUpController {
 
-    public void createAccount(CredentialsBean signUpBean) throws SQLException, NoSuchAlgorithmException {
+    public void createAccount(CredentialsBean signUpBean) throws NoSuchAlgorithmException {
 
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("dd/MM/uuuu");
@@ -47,10 +45,8 @@ public class SignUpController {
         try{
             Configurator c = Configurator.getConfigurator();
             SignUpDaoFactory signUpDao = SignUpDaoFactory.getInstance(c.getPersistenceLayer());
-            SignUpDaoInterface dao = signUpDao.getDao();
-
-            SignUpDaoDBMS signUpDAO = new SignUpDaoDBMS(user);
-            signUpDAO.createAccount();
+            SignUpDaoInterface dao = signUpDao.getDao(user);
+            dao.createAccount();
         } catch (IOException e) {
             e.printStackTrace();
         }
