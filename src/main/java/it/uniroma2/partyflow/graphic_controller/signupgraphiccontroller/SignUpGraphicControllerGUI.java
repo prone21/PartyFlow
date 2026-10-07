@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.graphic_controller;
+package it.uniroma2.partyflow.graphic_controller.signupgraphiccontroller;
 
 import it.uniroma2.partyflow.app_controller.SignUpController;
 import it.uniroma2.partyflow.beans.CredentialsBean;

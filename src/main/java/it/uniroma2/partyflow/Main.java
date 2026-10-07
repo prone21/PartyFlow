@@ -1,4 +1,5 @@
 package it.uniroma2.partyflow;
+import it.uniroma2.partyflow.launcher.CliApplication;
 import it.uniroma2.partyflow.launcher.GuiApplication;
 import it.uniroma2.partyflow.utilities.Configurator;
 import javafx.application.Application;
@@ -16,7 +17,7 @@ public class Main {
     private static final String PERSISTENCE_INMEMORY = "inmemory";
 */
     private static final String INTERFACE_GUI = "gui-javafx";
-    private static final String INTERFACE_CLI = "cli";
+    private static final String INTERFACE_CLI = "CLI";
 
 
     public static void main() {
@@ -41,7 +42,7 @@ public class Main {
             Application.launch(GuiApplication.class);
         } else if (INTERFACE_CLI.equals(interfaceType)) {
             System.out.println("CLI");
-           // new CliApplication().start();
+            new CliApplication().start();
         } else {
             System.out.println("Unknown interface type: " + interfaceType + ". Defaulting to GUI.");
             Application.launch(GuiApplication.class);

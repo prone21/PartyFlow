@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.graphic_controller;
+package it.uniroma2.partyflow.graphic_controller.firstscenegraphiccontroller;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import java.io.IOException;
