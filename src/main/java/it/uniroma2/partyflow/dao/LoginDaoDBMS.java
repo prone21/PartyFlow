@@ -1,12 +1,10 @@
 package it.uniroma2.partyflow.dao;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
+
+import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import it.uniroma2.partyflow.session.SessionManager;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.model.LoginCredential;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class LoginDaoDBMS {
     LoginCredential cred;
@@ -18,19 +16,22 @@ public class LoginDaoDBMS {
     public AccountType checkCredentials() throws SQLException {
         SessionManager sm = SessionManager.getSessionManager();
         Connection conn = sm.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(    "select email from users where email='"+cred.getEmail()+"' and password='"+cred.getPassword()+"'");
-        if (rs.next()) {
-            return AccountType.Participant;
-        } else {
-            rs = stmt.executeQuery("select email from users where email='"+cred.getEmail()+"' and password='"+cred.getPassword()+"'");
-            if (rs.next()) {
-                return AccountType.PartyPlanner;
-            } else {
-                System.out.println("non ci sta sto account");
-                return null;
-            }
+
+        String query = "select email from users where email = ? and password = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1,cred.getEmail());
+        stmt.setString(2,cred.getPassword());
+
+        ResultSet rs = stmt.executeQuery();
+        String accountType;
+        if(rs.next()){
+            accountType = rs.getString("accountType");
+            return AccountType.valueOf(accountType);
         }
+        else{
+            return AccountType.AccountNotExsist;
+        }
+
     }
 
 

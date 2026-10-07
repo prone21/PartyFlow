@@ -5,10 +5,12 @@ import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class LoginGraphicControllerGUI {
@@ -26,7 +28,7 @@ public class LoginGraphicControllerGUI {
     }
 
     @FXML
-    public void submitCredentials() throws SQLException {
+    public void submitCredentials() throws SQLException, NoSuchAlgorithmException {
         String email = emailField.getText();
         String pwd = pwdField.getText();
 
@@ -49,12 +51,18 @@ public class LoginGraphicControllerGUI {
 
     @FXML
     public void continueWithGoogle(){
-        System.out.println("Google log-in is not implemented yet.");
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setContentText("Google log-in is not implemented yet.");
+        alert.showAndWait();
     }
 
     @FXML
     public void continueWithFacebook(){
-        System.out.println("Facebook log-in is not implemented yet.");
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setContentText("Facebook log-in is not implemented yet.");
+        alert.showAndWait();
     }
 
 
