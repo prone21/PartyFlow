@@ -2,15 +2,21 @@ package it.uniroma2.partyflow.app_controller;
 
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.dao.LoginDaoDBMS;
+import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.model.LoginCredential;
+import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
+import static java.lang.System.exit;
+import static java.lang.System.nanoTime;
+
 public class LoginappController {
-    public void login(LoginCredentialsBean cred) throws SQLException, NoSuchAlgorithmException {
+    public AccountType login(LoginCredentialsBean cred) throws SQLException, NoSuchAlgorithmException {
         LoginCredential usCred = new LoginCredential(cred.getEmail(),cred.getPassword());
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -28,19 +34,8 @@ public class LoginappController {
         usCred.setPassword(hashedPassword);
 
         LoginDaoDBMS loginDao = new LoginDaoDBMS(usCred);
-        switch(loginDao.checkCredentials()){
-            case Participant:
-                System.out.println("è un partecipante");
-                break;
+        return loginDao.login();
 
-            case PartyPlanner:
-                System.out.println("è un partyplanner");
-                break;
-
-            default:
-                System.out.println("non esiste sto account");
-                break;
-        }
 
     }
 }

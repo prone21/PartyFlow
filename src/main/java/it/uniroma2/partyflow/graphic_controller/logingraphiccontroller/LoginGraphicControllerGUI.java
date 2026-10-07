@@ -2,6 +2,7 @@ package it.uniroma2.partyflow.graphic_controller.logingraphiccontroller;
 
 import it.uniroma2.partyflow.app_controller.LoginappController;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
+import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,6 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+
+import static java.lang.System.exit;
 
 public class LoginGraphicControllerGUI {
 
@@ -29,6 +32,7 @@ public class LoginGraphicControllerGUI {
 
     @FXML
     public void submitCredentials() throws SQLException, NoSuchAlgorithmException {
+        NavigatorSingleton nav = NavigatorSingleton.getInstance();
         String email = emailField.getText();
         String pwd = pwdField.getText();
 
@@ -37,7 +41,29 @@ public class LoginGraphicControllerGUI {
         loginBean.setPwd(pwd);
 
         LoginappController loginController = new LoginappController();
-        loginController.login(loginBean);
+        AccountType accountType = loginController.login(loginBean);
+        try{
+            switch(accountType){
+                case Participant:
+                    nav.gotoView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
+                    break;
+
+                case PartyPlanner:
+                    nav.gotoView("/it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
+                    break;
+
+                default:
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Account non esistente, registrati!");
+                    alert.showAndWait();
+                    break;
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            exit(0);
+        }
     }
 
     @FXML

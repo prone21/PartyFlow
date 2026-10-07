@@ -1,10 +1,14 @@
 package it.uniroma2.partyflow.dao;
+import java.io.IOException;
 import java.sql.*;
 
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import it.uniroma2.partyflow.session.SessionManager;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.model.LoginCredential;
+import it.uniroma2.partyflow.utilities.NavigatorSingleton;
+
+import static java.lang.System.exit;
 
 public class LoginDaoDBMS {
     LoginCredential cred;
@@ -13,11 +17,11 @@ public class LoginDaoDBMS {
         this.cred = cred;
     }
 
-    public AccountType checkCredentials() throws SQLException {
+    private AccountType checkCredentials() throws SQLException {
         SessionManager sm = SessionManager.getSessionManager();
         Connection conn = sm.getConnection();
 
-        String query = "select email from users where email = ? and password = ?";
+        String query = "select * from users where email = ? and password = ?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1,cred.getEmail());
         stmt.setString(2,cred.getPassword());
@@ -32,6 +36,10 @@ public class LoginDaoDBMS {
             return AccountType.AccountNotExsist;
         }
 
+    }
+
+    public AccountType login() throws SQLException {
+        return checkCredentials();
     }
 
 
