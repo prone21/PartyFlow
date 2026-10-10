@@ -1,1 +1,3 @@
 email,name,surname,password,dateOfBirth,gender
+"userp@gmail.com","perry","perrone","c7786a7a0759e0a45a616e5a64009ece3aed80465aa9edf011bffe90f84a2413","2000-11-21","MALE"
+"usercsv@gmail.com","fd","0","234b1498bc809588ee7dc347eccdb3b89b1cc6d4986590a97faaacd417afe09d","2005-07-21","MALE"

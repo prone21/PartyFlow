@@ -1,16 +1,11 @@
-package it.uniroma2.partyflow.dao;
-import java.io.IOException;
+package it.uniroma2.partyflow.dao.logindao;
 import java.sql.*;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import it.uniroma2.partyflow.session.SessionManager;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.model.LoginCredential;
-import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 
-import static java.lang.System.exit;
-
-public class LoginDaoDBMS {
+public class LoginDaoDBMS implements LoginDaoInterface {
     LoginCredential cred;
 
     public LoginDaoDBMS(LoginCredential cred){
@@ -38,8 +33,14 @@ public class LoginDaoDBMS {
 
     }
 
-    public AccountType login() throws SQLException {
-        return checkCredentials();
+    public AccountType login() {
+        try {
+            return checkCredentials();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

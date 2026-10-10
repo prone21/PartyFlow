@@ -1,4 +1,9 @@
 package it.uniroma2.partyflow;
+import it.uniroma2.partyflow.dao.DaoAbstractFactory;
+import it.uniroma2.partyflow.enums.PersistenceType;
+import it.uniroma2.partyflow.enums.UIType;
+import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
+import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.launcher.CliApplication;
 import it.uniroma2.partyflow.launcher.GuiApplication;
 import it.uniroma2.partyflow.utilities.Configurator;
@@ -9,44 +14,51 @@ import java.io.IOException;
 public class Main {
     //software configuration variables
 
-    private static final String DEFAULT_PERSISTENCE = "dbms-mysql";
-    private static final String DEFAULT_INTERFACE = "gui-javafx";
-
-   /* private static final String PERSISTENCE_MYSQL = "mysql";
-    private static final String PERSISTENCE_CSV = "csv";
-    private static final String PERSISTENCE_INMEMORY = "inmemory";
-*/
-    private static final String INTERFACE_GUI = "gui-javafx";
-    private static final String INTERFACE_CLI = "CLI";
-
-
     public static void main() {
+        HandlerErrorFactory hef = HandlerErrorFactory.getInstance();
 
         try {
             Configurator cr = Configurator.getConfigurator();
+            configurePersistence(cr.getPersistenceLayer());
             launchInterface(cr.getUI());
 
         }
         catch (IOException e){
-            System.out.println("Oye maestro! No te olvidaremos");
-            e.printStackTrace();
+            HandlerSystemError hse = hef.getHandlerSystemError();
+            hse.severeLog("IOException", e);
         }
-
-
 
     }
 
-    private static void launchInterface(String interfaceType){
+    private static void configurePersistence(PersistenceType persistenceType){
+        DaoAbstractFactory.getFactory(persistenceType);
 
-        if (INTERFACE_GUI.equals(interfaceType)) {
+    }
+
+    private static void launchInterface(UIType interfaceType){
+        HandlerErrorFactory hef = HandlerErrorFactory.getInstance();
+        hef.getHandlerUIError(interfaceType);
+
+         switch (interfaceType){
+             case GUI -> Application.launch(GuiApplication.class);
+             case CLI -> new CliApplication().start();
+             default -> Application.launch(GuiApplication.class);
+         }
+
+         /*
+        if (interfaceType == UIType.GUI) {
             Application.launch(GuiApplication.class);
-        } else if (INTERFACE_CLI.equals(interfaceType)) {
-            System.out.println("CLI");
+        } else if (interfaceType == UI) {
             new CliApplication().start();
         } else {
             System.out.println("Unknown interface type: " + interfaceType + ". Defaulting to GUI.");
             Application.launch(GuiApplication.class);
         }
+
+
+          */
+
+
 
     }
 

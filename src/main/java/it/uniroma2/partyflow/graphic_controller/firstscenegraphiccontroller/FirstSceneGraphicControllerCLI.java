@@ -1,5 +1,6 @@
 package it.uniroma2.partyflow.graphic_controller.firstscenegraphiccontroller;
 
+import it.uniroma2.partyflow.graphic_controller.logingraphiccontroller.LoginGraphicControllerCLI;
 import it.uniroma2.partyflow.graphic_controller.signupgraphiccontroller.SignUpGraphicControllerCLI;
 
 import java.util.Scanner;
@@ -24,7 +25,10 @@ public class FirstSceneGraphicControllerCLI {
             switch (choice) {
 
                 case "1":
-                    System.out.println("Login not implemented yet.");
+                    LoginGraphicControllerCLI loginController =
+                            new LoginGraphicControllerCLI();
+
+                    loginController.execute();
                     break;
 
                 case "2":

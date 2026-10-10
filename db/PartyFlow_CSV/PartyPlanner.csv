@@ -5,3 +5,5 @@ email,name,surname,password,dateOfBirth,gender
 "gf@p.com","gfgfd","gfdgfd","b905ae2917b091ed8d62007cf8bfee90e8a9481e99d65947a93ddad26b65d9ac","2023-08-02","MALE"
 "gf@g.comfgfdg","gfgfgfdg","gfgfdgd","2b29ae10d450a4e038b14d6d2593400f034846f086e65a1b96c03bddc952018e","2023-08-02","MALE"
 "pippo@plito.com","davide","perrone","456663bc2a147201e54def43ea3acbdcce1bbf61e6095789390b1e0ab8579ae5","2000-11-21","MALE"
+"userpp@gmail.com","leo","becca","0b7d2068b5a3eb22559d14922c170f79483c109618c339ecd895a75077453ee7","2000-11-10","FEMALE"
+"usercsv2@gmail.com","fgrg","gr","1b67b2d659ea4604965867928f212728730658f3d5d9a2414690c96149467cc9","1965-04-03","MALE"

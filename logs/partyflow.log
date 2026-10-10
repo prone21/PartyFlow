@@ -1,0 +1,11 @@
+ott 10, 2026 1:09:05 PM it.uniroma2.partyflow.utilities.Configurator <init>
+SEVERE: IOException
+java.io.FileNotFoundException: src\main\resources\it\uniroma2\partyflow\fdf.ini (Impossibile trovare il file specificato)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:139)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:109)
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.utilities.Configurator.<init>(Configurator.java:36)
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.utilities.Configurator.getConfigurator(Configurator.java:51)
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.Main.main(Main.java:17)
+

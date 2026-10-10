@@ -1,7 +1,7 @@
 package it.uniroma2.partyflow.app_controller;
 
 import it.uniroma2.partyflow.beans.CredentialsBean;
-import it.uniroma2.partyflow.dao.signupdao.SignUpDaoFactory;
+import it.uniroma2.partyflow.dao.DaoAbstractFactory;
 import it.uniroma2.partyflow.dao.signupdao.SignUpDaoInterface;
 import it.uniroma2.partyflow.model.User;
 import it.uniroma2.partyflow.utilities.Configurator;
@@ -44,9 +44,9 @@ public class SignUpController {
 
         try{
             Configurator c = Configurator.getConfigurator();
-            SignUpDaoFactory signUpDao = SignUpDaoFactory.getInstance(c.getPersistenceLayer());
-            SignUpDaoInterface dao = signUpDao.getDao(user);
-            dao.createAccount();
+            DaoAbstractFactory factory = DaoAbstractFactory.getFactory(c.getPersistenceLayer());
+            SignUpDaoInterface signUpDao = factory.getSignUpDao(user);
+            signUpDao.createAccount();
         } catch (IOException e) {
             e.printStackTrace();
         }

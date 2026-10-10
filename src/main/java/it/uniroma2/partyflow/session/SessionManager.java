@@ -7,9 +7,6 @@ import java.util.List;
 
 public class SessionManager {
     private static SessionManager instance = null;
-    private static final String URL = "jdbc:mysql://localhost:3306/partyflow";
-    private static final String USER = "root";
-    private static final String PWD = "root";
     private static Connection conn;
 
     private SessionManager(){};

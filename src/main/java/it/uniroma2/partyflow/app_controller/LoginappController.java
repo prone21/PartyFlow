@@ -1,19 +1,18 @@
 package it.uniroma2.partyflow.app_controller;
 
+import com.mysql.cj.log.Log;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
-import it.uniroma2.partyflow.dao.LoginDaoDBMS;
+import it.uniroma2.partyflow.dao.DaoAbstractFactory;
+import it.uniroma2.partyflow.dao.logindao.LoginDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.model.LoginCredential;
-import it.uniroma2.partyflow.utilities.NavigatorSingleton;
+import it.uniroma2.partyflow.utilities.Configurator;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-
-import static java.lang.System.exit;
-import static java.lang.System.nanoTime;
 
 public class LoginappController {
     public AccountType login(LoginCredentialsBean cred) throws SQLException, NoSuchAlgorithmException {
@@ -33,8 +32,20 @@ public class LoginappController {
 
         usCred.setPassword(hashedPassword);
 
-        LoginDaoDBMS loginDao = new LoginDaoDBMS(usCred);
-        return loginDao.login();
+
+
+        try{
+            Configurator c = Configurator.getConfigurator();
+            DaoAbstractFactory factory = DaoAbstractFactory.getFactory(c.getPersistenceLayer());
+            LoginDaoInterface loginDao = factory.getLoginDao(usCred);
+            return loginDao.login();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            return  null;
+        }
+
+
 
 
     }
