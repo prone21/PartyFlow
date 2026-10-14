@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class HandlerSystemError {
+    // Its responsibility is to handle errors that occur within the system.
+
     private static HandlerSystemError instance = null;
     private final Logger LOGGER =
             Logger.getLogger(Configurator.class.getName());
@@ -23,14 +25,18 @@ public class HandlerSystemError {
             fileHandler.setFormatter(new SimpleFormatter()); // sets the format of the log entries
 
             this.LOGGER.addHandler(fileHandler);
-            this.LOGGER.setUseParentHandlers(false);
+            this.LOGGER.setUseParentHandlers(false); // disable the default handlers
             //--------------------------------------------------------------------------------------------------------
         }
         catch (IOException e){
+            // If the log file cannot be created or opened, the FileHandler is not added
+            // and parent handlers remain enabled. Therefore, the logger falls back to
+            // the default console handler and reports the error on the console.
             this.severeLog("IOException",e);
         }
     }
 
+    // Guarantee Singleton
     public static HandlerSystemError getInstance(){
         if(instance == null){
             instance = new HandlerSystemError();
@@ -39,6 +45,10 @@ public class HandlerSystemError {
     }
 
     public void severeLog(String msg, Throwable e){
-        this.LOGGER.log(Level.SEVERE, msg, e);
+        StackTraceElement[] stack = e.getStackTrace();
+
+        String className = stack[0].getClassName();
+
+        this.LOGGER.log(Level.SEVERE, className+": "+msg, e);
     }
 }

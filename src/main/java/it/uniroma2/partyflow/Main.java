@@ -3,36 +3,26 @@ import it.uniroma2.partyflow.dao.DaoAbstractFactory;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.enums.UIType;
 import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
-import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.launcher.CliApplication;
 import it.uniroma2.partyflow.launcher.GuiApplication;
-import it.uniroma2.partyflow.utilities.Configurator;
+import it.uniroma2.partyflow.utilities.UIConfigurator;
+import it.uniroma2.partyflow.utilities.PersistenceConfigurator;
 import javafx.application.Application;
 
-import java.io.IOException;
 
 public class Main {
-    //software configuration variables
 
     public static void main() {
-        HandlerErrorFactory hef = HandlerErrorFactory.getInstance();
+        // It defines the execution context.
+        UIConfigurator uiconf = UIConfigurator.getInstance();
+        PersistenceConfigurator persconf = PersistenceConfigurator.getInstance();
 
-        try {
-            Configurator cr = Configurator.getConfigurator();
-            configurePersistence(cr.getPersistenceLayer());
-            launchInterface(cr.getUI());
-
-        }
-        catch (IOException e){
-            HandlerSystemError hse = hef.getHandlerSystemError();
-            hse.severeLog("IOException", e);
-        }
-
+        configurePersistence(persconf.getPersistenceType());
+        launchInterface(uiconf.getUI());
     }
 
     private static void configurePersistence(PersistenceType persistenceType){
-        DaoAbstractFactory.getFactory(persistenceType);
-
+        DaoAbstractFactory.setPersistenceType(persistenceType);
     }
 
     private static void launchInterface(UIType interfaceType){

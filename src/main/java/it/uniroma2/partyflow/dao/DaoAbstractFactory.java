@@ -8,16 +8,18 @@ import it.uniroma2.partyflow.model.User;
 
 public abstract class DaoAbstractFactory {
 
+    private static PersistenceType persistenceType;
 
-    public static DaoAbstractFactory getFactory(PersistenceType percistenceType) {
+    public static DaoAbstractFactory getFactory() {
+            return switch (persistenceType){
+                case PersistenceType.MySQL -> DaoFactoryDBMS.getInstance();
+                case PersistenceType.CSV -> DaoFactoryCSV.getInstance();
+                case PersistenceType.InMemory -> DaoFactoryDEMO.getInstance();
+            };
+    }
 
-
-            switch (percistenceType){
-                case DBMS -> {return DaoFactoryDBMS.getInstance();}
-                case CSV -> {return DaoFactoryCSV.getInstance();}
-                case DEMO -> {return DaoFactoryDEMO.getInstance();}
-                default -> {return null;}
-            }
+    public static void setPersistenceType(PersistenceType pt){
+        persistenceType = pt;
     }
 
     public abstract SignUpDaoInterface getSignUpDao(User cred);

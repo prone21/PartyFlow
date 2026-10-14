@@ -3,10 +3,13 @@ package it.uniroma2.partyflow.errorhandlers;
 import it.uniroma2.partyflow.enums.UIType;
 
 public class HandlerErrorFactory {
+    // Its responsibility is to provide the appropriate error handler.
+
     private static HandlerErrorFactory instance = null;
 
     private HandlerErrorFactory (){}
 
+    // Guarantee Singleton
     public static HandlerErrorFactory getInstance(){
         if(instance == null){
             instance = new HandlerErrorFactory();
