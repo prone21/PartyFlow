@@ -68,6 +68,7 @@ public class LoginGraphicControllerGUI {
 
     @FXML
     public void signUp(MouseEvent event) throws IOException {
+        //REVIEW MA CHE FAI
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
 

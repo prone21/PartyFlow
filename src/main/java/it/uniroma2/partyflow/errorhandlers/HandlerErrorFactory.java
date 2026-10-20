@@ -24,7 +24,7 @@ public class HandlerErrorFactory {
     public HandlerUIError getHandlerUIError(UIType uiType){
         return switch (uiType){
             case CLI ->  HandlerCLIError.getInstance();
-            case GUI ->  HandlerGUIError.getInstance();
+            case JavaFxGUI ->  HandlerGUIError.getInstance();
         };
     }
 }

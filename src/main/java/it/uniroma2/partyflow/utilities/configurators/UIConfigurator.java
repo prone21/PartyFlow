@@ -1,5 +1,4 @@
-package it.uniroma2.partyflow.utilities;
-
+package it.uniroma2.partyflow.utilities.configurators;
 
 import it.uniroma2.partyflow.enums.UIType;
 import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class UIConfigurator {
-    // Its responsibility is to obtain the UI
+    // Its responsibility is to obtain the application UI type
     private final Properties properties = new Properties();
     private static UIConfigurator instance = null;
 
@@ -18,7 +17,7 @@ public class UIConfigurator {
     private UIConfigurator(){
         try{
             FileInputStream input =
-                    new FileInputStream("src/main/resources/it/uniroma2/partyflow/configUI.ini");
+                    new FileInputStream("src/main/resources/it/uniroma2/partyflow/configurations/configUI.ini");
             this.properties.load(input); // it puts the content of the .ini file into the properties var
         }
         catch (IOException e){

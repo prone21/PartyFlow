@@ -20,31 +20,48 @@ public class FirstSceneGraphicControllerCLI {
             System.out.println("0 - Exit");
             System.out.print("Choice: ");
 
-            String choice = scanner.nextLine();
+            String choice = this.scanner.nextLine();
 
             switch (choice) {
 
                 case "1":
-                    LoginGraphicControllerCLI loginController =
-                            new LoginGraphicControllerCLI();
-
-                    loginController.execute();
+                    this.login();
                     break;
 
                 case "2":
-                    SignUpGraphicControllerCLI signUpController =
-                            new SignUpGraphicControllerCLI();
-
-                    signUpController.execute();
+                    this.signUp();
                     break;
 
                 case "0":
-                    System.out.println("Goodbye!");
+                    this.exit();
                     return;
 
                 default:
-                    System.out.println("Invalid choice.");
+                    this.invalidChoice();
             }
         }
+    }
+
+    private void login(){
+        LoginGraphicControllerCLI loginController =
+                new LoginGraphicControllerCLI();
+
+        loginController.execute();
+    }
+
+
+    private void signUp(){
+        SignUpGraphicControllerCLI signUpController =
+                new SignUpGraphicControllerCLI();
+
+        signUpController.execute();
+    }
+
+    private void exit(){
+        System.out.println("Goodbye!");
+    }
+
+    private void invalidChoice(){
+        System.out.println("Invalid choice.");
     }
 }

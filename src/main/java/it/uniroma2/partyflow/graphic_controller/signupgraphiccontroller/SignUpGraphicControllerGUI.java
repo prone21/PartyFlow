@@ -4,6 +4,8 @@ import it.uniroma2.partyflow.app_controller.SignUpController;
 import it.uniroma2.partyflow.beans.CredentialsBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
+import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
+import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.EmptyException;
 import it.uniroma2.partyflow.exceptions.SignUpException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
@@ -14,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import it.uniroma2.partyflow.exceptions.InvalidStateException;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -61,12 +64,19 @@ public class SignUpGraphicControllerGUI {
     private String oldStyleField;
 
     public void goBackward() {
-        NavigatorSingleton nav = NavigatorSingleton.getInstance();
-        nav.goBackward();
+        try {
+            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            nav.goBackward();
+        }
+        catch (InvalidStateException e){
+            HandlerErrorFactory factory = HandlerErrorFactory.getInstance();
+            HandlerSystemError hse = factory.getHandlerSystemError();
+            hse.severeLog("InvalidStateException",e);
+        }
     }
 
     @FXML
-    public void createAccount() throws SQLException, NoSuchAlgorithmException {
+    public void createAccount() throws NoSuchAlgorithmException {
          Node[] nodes = {
                  nameField,
                  surnameField,

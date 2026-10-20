@@ -1,5 +1,7 @@
-package it.uniroma2.partyflow.utilities;
+package it.uniroma2.partyflow.utilities.configurators;
 
+import it.uniroma2.partyflow.exceptions.InvalidStateException;
+import it.uniroma2.partyflow.enums.ApplicationModalities;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class PersistenceConfigurator {
-    // Its responsibility is to obtain the persistence layer
+    // Its responsibility is to obtain the application persistence layer
     private final Properties properties = new Properties();
     private static PersistenceConfigurator instance = null;
 
@@ -19,7 +21,7 @@ public class PersistenceConfigurator {
     private PersistenceConfigurator(){
         try{
             FileInputStream input =
-                    new FileInputStream("src/main/resources/it/uniroma2/partyflow/configPersistency.ini");
+                    new FileInputStream("src/main/resources/it/uniroma2/partyflow/configurations/configPersistency.ini");
             this.properties.load(input); // it puts the content of the .ini file into the properties var
         }
         catch (IOException e){
@@ -41,36 +43,35 @@ public class PersistenceConfigurator {
 
 
     public PersistenceType getPersistenceType(){
-        return PersistenceType.valueOf(this.properties.getProperty("persistence.type"));
+
+        return switch (ApplicationModalities.valueOf(this.properties.getProperty("application.modalities"))){
+            case ApplicationModalities.FULL -> PersistenceType.valueOf(this.properties.getProperty("persistence.type"));
+            case ApplicationModalities.DEMO -> PersistenceType.InMemory;
+        };
     }
 
-
-    // An IllegalStateException indicates that an operation
-    // has been attempted that is inconsistent with the current state of an object.
-
-    public List<String> getDBMSConnectionParameter() throws IllegalStateException{
+    public List<String> getDBMSConnectionParameter() throws InvalidStateException{
         if( this.getPersistenceType() == PersistenceType.MySQL ) {
             List<String> DBMSConnproperties = new ArrayList<>();
             DBMSConnproperties.add(this.properties.getProperty("url.mysql"));
             DBMSConnproperties.add(this.properties.getProperty("username.mysql"));
             DBMSConnproperties.add(this.properties.getProperty("password.mysql"));
-            DBMSConnproperties.add(this.properties.getProperty("url.mysql"));
             return DBMSConnproperties;
         }
 
         else{
-            throw new IllegalStateException("Persistence layer is not MySQL");
+            throw new InvalidStateException("Persistence layer is not MySQL");
         }
 
     }
 
 
-    public String getDirectoryCSVDB() throws IllegalStateException{
+    public String getDirectoryCSVDB() throws InvalidStateException{
         if (this.getPersistenceType() == PersistenceType.CSV ){
-            return this.properties.getProperty("directoryCSVDB");
+            return this.properties.getProperty("directory.CSVDB");
         }
         else {
-            throw new IllegalStateException("Persistence layer is not CSV");
+            throw new InvalidStateException("Persistence Layer is not CSV");
         }
     }
 

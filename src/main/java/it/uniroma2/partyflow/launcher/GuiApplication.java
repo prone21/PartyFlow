@@ -5,12 +5,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class GuiApplication extends Application {
+public class GuiApplication extends Application implements UIApplication {
     @Override
     public void start(Stage stage) throws IOException {
 
         NavigatorSingleton nav = NavigatorSingleton.getInstance(stage);
         nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
 
+    }
+
+    public void launch(){
+        Application.launch(GuiApplication.class);
     }
 }

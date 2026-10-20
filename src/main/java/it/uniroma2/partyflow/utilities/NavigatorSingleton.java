@@ -1,5 +1,6 @@
 package it.uniroma2.partyflow.utilities;
 
+import it.uniroma2.partyflow.exceptions.InvalidStateException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -7,53 +8,62 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class NavigatorSingleton {
-    private static NavigatorSingleton instance = null;
-    private final Stage stage; // The Stage whose views are managed by the Navigator.
-    private Scene prevScene;
+    // Responsible for displaying views defined in FXML files. It allows the view navigation.
 
-    private NavigatorSingleton(Stage stage){
+    private final Stage stage; // The Stage in which the views (scenes) are displayed.
+    private Scene prevScene;
+    private static NavigatorSingleton instance = null;
+
+    private NavigatorSingleton(Stage stage) {
         this.stage = stage;
     }
 
+
+    // guarantee singleton
     public static NavigatorSingleton getInstance(Stage stage){
-        if (NavigatorSingleton.instance == null){
-            NavigatorSingleton.instance = new NavigatorSingleton(stage);
+        if(instance == null){
+            instance = new NavigatorSingleton(stage);
         }
-        return NavigatorSingleton.instance;
+        return instance;
     }
 
-    // Is used to obtain the existing instance without passing the Stage.
-    public static NavigatorSingleton getInstance(){
-        return NavigatorSingleton.instance;
+    public static NavigatorSingleton getInstance() throws InvalidStateException {
+        if(instance == null){
+            throw new InvalidStateException("NavigatorSingleton is not initialized. " +
+                    "Use getInstance(Stage) to initialize it first.");
+        }
+        else{
+            return instance;
+        }
     }
 
+
+    //Given the view's path, it sets the new scene on the stage
     public void gotoView(String viewFXMLPath) throws IOException {
-        prevScene = stage.getScene();
+        this.prevScene = this.stage.getScene(); // obtaining the actual scene that is going to be the prevScene
 
         FXMLLoader loader =
                 new FXMLLoader(getClass().getResource(viewFXMLPath));
 
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load()); // load obtains the root node by fxml file
 
-        stage.setTitle("PartyFlow");
-        stage.setScene(scene);
+        this.stage.setTitle("PartyFlow");
+        this.stage.setScene(scene);
 
-        stage.show();
+        this.stage.show();
     }
 
+    //sets the given scene on the stage
+    private void gotoScene(Scene scene) {
+        this.stage.setTitle("PartyFlow");
+        this.stage.setScene(scene);
 
-    public void gotoView(Scene scene) {
-
-        stage.setTitle("PartyFlow");
-        stage.setScene(scene);
-
-        stage.show();
+        this.stage.show();
     }
 
-    // Is used to go back at the precedent view
+    //It's used to go back at the precedent view
     public void goBackward() {
-        NavigatorSingleton nav = NavigatorSingleton.getInstance();
-        nav.gotoView(prevScene);
+        this.gotoScene(this.prevScene);
     }
 
 }
