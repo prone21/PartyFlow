@@ -1,19 +1,20 @@
 package it.uniroma2.partyflow.errorhandlers;
 
-import it.uniroma2.partyflow.utilities.Configurator;
-
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ *  Its responsibility is to handle errors that occur within the system.
+ */
+
 public class HandlerSystemError {
-    // Its responsibility is to handle errors that occur within the system.
 
     private static HandlerSystemError instance = null;
     private final Logger LOGGER =
-            Logger.getLogger(Configurator.class.getName());
+            Logger.getLogger(HandlerSystemError.class.getName());
 
     private HandlerSystemError(){
         try{
@@ -32,7 +33,7 @@ public class HandlerSystemError {
             // If the log file cannot be created or opened, the FileHandler is not added
             // and parent handlers remain enabled. Therefore, the logger falls back to
             // the default console handler and reports the error on the console.
-            this.severeLog("IOException",e);
+            this.logError("Unable to initialize the log file",e);
         }
     }
 
@@ -44,11 +45,33 @@ public class HandlerSystemError {
         return instance;
     }
 
-    public void severeLog(String msg, Throwable e){
-        StackTraceElement[] stack = e.getStackTrace();
 
-        String className = stack[0].getClassName();
-
-        this.LOGGER.log(Level.SEVERE, className+": "+msg, e);
+    /**
+     * Logs an error including the original exception stack trace.
+     */
+    public void logError(String message, Throwable exception) {
+        this.LOGGER.log(Level.SEVERE, message, exception);
     }
+
+    /**
+     * Logs an error message without an exception.
+     */
+    public void logError(String message) {
+        this.LOGGER.log(Level.SEVERE, message);
+    }
+
+    /**
+     * Logs a warning message.
+     */
+    public void logWarning(String message) {
+        this.LOGGER.log(Level.WARNING, message);
+    }
+
+    /**
+     * Logs an informational message.
+     */
+    public void logInfo(String message) {
+        this.LOGGER.log(Level.INFO, message);
+    }
+
 }

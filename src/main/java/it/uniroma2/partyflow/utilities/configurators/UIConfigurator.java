@@ -23,7 +23,7 @@ public class UIConfigurator {
         catch (IOException e){
             HandlerErrorFactory hef = HandlerErrorFactory.getInstance();
             HandlerSystemError hse = hef.getHandlerSystemError();
-            hse.severeLog("IOException", e);
+            hse.severeLog(e.getStackTrace());
 
         }
 
