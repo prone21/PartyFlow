@@ -1,7 +1,7 @@
 package it.uniroma2.partyflow.errorhandlers;
 
 public class HandlerCLIError implements HandlerUIError {
-    static private HandlerCLIError instance = null;
+    private static HandlerCLIError instance = null;
 
     private HandlerCLIError(){}
 

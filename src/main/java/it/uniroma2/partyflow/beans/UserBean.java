@@ -2,7 +2,8 @@ package it.uniroma2.partyflow.beans;
 
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
-import it.uniroma2.partyflow.exceptions.EmptyException;
+import it.uniroma2.partyflow.enums.UserField;
+import it.uniroma2.partyflow.exceptions.RequiredFieldException;
 import it.uniroma2.partyflow.exceptions.SignUpException;
 
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
-public class CredentialsBean {
+public class UserBean {
     private String name;
     private String surname;
     private String dateOfBirth;
@@ -19,15 +20,31 @@ public class CredentialsBean {
     private String password;
     private AccountType accountType;
 
-    public CredentialsBean() {}
+    public UserBean() {}
 
-    public String getName() {
-        return name;
+
+    public UserBean(String name, String surname, String dateOfBirth,
+                    Gender gender, String email, String password,
+                    AccountType accountType)
+            throws RequiredFieldException, SignUpException {
+
+        this.setName(name);
+        this.setSurname(surname);
+        this.setDateOfBirth(dateOfBirth);
+        this.setGender(gender);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setAccountType(accountType);
     }
 
-    public void setName(String name) throws EmptyException {
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) throws RequiredFieldException {
         if(name.isEmpty()){
-            throw new EmptyException(0);
+            throw new RequiredFieldException(UserField.NAME);
         }
         else {
             this.name = name;
@@ -38,9 +55,9 @@ public class CredentialsBean {
         return surname;
     }
 
-    public void setSurname(String surname) throws EmptyException{
+    public void setSurname(String surname) throws RequiredFieldException {
         if(surname.isEmpty()){
-            throw new EmptyException(1);
+            throw new RequiredFieldException(1);
         }
         else{
             this.surname = surname;
@@ -67,9 +84,9 @@ public class CredentialsBean {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) throws SignUpException, EmptyException {
+    public void setDateOfBirth(String dateOfBirth) throws SignUpException, RequiredFieldException {
         if(dateOfBirth.isEmpty()){
-            throw new EmptyException(2);
+            throw new RequiredFieldException(2);
         }
         else if (this.isValidDate(dateOfBirth)){
             this.dateOfBirth = dateOfBirth;
@@ -92,9 +109,9 @@ public class CredentialsBean {
         return email;
     }
 
-    public void setEmail(String email) throws SignUpException, EmptyException {
+    public void setEmail(String email) throws SignUpException, RequiredFieldException {
         if (email.isEmpty()){
-            throw new EmptyException(3);
+            throw new RequiredFieldException(3);
         }
         else if (this.isValidEmail(email)){
             this.email = email;
@@ -115,9 +132,9 @@ public class CredentialsBean {
         return pwd.length()>=8;
     }
 
-    public void setPassword(String password) throws SignUpException, EmptyException {
+    public void setPassword(String password) throws SignUpException, RequiredFieldException {
         if (password.isEmpty()){
-            throw new EmptyException(4);
+            throw new RequiredFieldException(4);
         }
         else if (this.isValidPwd(password)){
             this.password = password;
@@ -134,9 +151,9 @@ public class CredentialsBean {
         return gender;
     }
 
-    public void setGender(Gender gender) throws EmptyException {
+    public void setGender(Gender gender) throws RequiredFieldException {
         if (gender == null){
-            throw new EmptyException(5);
+            throw new RequiredFieldException(5);
         }
         else {
             this.gender = gender;
@@ -147,10 +164,10 @@ public class CredentialsBean {
         return accountType;
     }
 
-    public void setAccountType(AccountType accountType) throws EmptyException {
+    public void setAccountType(AccountType accountType) throws RequiredFieldException {
        if(accountType == null){
            System.out.println("la puta madre que de pariò");
-           throw new EmptyException(6);
+           throw new RequiredFieldException(6);
        }
        else {
            this.accountType = accountType;

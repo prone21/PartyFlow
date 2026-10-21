@@ -1,6 +1,7 @@
 package it.uniroma2.partyflow.errorhandlers;
 
 import it.uniroma2.partyflow.enums.UIType;
+import it.uniroma2.partyflow.utilities.configurators.UIConfigurator;
 
 public class HandlerErrorFactory {
     // Its responsibility is to provide the appropriate error handler.
@@ -21,10 +22,13 @@ public class HandlerErrorFactory {
         return HandlerSystemError.getInstance();
     }
 
-    public HandlerUIError getHandlerUIError(UIType uiType){
+    public HandlerUIError getHandlerUIError(){
+        UIConfigurator uiconf = UIConfigurator.getInstance();
+        UIType uiType = uiconf.getUI();
+
         return switch (uiType){
             case CLI ->  HandlerCLIError.getInstance();
-            case JavaFxGUI ->  HandlerGUIError.getInstance();
+            case JavaFxGUI ->  HandlerJavaFxGUIError.getInstance();
         };
     }
 }

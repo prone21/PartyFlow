@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.app_controller;
 
-import it.uniroma2.partyflow.beans.CredentialsBean;
+import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.dao.DaoAbstractFactory;
 import it.uniroma2.partyflow.dao.signupdao.SignUpDaoInterface;
 import it.uniroma2.partyflow.model.User;
@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 public class SignUpController {
 
-    public void createAccount(CredentialsBean signUpBean) throws NoSuchAlgorithmException {
+    public void createAccount(UserBean signUpBean) throws NoSuchAlgorithmException {
 
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("dd/MM/uuuu");

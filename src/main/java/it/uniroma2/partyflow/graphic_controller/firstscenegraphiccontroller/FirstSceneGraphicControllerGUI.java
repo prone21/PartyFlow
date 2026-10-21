@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class FirstSceneGraphicControllerGUI {
     @FXML
-    public void login() throws IOException {
+    public void login(){
         try{
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/login.fxml");
@@ -18,10 +18,15 @@ public class FirstSceneGraphicControllerGUI {
             HandlerSystemError hse = factory.getHandlerSystemError();
             hse.severeLog("InvalidStateException",e);
         }
+        catch (IOException e){
+            HandlerErrorFactory factory = HandlerErrorFactory.getInstance();
+            HandlerSystemError hse = factory.getHandlerSystemError();
+            hse.severeLog("IOException",e);
+        }
     }
 
     @FXML
-    public void signUp () throws IOException {
+    public void signUp (){
         try {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
@@ -30,6 +35,11 @@ public class FirstSceneGraphicControllerGUI {
             HandlerErrorFactory factory = HandlerErrorFactory.getInstance();
             HandlerSystemError hse = factory.getHandlerSystemError();
             hse.severeLog("InvalidStateException",e);
+        }
+        catch (IOException e){
+            HandlerErrorFactory factory = HandlerErrorFactory.getInstance();
+            HandlerSystemError hse = factory.getHandlerSystemError();
+            hse.severeLog("IOException",e);
         }
     }
 }

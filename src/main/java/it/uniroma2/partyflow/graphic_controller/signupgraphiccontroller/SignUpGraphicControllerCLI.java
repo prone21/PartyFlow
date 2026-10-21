@@ -1,10 +1,10 @@
 package it.uniroma2.partyflow.graphic_controller.signupgraphiccontroller;
 
 import it.uniroma2.partyflow.app_controller.SignUpController;
-import it.uniroma2.partyflow.beans.CredentialsBean;
+import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
-import it.uniroma2.partyflow.exceptions.EmptyException;
+import it.uniroma2.partyflow.exceptions.RequiredFieldException;
 import it.uniroma2.partyflow.exceptions.SignUpException;
 
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +20,7 @@ public class SignUpGraphicControllerCLI {
         System.out.println();
         System.out.println("=== PARTYFLOW - SIGN UP ===");
 
-        CredentialsBean credentials = new CredentialsBean();
+        UserBean credentials = new UserBean();
 
         readName(credentials);
         readSurname(credentials);
@@ -41,7 +41,7 @@ public class SignUpGraphicControllerCLI {
         }
     }
 
-    private void readName(CredentialsBean credentials) {
+    private void readName(UserBean credentials) {
 
         while (true) {
 
@@ -50,13 +50,13 @@ public class SignUpGraphicControllerCLI {
                 credentials.setName(scanner.nextLine());
                 return;
 
-            } catch (EmptyException e) {
+            } catch (RequiredFieldException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
     }
 
-    private void readSurname(CredentialsBean credentials) {
+    private void readSurname(UserBean credentials) {
 
         while (true) {
 
@@ -65,13 +65,13 @@ public class SignUpGraphicControllerCLI {
                 credentials.setSurname(scanner.nextLine());
                 return;
 
-            } catch (EmptyException e) {
+            } catch (RequiredFieldException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
     }
 
-    private void readDateOfBirth(CredentialsBean credentials) {
+    private void readDateOfBirth(UserBean credentials) {
 
         while (true) {
 
@@ -80,13 +80,13 @@ public class SignUpGraphicControllerCLI {
                 credentials.setDateOfBirth(scanner.nextLine());
                 return;
 
-            } catch (EmptyException | SignUpException e) {
+            } catch (RequiredFieldException | SignUpException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
     }
 
-    private void readEmail(CredentialsBean credentials) {
+    private void readEmail(UserBean credentials) {
 
         while (true) {
 
@@ -95,13 +95,13 @@ public class SignUpGraphicControllerCLI {
                 credentials.setEmail(scanner.nextLine());
                 return;
 
-            } catch (EmptyException | SignUpException e) {
+            } catch (RequiredFieldException | SignUpException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
     }
 
-    private void readPassword(CredentialsBean credentials) {
+    private void readPassword(UserBean credentials) {
 
         while (true) {
 
@@ -110,13 +110,13 @@ public class SignUpGraphicControllerCLI {
                 credentials.setPassword(scanner.nextLine());
                 return;
 
-            } catch (EmptyException | SignUpException e) {
+            } catch (RequiredFieldException | SignUpException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
     }
 
-    private void readGender(CredentialsBean credentials) {
+    private void readGender(UserBean credentials) {
 
         while (true) {
 
@@ -149,13 +149,13 @@ public class SignUpGraphicControllerCLI {
                         System.out.println("Invalid choice.");
                 }
 
-            } catch (EmptyException e) {
+            } catch (RequiredFieldException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
     }
 
-    private void readAccountType(CredentialsBean credentials) {
+    private void readAccountType(UserBean credentials) {
 
         while (true) {
 
@@ -183,7 +183,7 @@ public class SignUpGraphicControllerCLI {
                         System.out.println("Invalid choice.");
                 }
 
-            } catch (EmptyException e) {
+            } catch (RequiredFieldException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }

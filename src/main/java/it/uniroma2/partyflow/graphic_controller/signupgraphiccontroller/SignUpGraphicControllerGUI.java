@@ -1,17 +1,21 @@
 package it.uniroma2.partyflow.graphic_controller.signupgraphiccontroller;
 
 import it.uniroma2.partyflow.app_controller.SignUpController;
-import it.uniroma2.partyflow.beans.CredentialsBean;
+import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
+import it.uniroma2.partyflow.enums.UIType;
+import it.uniroma2.partyflow.enums.UserField;
 import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
+import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.EmptyException;
+import it.uniroma2.partyflow.errorhandlers.HandlerUIError;
+import it.uniroma2.partyflow.exceptions.RequiredFieldException;
 import it.uniroma2.partyflow.exceptions.SignUpException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
+import it.uniroma2.partyflow.utilities.configurators.UIConfigurator;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -19,7 +23,8 @@ import javafx.scene.layout.AnchorPane;
 import it.uniroma2.partyflow.exceptions.InvalidStateException;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class SignUpGraphicControllerGUI {
 
@@ -92,7 +97,7 @@ public class SignUpGraphicControllerGUI {
         }
 
         try {
-            CredentialsBean signUpBean = new CredentialsBean();
+            UserBean signUpBean = new UserBean();
 
             signUpBean.setName(nameField.getText());
             signUpBean.setSurname(surnameField.getText());
@@ -128,20 +133,41 @@ public class SignUpGraphicControllerGUI {
         }
 
         catch (SignUpException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            HandlerErrorFactory heFactory = HandlerErrorFactory.getInstance();
+            HandlerUIError hUIError = heFactory.getHandlerUIError();
+            hUIError.alertMessage(e.getMessage());
         }
-        catch (EmptyException e){
-            this.oldStyleField = nodes[e.getType()].getStyle();
-            System.out.println(e.getType());
-            System.out.println(nodes[e.getType()].getId());
-            nodes[e.getType()].setStyle(this.oldStyleField + "-fx-border-color: red;");
-            this.errorField = nodes[e.getType()];
+        catch (RequiredFieldException e){
+            UIConfigurator uiconf = UIConfigurator.getInstance();
+            UIType uIType = uiconf.getUI();
+
+            switch (uIType){
+                case JavaFxGUI -> {
+                    Map<UserField, Node> fields =  new EnumMap<>(UserField.class);
+                    fields.put(UserField.NAME, this.nameField);
+                    fields.put(UserField.SURNAME, this.surnameField);
+                    fields.put(UserField.DATE_OF_BIRTH, this.dateField);
+                    fields.put(UserField.EMAIL, this.emailField);
+                    fields.put(UserField.PASSWORD, this.pwdField);
+                    fields.put(UserField.GENDER, this.genderPane);
+                    fields.put(UserField.ACCOUNT_TYPE, this.accountTypePane);
+
+                    HandlerJavaFxGUIError handlerGui = HandlerJavaFxGUIError.getInstance();
+                    handlerGui.highlightMissedParameter(fields.get(e.getField()));
+                }
+
+                case CLI -> {
+
+                }
+            }
 
         }
 
     }
+
+
+
+
+
 
 }
