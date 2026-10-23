@@ -61,6 +61,15 @@ public class HandlerSystemError {
     }
 
     /**
+     * Logs an exception at SEVERE level, including
+     * its type, message, and stack trace.
+     *
+     */
+    public void logError(Throwable exception){
+        this.LOGGER.log(Level.SEVERE, "", exception);
+    }
+
+    /**
      * Logs a warning message.
      */
     public void logWarning(String message) {

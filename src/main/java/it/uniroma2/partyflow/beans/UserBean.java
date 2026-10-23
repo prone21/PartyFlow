@@ -4,7 +4,7 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.enums.UserField;
 import it.uniroma2.partyflow.exceptions.RequiredFieldException;
-import it.uniroma2.partyflow.exceptions.SignUpException;
+import it.uniroma2.partyflow.exceptions.InvalidFieldFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +26,7 @@ public class UserBean {
     public UserBean(String name, String surname, String dateOfBirth,
                     Gender gender, String email, String password,
                     AccountType accountType)
-            throws RequiredFieldException, SignUpException {
+            throws RequiredFieldException, InvalidFieldFormatException {
 
         this.setName(name);
         this.setSurname(surname);
@@ -84,7 +84,7 @@ public class UserBean {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) throws SignUpException, RequiredFieldException {
+    public void setDateOfBirth(String dateOfBirth) throws InvalidFieldFormatException, RequiredFieldException {
         if(dateOfBirth.isEmpty()){
             throw new RequiredFieldException(2);
         }
@@ -92,7 +92,7 @@ public class UserBean {
             this.dateOfBirth = dateOfBirth;
         }
         else{
-            throw new SignUpException("Invalid date format. Please use DD/MM/YYYY.",0);
+            throw new InvalidFieldFormatException("Invalid date format. Please use DD/MM/YYYY.",0);
         }
     }
     //---------------------------------------------------------------------
@@ -109,7 +109,7 @@ public class UserBean {
         return email;
     }
 
-    public void setEmail(String email) throws SignUpException, RequiredFieldException {
+    public void setEmail(String email) throws InvalidFieldFormatException, RequiredFieldException {
         if (email.isEmpty()){
             throw new RequiredFieldException(3);
         }
@@ -117,7 +117,7 @@ public class UserBean {
             this.email = email;
         }
         else{
-            throw new SignUpException("Invalid email",0);
+            throw new InvalidFieldFormatException("Invalid email",0);
         }
     }
     //----------------------------------------------------------------------
@@ -132,7 +132,7 @@ public class UserBean {
         return pwd.length()>=8;
     }
 
-    public void setPassword(String password) throws SignUpException, RequiredFieldException {
+    public void setPassword(String password) throws InvalidFieldFormatException, RequiredFieldException {
         if (password.isEmpty()){
             throw new RequiredFieldException(4);
         }
@@ -140,7 +140,7 @@ public class UserBean {
             this.password = password;
         }
         else{
-            throw new SignUpException("The password must be at least 8 characters long.",0);
+            throw new InvalidFieldFormatException("The password must be at least 8 characters long.",0);
         }
     }
     //----------------------------------------------------------------------

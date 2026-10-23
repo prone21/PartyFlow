@@ -4,16 +4,11 @@ import it.uniroma2.partyflow.app_controller.SignUpController;
 import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
-import it.uniroma2.partyflow.enums.UIType;
-import it.uniroma2.partyflow.enums.UserField;
-import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.errorhandlers.HandlerUIError;
 import it.uniroma2.partyflow.exceptions.RequiredFieldException;
-import it.uniroma2.partyflow.exceptions.SignUpException;
+import it.uniroma2.partyflow.exceptions.InvalidFieldFormatException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
-import it.uniroma2.partyflow.utilities.configurators.UIConfigurator;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
@@ -23,11 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import it.uniroma2.partyflow.exceptions.InvalidStateException;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.EnumMap;
-import java.util.Map;
 
 public class SignUpGraphicControllerGUI {
 
+    // TextField
     @FXML
     private TextField nameField;
 
@@ -43,6 +37,10 @@ public class SignUpGraphicControllerGUI {
     @FXML
     private PasswordField pwdField;
 
+    // ----------------------------------
+
+
+    // RadioButton
     @FXML
     private RadioButton maleOption;
 
@@ -58,14 +56,20 @@ public class SignUpGraphicControllerGUI {
     @FXML
     private RadioButton participantOption;
 
+    // ----------------------------------
+
+    // AnchorPane/ToggleGroup
     @FXML
     private AnchorPane genderPane;
 
     @FXML
     private AnchorPane accountTypePane;
 
-    private Node errorField;
+    // ----------------------------------
 
+    // REVIEW da eliminare
+    private Node errorField;
+    // REVIEW da eliminare
     private String oldStyleField;
 
     public void goBackward() {
@@ -74,15 +78,15 @@ public class SignUpGraphicControllerGUI {
             nav.goBackward();
         }
         catch (InvalidStateException e){
-            HandlerErrorFactory factory = HandlerErrorFactory.getInstance();
-            HandlerSystemError hse = factory.getHandlerSystemError();
-            hse.severeLog("InvalidStateException",e);
+            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
+            handlerSysErr.logError(e);
         }
     }
 
     @FXML
     public void createAccount() throws NoSuchAlgorithmException {
-         Node[] nodes = {
+        /* REVIEW DA TOGLIERE
+        Node[] nodes = {
                  nameField,
                  surnameField,
                  dateField,
@@ -96,7 +100,12 @@ public class SignUpGraphicControllerGUI {
             this.errorField.setStyle(this.oldStyleField);
         }
 
+         */
+
+
         try {
+
+            // 1) create the bean where the user date will be memorized
             UserBean signUpBean = new UserBean();
 
             signUpBean.setName(nameField.getText());
@@ -127,47 +136,63 @@ public class SignUpGraphicControllerGUI {
                 System.out.println("e dio cane");
                 signUpBean.setAccountType(null);
             }
+            //---------------------------------------------
 
+
+            // pass the UserBean to the application controller
             SignUpController signUpController = new SignUpController();
             signUpController.createAccount(signUpBean);
+            //---------------------------------------------
+
         }
 
-        catch (SignUpException e) {
-            HandlerErrorFactory heFactory = HandlerErrorFactory.getInstance();
-            HandlerUIError hUIError = heFactory.getHandlerUIError();
-            hUIError.alertMessage(e.getMessage());
-        }
         catch (RequiredFieldException e){
-            UIConfigurator uiconf = UIConfigurator.getInstance();
-            UIType uIType = uiconf.getUI();
+            /*
+             * Handles missing required fields in the sign-up form.
+             * Uses a switch statement to identify the corresponding JavaFX element
+             * and delegates its highlighting to the JavaFxGUI error handler.
+             */
 
-            switch (uIType){
-                case JavaFxGUI -> {
-                    Map<UserField, Node> fields =  new EnumMap<>(UserField.class);
-                    fields.put(UserField.NAME, this.nameField);
-                    fields.put(UserField.SURNAME, this.surnameField);
-                    fields.put(UserField.DATE_OF_BIRTH, this.dateField);
-                    fields.put(UserField.EMAIL, this.emailField);
-                    fields.put(UserField.PASSWORD, this.pwdField);
-                    fields.put(UserField.GENDER, this.genderPane);
-                    fields.put(UserField.ACCOUNT_TYPE, this.accountTypePane);
+            HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
 
-                    HandlerJavaFxGUIError handlerGui = HandlerJavaFxGUIError.getInstance();
-                    handlerGui.highlightMissedParameter(fields.get(e.getField()));
+            switch (e.getField()){
+                case NAME->{
+                    handlerJavaError.highlightMissingFormElement(this.nameField);
                 }
-
-                case CLI -> {
-
+                case SURNAME -> {
+                    handlerJavaError.highlightMissingFormElement(this.surnameField);
+                }
+                case DATE_OF_BIRTH -> {
+                    handlerJavaError.highlightMissingFormElement(this.dateField);
+                }
+                case EMAIL -> {
+                    handlerJavaError.highlightMissingFormElement(this.emailField);
+                }
+                case PASSWORD -> {
+                    handlerJavaError.highlightMissingFormElement(this.pwdField);
+                }
+                case GENDER -> {
+                    handlerJavaError.highlightMissingFormElement(this.genderPane);
+                }
+                case ACCOUNT_TYPE -> {
+                    handlerJavaError.highlightMissingFormElement(this.accountTypePane);
                 }
             }
 
         }
 
+        catch (InvalidFieldFormatException e) {
+            /*
+             * Handles invalid field formats in the sign-up form.
+             * Delegates the display of the exception message
+             * to the JavaFX GUI error handler.
+             */
+            HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
+            handlerJavaError.alertErrorMessage(e.getMessage());
+        }
+
+
     }
-
-
-
-
 
 
 }

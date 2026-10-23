@@ -3,12 +3,12 @@ package it.uniroma2.partyflow.exceptions;
 import it.uniroma2.partyflow.enums.UserField;
 
 /**
- * Thrown when a required Bean attribute is assigned
- * a null or empty value through its setter.
+ * Thrown when a required field is missing or contains an empty value,
+ * regardless of how the value was provided.
  */
 
 public class RequiredFieldException extends Exception{
-    UserField field;
+    private final UserField field;
     public RequiredFieldException(UserField field){
         super();
         this.field = field;

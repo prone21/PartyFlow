@@ -5,7 +5,7 @@ import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.exceptions.RequiredFieldException;
-import it.uniroma2.partyflow.exceptions.SignUpException;
+import it.uniroma2.partyflow.exceptions.InvalidFieldFormatException;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
@@ -80,7 +80,7 @@ public class SignUpGraphicControllerCLI {
                 credentials.setDateOfBirth(scanner.nextLine());
                 return;
 
-            } catch (RequiredFieldException | SignUpException e) {
+            } catch (RequiredFieldException | InvalidFieldFormatException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
@@ -95,7 +95,7 @@ public class SignUpGraphicControllerCLI {
                 credentials.setEmail(scanner.nextLine());
                 return;
 
-            } catch (RequiredFieldException | SignUpException e) {
+            } catch (RequiredFieldException | InvalidFieldFormatException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
@@ -110,7 +110,7 @@ public class SignUpGraphicControllerCLI {
                 credentials.setPassword(scanner.nextLine());
                 return;
 
-            } catch (RequiredFieldException | SignUpException e) {
+            } catch (RequiredFieldException | InvalidFieldFormatException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
