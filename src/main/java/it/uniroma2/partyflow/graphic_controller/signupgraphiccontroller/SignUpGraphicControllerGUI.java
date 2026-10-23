@@ -67,11 +67,6 @@ public class SignUpGraphicControllerGUI {
 
     // ----------------------------------
 
-    // REVIEW da eliminare
-    private Node errorField;
-    // REVIEW da eliminare
-    private String oldStyleField;
-
     public void goBackward() {
         try {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
@@ -85,24 +80,6 @@ public class SignUpGraphicControllerGUI {
 
     @FXML
     public void createAccount() throws NoSuchAlgorithmException {
-        /* REVIEW DA TOGLIERE
-        Node[] nodes = {
-                 nameField,
-                 surnameField,
-                 dateField,
-                 emailField,
-                 pwdField,
-                 genderPane,
-                 accountTypePane
-        };
-
-        if (errorField != null){
-            this.errorField.setStyle(this.oldStyleField);
-        }
-
-         */
-
-
         try {
 
             // 1) create the bean where the user date will be memorized
