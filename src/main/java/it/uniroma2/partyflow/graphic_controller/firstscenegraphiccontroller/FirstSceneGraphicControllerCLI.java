@@ -1,7 +1,7 @@
 package it.uniroma2.partyflow.graphic_controller.firstscenegraphiccontroller;
 
 import it.uniroma2.partyflow.graphic_controller.logingraphiccontroller.LoginGraphicControllerCLI;
-import it.uniroma2.partyflow.graphic_controller.signupgraphiccontroller.SignUpGra
+import it.uniroma2.partyflow.graphic_controller.signupgraphiccontroller.SignUpGraphicControllerCLI;
 
 import java.util.Scanner;
 
