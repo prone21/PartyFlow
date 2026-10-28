@@ -3,9 +3,12 @@ package it.uniroma2.partyflow.errorhandlers;
 import it.uniroma2.partyflow.enums.UIType;
 import it.uniroma2.partyflow.utilities.configurators.UIConfigurator;
 
-public class HandlerErrorFactory {
-    // Its responsibility is to provide the appropriate error handler.
+/**
+ * Its responsibility is to provide the appropriate error handler.
+ */
 
+
+public class HandlerErrorFactory {
     private static HandlerErrorFactory instance = null;
 
     private HandlerErrorFactory (){}

@@ -15,45 +15,37 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="2.0" prefWidth="800.0" style="-fx-background-color: FFD700; -fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+      <!-- Header -->
+      <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #153A5F; -fx-border-color: #153A5F; -fx-border-width: 3; -fx-border-radius: 25; -fx-background-radius: 30 30 0 0;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="10.0" layoutY="-1.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party">
+            <Label layoutX="19.0" layoutY="1.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="29.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow">
+            <Label layoutX="38.0" layoutY="32.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="275.0" layoutY="6.0" style="-fx-font-weight: bold;" text="Hangout Planning" textAlignment="CENTER">
+            <Label layoutX="267.0" layoutY="11.0" style="-fx-font-weight: bold;" text="Hangout Planning" textAlignment="CENTER" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Button layoutX="712.0" layoutY="19.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-background-radius: 20; -fx-border-radius: 20;" text="←">
+            <Button fx:id="backwardButton" layoutX="687.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#goBackward" prefHeight="66.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-background-color: #2978DE; -fx-border-color: #f6f7f9; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 20; -fx-border-width: 0;" text="←" textFill="#f6f7f9" />
+            <Label layoutX="278.0" layoutY="55.0" style="-fx-font-weight: bold; -fx-font-style: italic;" text="Hangout Name: &lt;name&gt;" textFill="#f6f7f9">
                <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Label layoutX="283.0" layoutY="44.0" style="-fx-font-weight: bold;" text="Hangout Name:" textAlignment="CENTER">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="401.0" layoutY="44.0" style="-fx-font-weight: bold;" text="&lt;nome&gt;" textAlignment="CENTER">
-               <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black; -fx-border-color: black; -fx-border-width: 0 3 0 3;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6F7F9;" BorderPane.alignment="CENTER">
          <children>
-            <GridPane layoutX="29.0" layoutY="36.0" prefHeight="386.0" prefWidth="742.0" style="-fx-background-color: #FFD700; -fx-background-radius: 20; -fx-border-radius: 20;">
+            <GridPane layoutX="29.0" layoutY="20.0" prefHeight="386.0" prefWidth="742.0" style="-fx-background-color: #F6F7F9; -fx-background-radius: 20; -fx-border-color: rgba(21,58,95,0.25); -fx-border-radius: 20; -fx-border-width: 1.5;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,16 +58,16 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="43.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Date:">
+                        <Label layoutX="43.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Date:" textFill="#153A5F">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: trasparent;">
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: #F6F7F9; -fx-background-insets: 0; -fx-border-color: rgba(21,58,95,0.30); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: FFD700;">
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #F6F7F9;">
                                  <children>
-                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: trasparent;" text="+ Add date" />
+                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-text-fill: #2978DE;" text="+ Add date" textFill="#2978DE" />
                                  </children>
                               </VBox>
                            </content>
@@ -84,16 +76,16 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Label layoutX="43.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Time:">
+                        <Label layoutX="43.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Time:" textFill="#153A5F">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: trasparent;">
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: #F6F7F9; -fx-background-insets: 0; -fx-border-color: rgba(21,58,95,0.30); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: FFD700;">
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #F6F7F9;">
                                  <children>
-                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: trasparent;" text="+ Add time" />
+                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-text-fill: #2978DE;" text="+ Add time" textFill="#2978DE" />
                                  </children>
                               </VBox>
                            </content>
@@ -102,16 +94,16 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Label layoutX="17.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Pick your part:">
+                        <Label layoutX="17.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Pick your part:" textFill="#153A5F">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: trasparent;">
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: #F6F7F9; -fx-background-insets: 0; -fx-border-color: rgba(21,58,95,0.30); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: FFD700;">
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #F6F7F9;">
                                  <children>
-                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: trasparent;" text="+ Add hangout role" />
+                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-text-fill: #2978DE;" text="+ Add hangout role" textFill="#2978DE" />
                                  </children>
                               </VBox>
                            </content>
@@ -120,16 +112,16 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label layoutX="43.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Location:">
+                        <Label layoutX="43.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Location:" textFill="#153A5F">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-border-color: black; -fx-background-color: trasparent;">
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="168.0" layoutY="12.0" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: #F6F7F9; -fx-background-insets: 0; -fx-border-color: rgba(21,58,95,0.30); -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: FFD700;">
+                              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #F6F7F9;">
                                  <children>
-                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: trasparent;" text="+ Add location" />
+                                    <Button mnemonicParsing="false" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-text-fill: #2978DE;" text="+ Add location" textFill="#2978DE" />
                                  </children>
                               </VBox>
                            </content>
@@ -138,18 +130,18 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label layoutX="20.0" layoutY="25.0" prefHeight="59.0" prefWidth="113.0" style="-fx-font-weight: bold;" text="Submission Deadline:" wrapText="true">
+                        <Label layoutX="20.0" layoutY="25.0" prefHeight="59.0" prefWidth="113.0" style="-fx-font-weight: bold;" text="Submission Deadline:" textFill="#153A5F" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="174.0" layoutY="52.0" prefHeight="27.0" prefWidth="130.0" promptText="dd/MM/yyyy HH:mm" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: trasparent; -fx-prompt-text-fill: #666666;" />
-                        <Label layoutX="20.0" layoutY="84.0" prefHeight="42.0" prefWidth="138.0" text="*Participants can’t submit after this date/time." textFill="#666666" wrapText="true" />
+                        <TextField layoutX="174.0" layoutY="52.0" prefHeight="27.0" prefWidth="130.0" promptText="dd/MM/yyyy HH:mm" style="-fx-border-color: rgba(21,58,95,0.30); -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #F6F7F9; -fx-prompt-text-fill: rgba(21,58,95,0.55); -fx-text-fill: #153A5F;" />
+                        <Label layoutX="20.0" layoutY="84.0" prefHeight="42.0" prefWidth="138.0" style="-fx-opacity: 0.65;" text="*Participants can’t submit after this date/time." textFill="#153A5F" wrapText="true" />
                      </children>
                   </AnchorPane>
                </children>
             </GridPane>
-            <Button layoutX="337.0" layoutY="396.0" mnemonicParsing="false" style="-fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: FFD700; -fx-border-color: black; -fx-font-weight: bold; -fx-background-insets: 0; -fx-border-insets: 0;" text="Propose">
+            <Button layoutX="337.0" layoutY="380.0" mnemonicParsing="false" style="-fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: #2978DE; -fx-border-color: #153A5F; -fx-font-weight: bold; -fx-background-insets: 0; -fx-border-insets: 0; -fx-font-size: 24;" text="Propose" textFill="#f6f7f9">
                <font>
                   <Font size="24.0" />
                </font>
@@ -158,19 +150,20 @@
       </AnchorPane>
    </center>
    <bottom>
-      <HBox prefHeight="56.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: FFD700;" BorderPane.alignment="CENTER">
+      <!-- Navigation bar -->
+      <HBox prefHeight="0.0" prefWidth="800.0" style="-fx-border-color: #153a5f; -fx-border-width: 3; -fx-background-color: #153a5f;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-border-color: black; -fx-border-width: 0 3 0 0; -fx-background-color: transparent;" text="Home">
+            <Button mnemonicParsing="false" prefHeight="106.0" prefWidth="276.0" style="-fx-font-weight: bold; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-background-color: transparent; -fx-font-size: 25;" text="Home" textFill="#f6f7f9">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 3 0 0;" text="My notifications">
+            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="265.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-font-size: 25;" text="My notifications" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0 0;" text="Profile">
+            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="284.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 0 0 0; -fx-font-size: 25;" text="Profile" textFill="#f6f7f9">
                <font>
                   <Font size="25.0" />
                </font>

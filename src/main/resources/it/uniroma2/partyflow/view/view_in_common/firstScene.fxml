@@ -5,19 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controller.firstscenegraphiccontroller.FirstSceneGraphicControllerGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #153A5F;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controller.firstscenegraphiccontroller.FirstSceneGraphicControllerGUI">
    <children>
-      <Label layoutX="206.0" layoutY="97.0" prefHeight="138.0" prefWidth="388.0" style="-fx-font-weight: bold;" text="PartyFlow" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label layoutX="206.0" layoutY="97.0" prefHeight="138.0" prefWidth="388.0" style="-fx-font-weight: bold;" text="PartyFlow" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
          <font>
             <Font size="80.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" layoutX="309.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="62.0" prefWidth="182.0" style="-fx-background-insets: 0; -fx-border-insets: 0; -fx-font-size: 30; -fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 20; -fx-background-radius: 20; -fx-font-weight: bold; -fx-background-color: FFD700;" text="Log in">
+      <Button fx:id="loginButton" layoutX="309.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="62.0" prefWidth="182.0" style="-fx-background-insets: 0; -fx-border-insets: 0; -fx-font-size: 30; -fx-border-width: 1; -fx-border-radius: 20; -fx-background-radius: 20; -fx-font-weight: bold; -fx-background-color: #2978DE;" text="Log in" textFill="#f6f7f9">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button fx:id="signUpButton" layoutX="309.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="62.0" prefWidth="182.0" style="-fx-background-insets: 0; -fx-border-insets: 0; -fx-border-color: black; -fx-font-size: 30; -fx-border-width: 1; -fx-border-radius: 20; -fx-background-radius: 20; -fx-font-weight: bold; -fx-background-color: FFD700;" text="Sign up">
+      <Button fx:id="signUpButton" layoutX="309.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="62.0" prefWidth="182.0" style="-fx-background-insets: 0; -fx-border-insets: 0; -fx-font-size: 30; -fx-border-width: 1; -fx-border-radius: 20; -fx-background-radius: 20; -fx-font-weight: bold; -fx-background-color: #2978DE;" text="Sign up" textFill="#f6f7f9">
          <font>
             <Font size="30.0" />
          </font>

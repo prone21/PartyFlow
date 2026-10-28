@@ -4,33 +4,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: FFD700; -fx-border-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #F6F7F9; -fx-border-color: rgba(21,58,95,0.20); -fx-border-width: 1;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="49.0" prefWidth="400.0" style="-fx-background-color: FFD700; -fx-border-color: black; -fx-border-width: 3;">
+      <AnchorPane prefHeight="49.0" prefWidth="400.0" style="-fx-background-color: #153A5F; -fx-border-width: 0;">
          <children>
-            <Label layoutX="10.0" layoutY="-5.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party">
+            <Label layoutX="10.0" layoutY="-5.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party" textFill="#f6f7f9">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="18.0" layoutY="16.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow">
+            <Label layoutX="18.0" layoutY="16.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow" textFill="#f6f7f9">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="92.0" layoutY="16.0" style="-fx-font-weight: bold;" text="Hangout Planning Failed" textAlignment="CENTER">
+            <Label layoutX="92.0" layoutY="16.0" style="-fx-font-weight: bold;" text="Hangout Planning Failed" textAlignment="CENTER" textFill="#f6f7f9">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="87.0" layoutY="84.0" style="-fx-font-weight: bold;" text="Submission deadline expired!" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="45.0" layoutY="78.0" prefWidth="310.0" alignment="CENTER" style="-fx-font-weight: bold;" text="Submission deadline expired!" textAlignment="CENTER" textFill="#153A5F" wrapText="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="93.0" layoutY="115.0" prefHeight="61.0" prefWidth="222.0" style="-fx-font-weight: bold;" text="Your preferences can no longer be submitted!" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="70.0" layoutY="111.0" prefHeight="61.0" prefWidth="260.0" alignment="CENTER" style="-fx-font-weight: bold;" text="Your preferences can no longer be submitted!" textAlignment="CENTER" textFill="#153A5F" wrapText="true">
          <font>
             <Font size="17.0" />
          </font>

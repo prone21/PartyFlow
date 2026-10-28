@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Its responsibility is to obtain the application persistence layer
+ */
+
 public class PersistenceConfigurator {
-    // Its responsibility is to obtain the application persistence layer
     private final Properties properties = new Properties();
     private static PersistenceConfigurator instance = null;
 
@@ -25,9 +28,8 @@ public class PersistenceConfigurator {
             this.properties.load(input); // it puts the content of the .ini file into the properties var
         }
         catch (IOException e){
-            HandlerErrorFactory hef = HandlerErrorFactory.getInstance();
-            HandlerSystemError hse = hef.getHandlerSystemError();
-            hse.severeLog("IOException", e);
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
 
         }
     }

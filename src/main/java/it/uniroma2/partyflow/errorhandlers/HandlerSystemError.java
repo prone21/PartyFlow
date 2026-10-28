@@ -46,39 +46,29 @@ public class HandlerSystemError {
     }
 
 
-    /**
-     * Logs an error including the original exception stack trace.
-     */
+    // Logs an error including the original exception stack trace.
     public void logError(String message, Throwable exception) {
         this.LOGGER.log(Level.SEVERE, message, exception);
     }
 
-    /**
-     * Logs an error message without an exception.
-     */
+    // Logs an error message without an exception.
     public void logError(String message) {
         this.LOGGER.log(Level.SEVERE, message);
     }
 
-    /**
-     * Logs an exception at SEVERE level, including
-     * its type, message, and stack trace.
-     *
-     */
+    // Logs an exception at SEVERE level, including
+    // its type, message, and stack trace.
     public void logError(Throwable exception){
         this.LOGGER.log(Level.SEVERE, "", exception);
     }
 
-    /**
-     * Logs a warning message.
-     */
+
+    // Logs a warning message.
     public void logWarning(String message) {
         this.LOGGER.log(Level.WARNING, message);
     }
 
-    /**
-     * Logs an informational message.
-     */
+    // Logs an informational message.
     public void logInfo(String message) {
         this.LOGGER.log(Level.INFO, message);
     }

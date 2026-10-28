@@ -10,10 +10,7 @@ import it.uniroma2.partyflow.exceptions.RequiredFieldException;
 import it.uniroma2.partyflow.exceptions.InvalidFieldFormatException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import it.uniroma2.partyflow.exceptions.InvalidStateException;
 
@@ -40,7 +37,13 @@ public class SignUpGraphicControllerGUI {
     // ----------------------------------
 
 
-    // RadioButton
+    // Gender toggle group
+    @FXML
+    private AnchorPane genderPane;
+
+    @FXML
+    private ToggleGroup genderGroup;
+
     @FXML
     private RadioButton maleOption;
 
@@ -50,20 +53,21 @@ public class SignUpGraphicControllerGUI {
     @FXML
     private RadioButton pntsOption;
 
+    // ----------------------------------
+
+
+    // Account type toggle group
+    @FXML
+    private ToggleGroup accountTypeGroup;
+
+    @FXML
+    private AnchorPane accountTypePane;
+
     @FXML
     private RadioButton partyPlannerOption;
 
     @FXML
     private RadioButton participantOption;
-
-    // ----------------------------------
-
-    // AnchorPane/ToggleGroup
-    @FXML
-    private AnchorPane genderPane;
-
-    @FXML
-    private AnchorPane accountTypePane;
 
     // ----------------------------------
 
@@ -76,6 +80,54 @@ public class SignUpGraphicControllerGUI {
             HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
             handlerSysErr.logError(e);
         }
+    }
+
+
+    private Gender obtainSelectedGender() {
+        /*
+         * Toggle is an interface implemented by certain selectable JavaFX controls.
+         * getSelectedToggle() returns a reference to the currently selected Toggle in the ToggleGroup, or null if none is selected.
+         */
+
+        Toggle selectedGender = genderGroup.getSelectedToggle();
+        Gender gender = null;
+
+
+        /*
+         * In Java, the == operator compares object references, not their contents.
+         * It returns true if both references point to the same object in memory
+         * (conceptually, the same memory address).
+         *
+         * Java checks at compile time whether the reference types are compatible.
+         * Here, selectedGender and maleOption can be compared because RadioButton
+         * implements the Toggle interface through its superclass ToggleButton.
+         *
+         * The comparison checks whether both references point to the
+         * same RadioButton instance.
+         */
+
+        if (selectedGender == maleOption) {
+            gender = Gender.MALE;
+        } else if (selectedGender == femaleOption) {
+            gender = Gender.FEMALE;
+        } else if (selectedGender == pntsOption) {
+            gender = Gender.PNTS;
+        }
+
+        return gender;
+    }
+
+    private AccountType obtainSelectedAccountType(){
+        Toggle selectedAccountType = accountTypeGroup.getSelectedToggle();
+        AccountType account = null;
+
+        if(selectedAccountType == partyPlannerOption){
+            account = AccountType.PartyPlanner;
+        } else if (selectedAccountType == participantOption) {
+            account = AccountType.Participant;
+        }
+
+        return account;
     }
 
     @FXML
@@ -93,30 +145,13 @@ public class SignUpGraphicControllerGUI {
             signUpBean.setEmail(emailField.getText());
             signUpBean.setPassword(pwdField.getText());
 
-            if (maleOption.isSelected()) {
-                signUpBean.setGender(Gender.MALE);
-            } else if (femaleOption.isSelected()) {
-                signUpBean.setGender(Gender.FEMALE);
-            } else if (pntsOption.isSelected()) {
-                signUpBean.setGender(Gender.PNTS);
-            }
-            else{
-                signUpBean.setGender(null);
-            }
+            signUpBean.setGender(this.obtainSelectedGender());
 
-            if (partyPlannerOption.isSelected()) {
-                signUpBean.setAccountType(AccountType.PartyPlanner);
-            } else if (participantOption.isSelected()) {
-                signUpBean.setAccountType(AccountType.Participant);
-            }
-            else{
-                System.out.println("e dio cane");
-                signUpBean.setAccountType(null);
-            }
+            signUpBean.setAccountType(this.obtainSelectedAccountType());
             //---------------------------------------------
 
 
-            // pass the UserBean to the application controller
+            // 2) pass the UserBean to the application controller
             SignUpController signUpController = new SignUpController();
             signUpController.createAccount(signUpBean);
             //---------------------------------------------

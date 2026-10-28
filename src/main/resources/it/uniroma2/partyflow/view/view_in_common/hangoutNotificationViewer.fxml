@@ -11,30 +11,31 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <AnchorPane prefHeight="462.0" prefWidth="726.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="462.0" prefWidth="726.0" style="-fx-background-color: #f6f7f9;" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="50.0" layoutY="27.0" prefHeight="400.0" prefWidth="700.0">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="50.0" layoutY="27.0" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #F6F7F9; -fx-border-color: rgba(21,58,95,0.15);">
                <content>
-                  <VBox prefHeight="498.0" prefWidth="685.0" style="-fx-background-color: FFD700;" />
+                  <VBox prefHeight="498.0" prefWidth="685.0" style="-fx-background-color: #F6F7F9;" />
                </content>
             </ScrollPane>
          </children>
       </AnchorPane>
    </center>
    <bottom>
-      <HBox prefHeight="56.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: FFD700;" BorderPane.alignment="CENTER">
+       <!-- Navigation bar -->
+      <HBox prefHeight="0.0" prefWidth="800.0" style="-fx-border-color: #153a5f; -fx-border-width: 3; -fx-background-color: #153a5f;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-border-color: black; -fx-border-width: 0 3 0 0; -fx-background-color: transparent;" text="Home">
+            <Button mnemonicParsing="false" prefHeight="106.0" prefWidth="276.0" style="-fx-font-weight: bold; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-background-color: transparent; -fx-font-size: 25;" text="Home" textFill="#f6f7f9">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 3 0 0;" text="My notifications">
+            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="265.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-font-size: 25;" text="My notifications" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0 0;" text="Profile">
+            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="284.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 0 0 0; -fx-font-size: 25;" text="Profile" textFill="#f6f7f9">
                <font>
                   <Font size="25.0" />
                </font>
@@ -43,28 +44,25 @@
       </HBox>
    </bottom>
    <top>
-      <AnchorPane prefHeight="2.0" prefWidth="800.0" style="-fx-background-color: FFD700; -fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+     <!-- Header -->
+      <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #153A5F; -fx-border-color: #153A5F; -fx-border-width: 3; -fx-border-radius: 25; -fx-background-radius: 30 30 0 0;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="10.0" layoutY="-1.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party">
+            <Label layoutX="19.0" layoutY="1.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold; -fx-font-size: 30;" text="Party" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="29.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow">
+            <Label layoutX="38.0" layoutY="32.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold; -fx-font-size: 30;" text="Flow" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="164.0" layoutY="18.0" style="-fx-font-weight: bold;" text="My &lt;hangout type notifications&gt;" textAlignment="CENTER">
+            <Label layoutX="164.0" layoutY="27.0" style="-fx-font-weight: bold; -fx-font-size: 30;" text="My &lt;hangout type notifications&gt;" textAlignment="CENTER" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Button layoutX="712.0" layoutY="19.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2; -fx-background-radius: 20; -fx-border-radius: 20;" text="←">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
+            <Button fx:id="backwardButton" layoutX="687.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#goBackward" prefHeight="66.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-background-color: #2978DE; -fx-border-color: #f6f7f9; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 20; -fx-border-width: 0;" text="←" textFill="#f6f7f9" />
          </children>
       </AnchorPane>
    </top>

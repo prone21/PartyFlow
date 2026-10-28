@@ -7,9 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class NavigatorSingleton {
-    // Responsible for displaying views defined in FXML files. It allows the view navigation.
+/**
+ * Responsible for displaying views defined in FXML files.
+ * It allows the view navigation.
+ */
 
+public class NavigatorSingleton {
     private final Stage stage; // The Stage in which the views (scenes) are displayed.
     private Scene prevScene;
     private static NavigatorSingleton instance = null;

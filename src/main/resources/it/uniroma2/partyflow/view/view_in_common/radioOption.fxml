@@ -6,13 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="188.0" style="-fx-background-color: FFD700;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="188.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="63.0" prefWidth="129.0">
+      <AnchorPane prefHeight="63.0" prefWidth="190.0" style="-fx-background-color: #F6F7F9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: #E5EAF0;">
          <children>
-            <RadioButton layoutX="164.0" layoutY="22.0" mnemonicParsing="false" />
-            <Label layoutX="7.0" layoutY="16.0" style="-fx-font-weight: bold;" text="Label">
+            <RadioButton layoutX="159.0" layoutY="19.0" mnemonicParsing="false" style="-fx-mark-color: #2978DE; -fx-font-size: 17; -fx-font-weight: bold;" />
+            <Label layoutX="7.0" layoutY="16.0" style="-fx-font-weight: bold; -fx-text-fill: #153a5f; -fx-font-size: 20;" text="Label" textFill="#f6f7f9">
                <font>
                   <Font size="20.0" />
                </font>

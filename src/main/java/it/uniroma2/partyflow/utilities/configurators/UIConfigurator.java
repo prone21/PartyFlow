@@ -1,15 +1,17 @@
 package it.uniroma2.partyflow.utilities.configurators;
 
 import it.uniroma2.partyflow.enums.UIType;
-import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Its responsibility is to obtain the application UI type
+ */
+
 public class UIConfigurator {
-    // Its responsibility is to obtain the application UI type
     private final Properties properties = new Properties();
     private static UIConfigurator instance = null;
 
@@ -21,9 +23,8 @@ public class UIConfigurator {
             this.properties.load(input); // it puts the content of the .ini file into the properties var
         }
         catch (IOException e){
-            HandlerErrorFactory hef = HandlerErrorFactory.getInstance();
-            HandlerSystemError hse = hef.getHandlerSystemError();
-            hse.severeLog(e.getStackTrace());
+            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
+            handlerSysErr.logError(e);
 
         }
 

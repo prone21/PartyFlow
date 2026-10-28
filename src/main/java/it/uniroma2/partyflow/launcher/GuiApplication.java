@@ -1,5 +1,4 @@
 package it.uniroma2.partyflow.launcher;
-import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.application.Application;
@@ -15,9 +14,8 @@ public class GuiApplication extends Application implements UIApplication {
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
         }
         catch (IOException e){
-            HandlerErrorFactory heFactory = HandlerErrorFactory.getInstance();
-            HandlerSystemError hse = heFactory.getHandlerSystemError();
-            hse.severeLog("IOException",e);
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
         }
 
     }
