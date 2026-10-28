@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 public class SignUpController {
 
-    public void createAccount(UserBean signUpBean) throws NoSuchAlgorithmException {
+    public void createAccount(UserBean signUpBean)  {
 
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("dd/MM/uuuu");

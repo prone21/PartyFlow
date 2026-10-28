@@ -14,8 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import it.uniroma2.partyflow.exceptions.InvalidStateException;
 
-import java.security.NoSuchAlgorithmException;
-
 public class SignUpGraphicControllerGUI {
 
     // TextField
@@ -131,7 +129,7 @@ public class SignUpGraphicControllerGUI {
     }
 
     @FXML
-    public void createAccount() throws NoSuchAlgorithmException {
+    public void createAccount(){
         try {
 
             // 1) create the bean where the user date will be memorized
