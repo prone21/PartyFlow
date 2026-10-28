@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow;
-import it.uniroma2.partyflow.launcher.UIApplication;
-import it.uniroma2.partyflow.launcher.UIApplicationFactory;
+import it.uniroma2.partyflow.launchers.UIApplication;
+import it.uniroma2.partyflow.launchers.UIApplicationFactory;
 
 public class Main {
     public static void main() {

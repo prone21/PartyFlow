@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controller.signupgraphiccontroller.SignUpGraphicControllerGUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controllers.GUI.SignUpGraphicControllerGUI">
    <top>
       <!-- Header -->
       <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #153A5F; -fx-border-color: #153A5F; -fx-border-width: 3; -fx-border-radius: 25; -fx-background-radius: 30 30 0 0;" BorderPane.alignment="CENTER">
