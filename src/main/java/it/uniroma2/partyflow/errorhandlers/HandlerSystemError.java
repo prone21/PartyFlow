@@ -46,7 +46,11 @@ public class HandlerSystemError {
     }
 
 
-    // Logs an error including the original exception stack trace.
+    /*
+     * Logs an error including the original exception's stack trace.
+     * An additional message can be provided to describe the context
+     * in which the error occurred.
+     */
     public void logError(String message, Throwable exception) {
         this.LOGGER.log(Level.SEVERE, message, exception);
     }
