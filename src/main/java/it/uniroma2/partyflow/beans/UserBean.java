@@ -3,8 +3,8 @@ package it.uniroma2.partyflow.beans;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.enums.UserField;
-import it.uniroma2.partyflow.exceptions.RequiredFieldException;
-import it.uniroma2.partyflow.exceptions.InvalidFieldFormatException;
+import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
+import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

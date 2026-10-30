@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.exceptions;
+package it.uniroma2.partyflow.exceptions.uiexception;
 
 /**
  * Thrown when a field contains a value that does not comply

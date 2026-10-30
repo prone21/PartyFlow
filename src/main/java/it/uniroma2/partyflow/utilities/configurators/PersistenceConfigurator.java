@@ -1,9 +1,8 @@
 package it.uniroma2.partyflow.utilities.configurators;
 
-import it.uniroma2.partyflow.exceptions.InvalidStateException;
+import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.enums.ApplicationModalities;
 import it.uniroma2.partyflow.enums.PersistenceType;
-import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 
 import java.io.FileInputStream;
@@ -52,7 +51,7 @@ public class PersistenceConfigurator {
         };
     }
 
-    public List<String> getDBMSConnectionParameter() throws InvalidStateException{
+    public List<String> getDBMSConnectionParameter() throws InvalidPersistenceTypeException {
         if( this.getPersistenceType() == PersistenceType.MySQL ) {
             List<String> DBMSConnproperties = new ArrayList<>();
             DBMSConnproperties.add(this.properties.getProperty("url.mysql"));
@@ -62,18 +61,18 @@ public class PersistenceConfigurator {
         }
 
         else{
-            throw new InvalidStateException("Persistence layer is not MySQL");
+            throw new InvalidPersistenceTypeException("Persistence layer is not MySQL");
         }
 
     }
 
 
-    public String getDirectoryCSVDB() throws InvalidStateException{
+    public String getDirectoryCSVDB() throws InvalidPersistenceTypeException {
         if (this.getPersistenceType() == PersistenceType.CSV ){
             return this.properties.getProperty("directory.CSVDB");
         }
         else {
-            throw new InvalidStateException("Persistence Layer is not CSV");
+            throw new InvalidPersistenceTypeException("Persistence Layer is not CSV");
         }
     }
 

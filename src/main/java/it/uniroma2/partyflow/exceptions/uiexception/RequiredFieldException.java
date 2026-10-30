@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.exceptions;
+package it.uniroma2.partyflow.exceptions.uiexception;
 
 import it.uniroma2.partyflow.enums.UserField;
 

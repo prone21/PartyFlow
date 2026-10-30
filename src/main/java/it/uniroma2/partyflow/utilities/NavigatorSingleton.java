@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.utilities;
 
-import it.uniroma2.partyflow.exceptions.InvalidStateException;
+import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -30,9 +30,10 @@ public class NavigatorSingleton {
         return instance;
     }
 
-    public static NavigatorSingleton getInstance() throws InvalidStateException {
+    public static NavigatorSingleton getInstance() throws InvalidPersistenceTypeException {
         if(instance == null){
-            throw new InvalidStateException("NavigatorSingleton is not initialized. " +
+            //REVIEW CAMBIA L'ECCEZIONE
+            throw new InvalidPersistenceTypeException("NavigatorSingleton is not initialized. " +
                     "Use getInstance(Stage) to initialize it first.");
         }
         else{

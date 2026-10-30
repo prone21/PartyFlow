@@ -5,8 +5,8 @@ import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
-import it.uniroma2.partyflow.exceptions.InvalidFieldFormatException;
-import it.uniroma2.partyflow.exceptions.RequiredFieldException;
+import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
+import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
 
 import java.util.Scanner;
 

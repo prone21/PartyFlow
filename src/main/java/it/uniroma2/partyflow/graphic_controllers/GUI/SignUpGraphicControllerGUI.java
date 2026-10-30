@@ -6,13 +6,13 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.RequiredFieldException;
-import it.uniroma2.partyflow.exceptions.InvalidFieldFormatException;
+import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
+import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import it.uniroma2.partyflow.exceptions.InvalidStateException;
+import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
 
 public class SignUpGraphicControllerGUI {
 
@@ -74,7 +74,7 @@ public class SignUpGraphicControllerGUI {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.goBackward();
         }
-        catch (InvalidStateException e){
+        catch (InvalidPersistenceTypeException e){
             HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
             handlerSysErr.logError(e);
         }
