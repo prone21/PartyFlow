@@ -2,7 +2,7 @@ package it.uniroma2.partyflow.daos;
 
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
-import it.uniroma2.partyflow.exceptions.uiexception.ApplicationConfigurationException;
+import it.uniroma2.partyflow.exceptions.uiexception.PersistenceError;
 import it.uniroma2.partyflow.exceptions.uiexception.ServiceUnavailableException;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
@@ -11,11 +11,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Database connection factory using the <b>Singleton pattern (GoF)</b>.
+ * <p>Maintains a single database connection for the application.
+ */
+
 public class ConnectionFactory {
-    /**
-     * Database connection factory using the <b>Singleton pattern (GoF)</b>.
-     * <p>Maintains a single database connection for the application.
-     */
 
     // ---------------singleton-----------------------
     private static ConnectionFactory instance = null;
@@ -23,8 +24,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){}
 
-    public static ConnectionFactory getInstance() throws ApplicationConfigurationException,
-            ServiceUnavailableException{
+    public static ConnectionFactory getInstance() throws PersistenceError {
 
         try{
             if (instance == null){
@@ -39,14 +39,12 @@ public class ConnectionFactory {
         catch (InvalidPersistenceTypeException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
-            throw new ApplicationConfigurationException("Something went wrong. " +
-                    "Please try again later or contact support if the problem persists.");
+            throw new PersistenceError();
         }
         catch (SQLException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError("Failed to establish database connection.",e);
-            throw new ServiceUnavailableException("The service is temporarily unavailable. Please try again later " +
-                    "or contact support if the problem persists.");
+            throw new PersistenceError();
         }
 
     }

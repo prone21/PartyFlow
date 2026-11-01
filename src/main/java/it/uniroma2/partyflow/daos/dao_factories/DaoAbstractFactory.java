@@ -1,7 +1,6 @@
 package it.uniroma2.partyflow.daos.dao_factories;
 
-import it.uniroma2.partyflow.daos.logindao.LoginDaoInterface;
-import it.uniroma2.partyflow.daos.signupdao.SignUpDaoInterface;
+import it.uniroma2.partyflow.daos.UserDaoInterface;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
@@ -19,9 +18,9 @@ public abstract class DaoAbstractFactory {
     }
 
 
-
-    public abstract SignUpDaoInterface getSignUpDao(User accountInfo);
-    public abstract LoginDaoInterface getLoginDao(LoginCredential cred);
+    public abstract UserDaoInterface getUserDao();
+    /*public abstract SignUpDaoInterface getSignUpDao(User accountInfo);
+    public abstract LoginDaoInterface getLoginDao(LoginCredential cred);*/
 
 
 }

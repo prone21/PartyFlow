@@ -6,8 +6,7 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
-import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
+import it.uniroma2.partyflow.exceptions.uiexception.*;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -154,6 +153,12 @@ public class SignUpGraphicControllerGUI {
             signUpController.createAccount(signUpBean);
             //---------------------------------------------
 
+        }
+
+        catch (PersistenceError e){
+         HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+         handlerJavaFxGUIError.alertErrorMessage("Unable to complete registration due to an internal error. " +
+                 "Please try again later or contact support if the problem persists.");
         }
 
         catch (RequiredFieldException e){

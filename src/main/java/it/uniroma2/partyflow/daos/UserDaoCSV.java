@@ -7,8 +7,7 @@ import it.uniroma2.partyflow.model.User;
 public class UserDaoCSV implements UserDaoInterface{
 
     @Override
-    public boolean signUp(User user){
-        return true;
+    public void signUp(User user){
     }
 
     @Override

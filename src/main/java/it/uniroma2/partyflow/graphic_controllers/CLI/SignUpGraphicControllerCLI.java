@@ -6,8 +6,10 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
+import it.uniroma2.partyflow.exceptions.uiexception.PersistenceError;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class SignUpGraphicControllerCLI {
@@ -90,7 +92,13 @@ public class SignUpGraphicControllerCLI {
 
                 return;
 
-            } catch (RequiredFieldException e) {
+            }
+            catch (PersistenceError e){
+                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+                handlerCLIError.printErrorMessage("Unable to complete registration due to an internal error. " +
+                        "Please try again later or contact support if the problem persists.");
+            }
+            catch (RequiredFieldException e) {
                 /*
                  * Handles missing required fields.
                  * Delegates the error message to the CLI error handler.

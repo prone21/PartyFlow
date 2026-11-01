@@ -2,7 +2,6 @@ package it.uniroma2.partyflow.app_controllers;
 
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.daos.dao_factories.DaoAbstractFactory;
-import it.uniroma2.partyflow.daos.logindao.LoginDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.model.LoginCredential;
 

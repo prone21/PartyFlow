@@ -1,6 +1,10 @@
 package it.uniroma2.partyflow.daos;
 
 import it.uniroma2.partyflow.enums.AccountType;
+import it.uniroma2.partyflow.exceptions.uiexception.ApplicationConfigurationException;
+import it.uniroma2.partyflow.exceptions.uiexception.PersistenceError;
+import it.uniroma2.partyflow.exceptions.uiexception.ServiceUnavailableException;
+import it.uniroma2.partyflow.exceptions.uiexception.UserOperationException;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
 
@@ -11,17 +15,17 @@ import it.uniroma2.partyflow.model.User;
  */
 
 
-public interface UserDaoInterface {
-
-    /** signUp
-     * Registers a new user account.
+public interface UserDaoInterface {    /**
+     * Registers a new user by storing their personal information
+     * and account details in the persistence layer.
+     * If the registration fails due to a persistence error,
+     * a PersistenceException is thrown.
      *
-     * @param user the user whose account must be registered.
-     * @return true if the account is successfully created,
-     *         false otherwise.
+     * @param user the user to be registered
+     * @throws UserOperationException if an error occurs during registration
      */
 
-    boolean signUp(User user);
+    void signUp(User user) throws PersistenceError;
 
 
     /** login

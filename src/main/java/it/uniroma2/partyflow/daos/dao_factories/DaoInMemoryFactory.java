@@ -1,8 +1,6 @@
 package it.uniroma2.partyflow.daos.dao_factories;
 
-import it.uniroma2.partyflow.daos.logindao.LoginDaoInterface;
 import it.uniroma2.partyflow.daos.logindao.LoginDaoInMemory;
-import it.uniroma2.partyflow.daos.signupdao.SignUpDaoInterface;
 import it.uniroma2.partyflow.daos.signupdao.SignUpDaoInMemory;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
