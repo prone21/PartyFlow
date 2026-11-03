@@ -4,10 +4,7 @@ import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.daoexception.DuplicateEntityException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceConstraintViolationException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceGenericException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceServiceUnavailableException;
+import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
 
@@ -29,7 +26,8 @@ public class UserDaoMySQL implements UserDaoInterface {
     }
 
     @Override
-    public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException, PersistenceGenericException, PersistenceConstraintViolationException {
+    public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException,
+            PersistenceGenericException, PersistenceConstraintViolationException {
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -121,18 +119,21 @@ public class UserDaoMySQL implements UserDaoInterface {
 
 
     @Override
-    public AccountType login(LoginCredential cred) throws PersistenceServiceUnavailableException, DuplicateEntityException, PersistenceConstraintViolationException, PersistenceGenericException {
+    public AccountType login(LoginCredential cred) throws PersistenceGenericException, PersistenceServiceUnavailableException,
+            EntityNotFound{
+
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+
+
         try{
             ConnectionFactory connFactory = ConnectionFactory.getInstance();
             conn = connFactory.getConnection();
-            conn.setAutoCommit(false);
 
-
-            // check if he is a participant
-            String query = "select * from users as u join participant as p on p.email = u.email " +
+            // check if he is a participant or a party planner
+            String query = "select COALESCE(p.email,'PartyPlanner') as account_type\n" +
+                    "from users as u left join participant as p on u.email = p.email " +
                     "where u.email = ? and u.password = ?";
 
             stmt = conn.prepareStatement(query);
@@ -141,51 +142,36 @@ public class UserDaoMySQL implements UserDaoInterface {
 
             rs = stmt.executeQuery();
             if (rs.next()){
-                return AccountType.Participant;
+                if (rs.getString("account_type").equals("PartyPlanner")){
+                    return AccountType.PartyPlanner;
+                }
+                else{
+                    return AccountType.Participant;
+                }
+
             }
             else{
-                return AccountType.PartyPlanner;
+                //TODO ERROR HANDLING FORSE
+                throw new EntityNotFound();
             }
+        }
+
+        catch (SQLException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            throw new PersistenceGenericException();
         }
 
         catch (PersistenceServiceUnavailableException e){
             // log the error
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
-
-            // rollback all the action done
-            this.rollBack(conn);
-
             // throw the exception
             throw e;
         }
 
-        catch (SQLException e){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
-
-            switch (e.getErrorCode()){
-                case 1062:
-                    // Primary key o UNIQUE duplicated
-                    throw new DuplicateEntityException();
-
-                case 1451, 1452:
-                    // Break Foreign Key constraint
-                    throw new PersistenceConstraintViolationException();
-
-                default:
-                    // rollback all the action done
-                    this.rollBack(conn);
-                    throw new PersistenceGenericException();
-            }
-        }
-
         finally{
             try {
-                if (conn != null){
-                    conn.setAutoCommit(true);
-                }
-
                 if (stmt != null) {
                     stmt.close();
                 }
@@ -199,7 +185,6 @@ public class UserDaoMySQL implements UserDaoInterface {
                 handlerSystemError.logError(e2);
             }
         }
-
     }
 
 }

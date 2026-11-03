@@ -1,10 +1,7 @@
 package it.uniroma2.partyflow.daos.dao_interfaces;
 
 import it.uniroma2.partyflow.enums.AccountType;
-import it.uniroma2.partyflow.exceptions.daoexception.DuplicateEntityException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceConstraintViolationException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceGenericException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceServiceUnavailableException;
+import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
@@ -37,6 +34,6 @@ public interface UserDaoInterface {    /**
      * @return the AccountType associated with the authenticated user,
      *         or null if no matching account is found.
      */
-    AccountType login(LoginCredential cred) throws PersistenceServiceUnavailableException, DuplicateEntityException, PersistenceConstraintViolationException,
+    AccountType login(LoginCredential cred) throws PersistenceServiceUnavailableException, EntityNotFound, PersistenceConstraintViolationException,
             PersistenceGenericException;
 }
