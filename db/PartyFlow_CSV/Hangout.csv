@@ -1,1 +1,7 @@
-name,description,state,partyPlannerPlanning
+﻿name,description,state,partyPlannerPlanning
+Aperitivo 2026,Aperitivo di gruppo,IN_PLANNING,giulia.verdi@partyflow.test
+Bowling Night 2026,Serata al bowling,IN_PLANNING,giulia.verdi@partyflow.test
+Cinema Night 2026,Serata al cinema,IN_PLANNING,marco.bianchi@partyflow.test
+Escape Room 2026,NOT_SPECIFIED,IN_PLANNING,marco.bianchi@partyflow.test
+Halloween 2026,Serata di Halloween,IN_PLANNING,alice.rossi@partyflow.test
+Pizza Night 2026,Pizzata tra amici,IN_PLANNING,alice.rossi@partyflow.test

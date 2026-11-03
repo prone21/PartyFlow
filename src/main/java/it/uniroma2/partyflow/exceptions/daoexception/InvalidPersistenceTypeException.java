@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.exceptions.systemexception;
+package it.uniroma2.partyflow.exceptions.daoexception;
 
 /**
  * An InvalidPersistenceTypeException indicates that an operation
@@ -6,7 +6,7 @@ package it.uniroma2.partyflow.exceptions.systemexception;
  * is incompatible with the persistence type required by the operation.
  */
 
-public class InvalidPersistenceTypeException extends Exception {
+public class InvalidPersistenceTypeException extends Exception{
     public InvalidPersistenceTypeException(String message) {
         super(message);
     }

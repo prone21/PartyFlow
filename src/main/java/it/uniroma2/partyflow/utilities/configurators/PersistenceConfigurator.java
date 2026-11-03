@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.utilities.configurators;
 
-import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
+import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.enums.ApplicationModalities;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;

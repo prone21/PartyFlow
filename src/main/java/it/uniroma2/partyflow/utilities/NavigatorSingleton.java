@@ -1,11 +1,9 @@
 package it.uniroma2.partyflow.utilities;
 
-import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
+import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Responsible for displaying views defined in FXML files.
@@ -30,10 +28,9 @@ public class NavigatorSingleton {
         return instance;
     }
 
-    public static NavigatorSingleton getInstance() throws InvalidPersistenceTypeException {
+    public static NavigatorSingleton getInstance() throws InternalException {
         if(instance == null){
-            //REVIEW CAMBIA L'ECCEZIONE
-            throw new InvalidPersistenceTypeException("NavigatorSingleton is not initialized. " +
+            throw new InternalException("NavigatorSingleton is not initialized. " +
                     "Use getInstance(Stage) to initialize it first.");
         }
         else{
@@ -43,7 +40,7 @@ public class NavigatorSingleton {
 
 
     //Given the view's path, it sets the new scene on the stage
-    public void gotoView(String viewFXMLPath) throws IOException {
+    public void gotoView(String viewFXMLPath){
         this.prevScene = this.stage.getScene(); // obtaining the actual scene that is going to be the prevScene
 
         FXMLLoader loader =

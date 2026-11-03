@@ -6,12 +6,12 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
+import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.exceptions.uiexception.*;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
 
 public class SignUpGraphicControllerGUI {
 
@@ -73,9 +73,15 @@ public class SignUpGraphicControllerGUI {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.goBackward();
         }
-        catch (InvalidPersistenceTypeException e){
+        catch (InternalException e){
             HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
+            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+
             handlerSysErr.logError(e);
+            handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
+                    "The application cannot continue and will be terminated.");
+
+            handlerSysErr.terminateApp();
         }
     }
 
@@ -155,10 +161,9 @@ public class SignUpGraphicControllerGUI {
 
         }
 
-        catch (PersistenceError e){
-         HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
-         handlerJavaFxGUIError.alertErrorMessage("Unable to complete registration due to an internal error. " +
-                 "Please try again later or contact support if the problem persists.");
+        catch (ApplicationException e){
+            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+            handlerJavaFxGUIError.errorMessage(e.getMessage());
         }
 
         catch (RequiredFieldException e){
@@ -203,7 +208,7 @@ public class SignUpGraphicControllerGUI {
              * to the JavaFX GUI error handler.
              */
             HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
-            handlerJavaError.alertErrorMessage(e.getMessage());
+            handlerJavaError.errorMessage(e.getMessage());
         }
 
 

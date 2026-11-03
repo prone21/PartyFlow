@@ -1,1 +1,31 @@
-proposal,participant,time,locationName,locationAddress,participantRole,date,dateOfExpression,timeOfExpression
+﻿proposal,participant,time,locationName,locationAddress,participantRole,date,dateOfExpression,timeOfExpression
+Aperitivo 2026,chiara.mancini@partyflow.test,18:30:00,Sunset Bar,Lungomare Colombo 40 Salerno,Food Coordinator,2026-10-09,2026-09-15,13:15:00
+Aperitivo 2026,luca.ferrari@partyflow.test,18:30:00,Terrazza 27,Via Porto 27 Salerno,Food Coordinator,2026-10-09,2026-09-15,10:15:00
+Aperitivo 2026,matteo.greco@partyflow.test,19:00:00,Terrazza 27,Via Porto 27 Salerno,Organizer,2026-10-10,2026-09-15,14:15:00
+Aperitivo 2026,paolo.gallo@partyflow.test,19:30:00,Terrazza 27,Via Porto 27 Salerno,Photographer,2026-10-11,2026-09-15,12:15:00
+Aperitivo 2026,sara.esposito@partyflow.test,19:00:00,Sunset Bar,Lungomare Colombo 40 Salerno,Organizer,2026-10-10,2026-09-15,11:15:00
+Bowling Night 2026,chiara.mancini@partyflow.test,18:30:00,Strike Club,Corso Europa 15 Napoli,Organizer,2026-10-02,2026-09-13,13:15:00
+Bowling Night 2026,luca.ferrari@partyflow.test,18:30:00,Bowling Center,Via delle Industrie 20 Salerno,Organizer,2026-10-02,2026-09-13,10:15:00
+Bowling Night 2026,matteo.greco@partyflow.test,20:00:00,Bowling Center,Via delle Industrie 20 Salerno,Driver,2026-10-03,2026-09-13,14:15:00
+Bowling Night 2026,paolo.gallo@partyflow.test,21:00:00,Bowling Center,Via delle Industrie 20 Salerno,Music Coordinator,2026-10-04,2026-09-13,12:15:00
+Bowling Night 2026,sara.esposito@partyflow.test,20:00:00,Strike Club,Corso Europa 15 Napoli,Driver,2026-10-03,2026-09-13,11:15:00
+Cinema Night 2026,chiara.mancini@partyflow.test,18:30:00,Cinema Moderno,Via Roma 77 Salerno,Organizer,2026-09-18,2026-09-09,13:15:00
+Cinema Night 2026,luca.ferrari@partyflow.test,18:30:00,Cinema Centrale,Piazza Garibaldi 5 Napoli,Organizer,2026-09-18,2026-09-09,10:15:00
+Cinema Night 2026,matteo.greco@partyflow.test,19:00:00,Cinema Centrale,Piazza Garibaldi 5 Napoli,Driver,2026-09-19,2026-09-09,14:15:00
+Cinema Night 2026,paolo.gallo@partyflow.test,21:00:00,Cinema Centrale,Piazza Garibaldi 5 Napoli,Photographer,2026-09-20,2026-09-09,12:15:00
+Cinema Night 2026,sara.esposito@partyflow.test,19:00:00,Cinema Moderno,Via Roma 77 Salerno,Driver,2026-09-19,2026-09-09,11:15:00
+Escape Room 2026,chiara.mancini@partyflow.test,19:00:00,Enigma Room,Via Duomo 33 Salerno,Organizer,2026-09-25,2026-09-11,13:15:00
+Escape Room 2026,luca.ferrari@partyflow.test,19:00:00,Mystery House,Via Mercanti 14 Salerno,Organizer,2026-09-25,2026-09-11,10:15:00
+Escape Room 2026,matteo.greco@partyflow.test,19:30:00,Mystery House,Via Mercanti 14 Salerno,Driver,2026-09-26,2026-09-11,14:15:00
+Escape Room 2026,paolo.gallo@partyflow.test,20:30:00,Mystery House,Via Mercanti 14 Salerno,Photographer,2026-09-27,2026-09-11,12:15:00
+Escape Room 2026,sara.esposito@partyflow.test,19:30:00,Enigma Room,Via Duomo 33 Salerno,Driver,2026-09-26,2026-09-11,11:15:00
+Halloween 2026,chiara.mancini@partyflow.test,20:00:00,Club Nova,Lungomare Trieste 8 Salerno,Driver,2026-10-30,2026-10-21,13:15:00
+Halloween 2026,luca.ferrari@partyflow.test,20:00:00,The Black Cat,Via Roma 12 Salerno,Driver,2026-10-30,2026-10-21,10:15:00
+Halloween 2026,matteo.greco@partyflow.test,20:30:00,The Black Cat,Via Roma 12 Salerno,Music Coordinator,2026-10-31,2026-10-21,14:15:00
+Halloween 2026,paolo.gallo@partyflow.test,21:00:00,The Black Cat,Via Roma 12 Salerno,Photographer,2026-11-01,2026-10-21,12:15:00
+Halloween 2026,sara.esposito@partyflow.test,20:30:00,Club Nova,Lungomare Trieste 8 Salerno,Music Coordinator,2026-10-31,2026-10-21,11:15:00
+Pizza Night 2026,chiara.mancini@partyflow.test,19:30:00,Forno 21,Via Chiaia 21 Napoli,Driver,2026-09-12,2026-09-05,13:15:00
+Pizza Night 2026,luca.ferrari@partyflow.test,19:30:00,Pizzeria Vesuvio,Via Toledo 101 Napoli,Driver,2026-09-12,2026-09-05,10:15:00
+Pizza Night 2026,matteo.greco@partyflow.test,20:00:00,Pizzeria Vesuvio,Via Toledo 101 Napoli,Food Coordinator,2026-09-13,2026-09-05,14:15:00
+Pizza Night 2026,paolo.gallo@partyflow.test,20:30:00,Pizzeria Vesuvio,Via Toledo 101 Napoli,Organizer,2026-09-14,2026-09-05,12:15:00
+Pizza Night 2026,sara.esposito@partyflow.test,20:00:00,Forno 21,Via Chiaia 21 Napoli,Food Coordinator,2026-09-13,2026-09-05,11:15:00

@@ -6,9 +6,9 @@ package it.uniroma2.partyflow.exceptions.uiexception;
  * has failed and must be handled by the UI.
  */
 
-public class UserOperationException extends Exception {
-    public UserOperationException() { super(); }
-    public UserOperationException(String message) {
+public class ApplicationException extends Exception {
+    public ApplicationException() { super(); }
+    public ApplicationException(String message) {
         super(message);
     }
 

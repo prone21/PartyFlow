@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.graphic_controllers.GUI;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
+import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import java.io.IOException;

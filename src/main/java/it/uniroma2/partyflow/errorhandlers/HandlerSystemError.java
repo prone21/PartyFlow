@@ -77,4 +77,6 @@ public class HandlerSystemError {
         this.LOGGER.log(Level.INFO, message);
     }
 
+    // It's useful for fatal errors
+    public void terminateApp(){ System.exit(0);}
 }

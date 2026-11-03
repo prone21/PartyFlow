@@ -26,8 +26,10 @@ public class HandlerJavaFxGUIError implements HandlerUIError{
         return instance;
     }
 
+
     // it shows a pop-up with a message of error
-    public void alertErrorMessage(String mex){
+    @Override
+    public void errorMessage(String mex){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setContentText(mex);

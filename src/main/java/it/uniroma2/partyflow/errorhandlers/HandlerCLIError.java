@@ -24,7 +24,8 @@ public class HandlerCLIError implements HandlerUIError {
      * Prints an error message to the command-line interface,
      * allowing the user to identify the reason for the failure.
      */
-    public void printErrorMessage(String message) {
+    @Override
+    public void errorMessage(String message) {
         System.out.println("Error: " + message);
     }
 

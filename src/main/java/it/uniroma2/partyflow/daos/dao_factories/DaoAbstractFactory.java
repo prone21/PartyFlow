@@ -1,9 +1,7 @@
 package it.uniroma2.partyflow.daos.dao_factories;
 
-import it.uniroma2.partyflow.daos.UserDaoInterface;
+import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.enums.PersistenceType;
-import it.uniroma2.partyflow.model.LoginCredential;
-import it.uniroma2.partyflow.model.User;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
 public abstract class DaoAbstractFactory {

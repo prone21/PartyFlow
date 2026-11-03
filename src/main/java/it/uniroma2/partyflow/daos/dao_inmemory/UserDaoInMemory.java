@@ -1,10 +1,11 @@
-package it.uniroma2.partyflow.daos;
+package it.uniroma2.partyflow.daos.dao_inmemory;
 
+import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
 
-public class UserDaoInMemory implements UserDaoInterface{
+public class UserDaoInMemory implements UserDaoInterface {
 
     @Override
     public void signUp(User user){

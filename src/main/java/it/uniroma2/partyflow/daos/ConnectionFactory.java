@@ -1,9 +1,10 @@
 package it.uniroma2.partyflow.daos;
 
+import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.systemexception.InvalidPersistenceTypeException;
-import it.uniroma2.partyflow.exceptions.uiexception.PersistenceError;
-import it.uniroma2.partyflow.exceptions.uiexception.ServiceUnavailableException;
+import it.uniroma2.partyflow.errorhandlers.HandlerUIError;
+import it.uniroma2.partyflow.exceptions.daoexception.PersistenceServiceUnavailableException;
+import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
 import java.sql.Connection;
@@ -24,7 +25,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){}
 
-    public static ConnectionFactory getInstance() throws PersistenceError {
+    public static ConnectionFactory getInstance() throws PersistenceServiceUnavailableException{
 
         try{
             if (instance == null){
@@ -37,14 +38,23 @@ public class ConnectionFactory {
             return instance;
         }
         catch (InvalidPersistenceTypeException e){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            HandlerErrorFactory handlerErrorFactory = HandlerErrorFactory.getInstance();
+
+            HandlerSystemError handlerSystemError = handlerErrorFactory.getHandlerSystemError();
             handlerSystemError.logError(e);
-            throw new PersistenceError();
+
+            HandlerUIError handlerUIError = handlerErrorFactory.getHandlerUIError();
+            handlerUIError.errorMessage("An unexpected internal error has occurred. " +
+                    "The application cannot continue and will be terminated.");
+
+            handlerSystemError.terminateApp();
+
+            return null;
         }
         catch (SQLException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError("Failed to establish database connection.",e);
-            throw new PersistenceError();
+            throw new PersistenceServiceUnavailableException();
         }
 
     }
