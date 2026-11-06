@@ -3,7 +3,7 @@ package it.uniroma2.partyflow.daos.dao_mysql;
 import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
-import it.uniroma2.partyflow.model.User;
+import it.uniroma2.partyflow.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

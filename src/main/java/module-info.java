@@ -7,6 +7,7 @@ module it.uniroma2.partyflow {
     requires mysql.connector.j;
     requires com.opencsv;
     requires jdk.jshell;
+    requires jbcrypt;
 
 
     // Without this, JavaFX cannot instantiate GuiApplication.

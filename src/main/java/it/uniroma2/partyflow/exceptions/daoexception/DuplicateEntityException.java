@@ -8,7 +8,7 @@ package it.uniroma2.partyflow.exceptions.daoexception;
 public class DuplicateEntityException extends Exception{
 
     public DuplicateEntityException() {
-        super("Duplicate entity detected during persistence.");
+        super("Duplicate entity detected in the persistence layer.");
     }
 
     public DuplicateEntityException(String message) {

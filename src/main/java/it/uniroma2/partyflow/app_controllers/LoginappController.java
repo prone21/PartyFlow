@@ -10,13 +10,7 @@ import it.uniroma2.partyflow.exceptions.daoexception.PersistenceConstraintViolat
 import it.uniroma2.partyflow.exceptions.daoexception.PersistenceGenericException;
 import it.uniroma2.partyflow.exceptions.daoexception.PersistenceServiceUnavailableException;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
-import it.uniroma2.partyflow.model.LoginCredential;
-
-
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
+import it.uniroma2.partyflow.models.LoginCredential;
 
 public class LoginappController {
     public AccountType login(LoginCredentialsBean cred) throws ApplicationException {

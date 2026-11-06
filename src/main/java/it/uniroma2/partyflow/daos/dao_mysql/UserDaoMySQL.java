@@ -6,8 +6,8 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
-import it.uniroma2.partyflow.model.LoginCredential;
-import it.uniroma2.partyflow.model.User;
+import it.uniroma2.partyflow.models.LoginCredential;
+import it.uniroma2.partyflow.models.User;
 
 import java.sql.*;
 

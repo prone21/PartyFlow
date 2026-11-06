@@ -3,10 +3,13 @@ package it.uniroma2.partyflow.app_controllers;
 import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.daos.dao_factories.DaoAbstractFactory;
+import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
+import it.uniroma2.partyflow.errorhandlers.HandlerUIError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
-import it.uniroma2.partyflow.model.User;
+import it.uniroma2.partyflow.models.User;
+import it.uniroma2.partyflow.utilities.PasswordProtector;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 public class SignUpController {
 
-    public void createAccount(UserBean signUpBean) throws ApplicationException {
+    public void createAccount(UserBean signUpBean)  {
 
         try{
             // --------convert the bean to the model---------
@@ -28,9 +31,13 @@ public class SignUpController {
                     LocalDate.parse(signUpBean.getDateOfBirth(), formatter);
             // -----------------------------------------------
 
+            // ---------- makes the password secure ----------
+            String hashedPassword = PasswordProtector.hashPassword(signUpBean.getPassword());
+            // -----------------------------------------------
+
             // ----------- convert bean in model --------------
             User user = new User(signUpBean.getName(), signUpBean.getSurname(),
-                    signUpBean.getEmail(), signUpBean.getPassword(),
+                    signUpBean.getEmail(), hashedPassword,
                     date, signUpBean.getAccountType(),
                     signUpBean.getGender());
 
@@ -43,21 +50,6 @@ public class SignUpController {
             signUpDao.signUp(user);
         }
 
-        catch (DuplicateEntityException | PersistenceConstraintViolationException e){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
-
-            throw new ApplicationException("This account already exists.");
-        }
-
-        catch (PersistenceServiceUnavailableException e){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
-
-            throw new ApplicationException( "The service is temporarily unavailable. " +
-                    "Please try again later.");
-        }
-
         catch (PersistenceGenericException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
@@ -66,6 +58,33 @@ public class SignUpController {
                     "Please try again.");
         }
 
+        catch (PersistenceServiceUnavailableException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
+
+            throw new ApplicationException("We couldn't complete your registration because the service is currently unavailable. " +
+                    "Please try again later.");
+        }
+
+        catch (DuplicateEntityException | PersistenceConstraintViolationException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
+
+            throw new ApplicationException("This account already exists.");
+        }
+
+        catch (InvalidPersistenceTypeException e){
+            HandlerErrorFactory handlerErrorFactory = HandlerErrorFactory.getInstance();
+
+            HandlerSystemError handlerSystemError = handlerErrorFactory.getHandlerSystemError();
+            handlerSystemError.logError(e);
+
+            HandlerUIError handlerUIError = handlerErrorFactory.getHandlerUIError();
+            handlerUIError.errorMessage("An unexpected internal error has occurred. " +
+                    "The application cannot continue and will be terminated.");
+
+            handlerSystemError.terminateApp();
+        }
 
     }
 

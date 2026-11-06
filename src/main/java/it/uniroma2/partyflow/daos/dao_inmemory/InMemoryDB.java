@@ -1,10 +1,8 @@
 package it.uniroma2.partyflow.daos.dao_inmemory;
 
-import it.uniroma2.partyflow.enums.AccountType;
-import it.uniroma2.partyflow.exceptions.daoexception.DuplicateEntityException;
 import it.uniroma2.partyflow.exceptions.daoexception.EntityNotFound;
-import it.uniroma2.partyflow.model.LoginCredential;
-import it.uniroma2.partyflow.model.User;
+import it.uniroma2.partyflow.models.LoginCredential;
+import it.uniroma2.partyflow.models.User;
 
 import java.util.List;
 
