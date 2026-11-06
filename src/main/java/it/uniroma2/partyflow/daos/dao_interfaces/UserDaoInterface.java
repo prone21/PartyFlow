@@ -2,7 +2,7 @@ package it.uniroma2.partyflow.daos.dao_interfaces;
 
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
-import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
+import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
 
@@ -13,27 +13,45 @@ import it.uniroma2.partyflow.model.User;
  */
 
 
-public interface UserDaoInterface {    /**
-     * Registers a new user by storing their personal information
-     * and account details in the persistence layer.
-     * If the registration fails due to a persistence error,
-     * a PersistenceException is thrown.
+public interface UserDaoInterface {
+
+    /**
+     * Persists a new user account.
      *
      * @param user the user to be registered
-     * @throws ApplicationException if an error occurs during registration
+     * @throws PersistenceGenericException if an unexpected
+     *         persistence error occurs
+     * @throws PersistenceServiceUnavailableException if the
+     *         persistence service is unavailable
+     * @throws DuplicateEntityException if the user already exists
+     * @throws PersistenceConstraintViolationException if a
+     *         persistence constraint is violated
+     * @throws InvalidPersistenceTypeException if the configured
+     *         persistence type is incompatible with the type
+     *         required by the operation
      */
-
     void signUp(User user) throws PersistenceGenericException, PersistenceServiceUnavailableException,
-            DuplicateEntityException, PersistenceConstraintViolationException;
+            DuplicateEntityException, PersistenceConstraintViolationException, InvalidPersistenceTypeException;
 
 
-    /** login
-     * Authenticates a user and retrieves their account type.
+    /**
+     * Retrieves the account type associated with the
+     * provided login credentials.
      *
-     * @param cred the credentials used to authenticate the user.
-     * @return the AccountType associated with the authenticated user,
-     *         or null if no matching account is found.
+     * @param cred the credentials used to identify the user
+     * @return the account type associated with the user,
+     *         or null if no matching account is found
+     * @throws PersistenceServiceUnavailableException if the
+     *         persistence service is unavailable
+     * @throws EntityNotFound if no matching account is found
+     * @throws PersistenceConstraintViolationException if a
+     *         persistence constraint is violated
+     * @throws PersistenceGenericException if an unexpected
+     *         persistence error occurs
+     * @throws InvalidPersistenceTypeException if the configured
+     *         persistence type is incompatible with the type
+     *         required by the operation
      */
     AccountType login(LoginCredential cred) throws PersistenceServiceUnavailableException, EntityNotFound, PersistenceConstraintViolationException,
-            PersistenceGenericException;
+            PersistenceGenericException, InvalidPersistenceTypeException;
 }

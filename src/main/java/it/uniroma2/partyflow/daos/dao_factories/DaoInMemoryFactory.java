@@ -1,9 +1,8 @@
 package it.uniroma2.partyflow.daos.dao_factories;
 
-import it.uniroma2.partyflow.daos.logindao.LoginDaoInMemory;
-import it.uniroma2.partyflow.daos.signupdao.SignUpDaoInMemory;
-import it.uniroma2.partyflow.model.LoginCredential;
-import it.uniroma2.partyflow.model.User;
+import it.uniroma2.partyflow.daos.dao_inmemory.UserDaoInMemory;
+import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
+
 
 public class DaoInMemoryFactory extends DaoAbstractFactory {
     private static DaoInMemoryFactory instance;
@@ -18,11 +17,9 @@ public class DaoInMemoryFactory extends DaoAbstractFactory {
         return instance;
     }
 
-    public SignUpDaoInterface getSignUpDao(User accountInfo){
-        return new SignUpDaoInMemory(accountInfo);
+    @Override
+    public UserDaoInterface getUserDao(){
+        return new UserDaoInMemory();
     }
 
-    public LoginDaoInterface getLoginDao(LoginCredential cred){
-        return new LoginDaoInMemory(cred);
-    }
 }

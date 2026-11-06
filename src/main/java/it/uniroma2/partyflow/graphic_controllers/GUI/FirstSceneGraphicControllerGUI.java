@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.graphic_controllers.GUI;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
+import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class FirstSceneGraphicControllerGUI {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/login.fxml");
         }
-        catch (InvalidPersistenceTypeException | IOException e){
+        catch (InternalException | IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
         }
@@ -24,7 +24,7 @@ public class FirstSceneGraphicControllerGUI {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
         }
-        catch (InvalidPersistenceTypeException | IOException e){
+        catch (InternalException | IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
         }

@@ -5,6 +5,7 @@ import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
+import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
 
@@ -12,11 +13,20 @@ import java.sql.*;
 
 public class UserDaoMySQL implements UserDaoInterface {
 
+    private Connection conn = null;
+
+    private void connect() throws PersistenceServiceUnavailableException,
+            InvalidPersistenceTypeException {
+
+            ConnectionFactory connectionFactory = ConnectionFactory.getInstance();
+            this.conn = connectionFactory.getConnection();
+    }
+
     // rollback all the action done
-    private void rollBack(Connection conn){
+    private void rollBack() throws PersistenceGenericException {
         try{
-            if(conn != null){
-                conn.rollback();
+            if(this.conn != null){
+                this.conn.rollback();
             }
         }
         catch (SQLException e1){
@@ -27,20 +37,19 @@ public class UserDaoMySQL implements UserDaoInterface {
 
     @Override
     public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException,
-            PersistenceGenericException, PersistenceConstraintViolationException {
-        Connection conn = null;
+            PersistenceGenericException, PersistenceConstraintViolationException, InvalidPersistenceTypeException {
+
         PreparedStatement stmt = null;
 
         try{
-            ConnectionFactory connFactory = ConnectionFactory.getInstance();
-            conn = connFactory.getConnection();
-            conn.setAutoCommit(false);
+            this.connect();
+            this.conn.setAutoCommit(false); // start transaction
 
             // insert the new account in the 'users' table
             String query = "insert into users (email, name, surname, password, dateOfBirth" +
                     ", gender) value (?,?,?,?,?,?)";
 
-            stmt = conn.prepareStatement(query);
+            stmt = this.conn.prepareStatement(query);
 
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getName());
@@ -63,7 +72,15 @@ public class UserDaoMySQL implements UserDaoInterface {
                 }
             }
 
-            conn.commit();
+            this.conn.commit(); // end transaction
+        }
+
+        catch (InvalidPersistenceTypeException e){
+            // log the error
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            // throw the exception
+            throw e;
         }
 
         catch (PersistenceServiceUnavailableException | DuplicateEntityException |
@@ -74,7 +91,7 @@ public class UserDaoMySQL implements UserDaoInterface {
             handlerSystemError.logError(e);
 
             // rollback all the action done
-            this.rollBack(conn);
+            this.rollBack();
 
             // throw the exception
             throw e;
@@ -83,6 +100,9 @@ public class UserDaoMySQL implements UserDaoInterface {
         catch (SQLException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
+
+            // rollback all the action done
+            this.rollBack();
 
             switch (e.getErrorCode()){
                 case 1062:
@@ -94,16 +114,14 @@ public class UserDaoMySQL implements UserDaoInterface {
                     throw new PersistenceConstraintViolationException();
 
                 default:
-                    // rollback all the action done
-                    this.rollBack(conn);
                     throw new PersistenceGenericException();
             }
         }
 
         finally {
             try {
-                if (conn != null){
-                    conn.setAutoCommit(true);
+                if (this.conn != null){
+                    this.conn.setAutoCommit(true);
                 }
 
                 if (stmt != null) {
@@ -119,24 +137,21 @@ public class UserDaoMySQL implements UserDaoInterface {
 
 
     @Override
-    public AccountType login(LoginCredential cred) throws PersistenceGenericException, PersistenceServiceUnavailableException,
-            EntityNotFound{
+    public AccountType login(LoginCredential cred) throws PersistenceGenericException,
+            EntityNotFound, PersistenceServiceUnavailableException, InvalidPersistenceTypeException {
 
-        Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-
         try{
-            ConnectionFactory connFactory = ConnectionFactory.getInstance();
-            conn = connFactory.getConnection();
+            this.connect();
 
-            // check if he is a participant or a party planner
+            // check if the user is a participant or a party planner
             String query = "select COALESCE(p.email,'PartyPlanner') as account_type\n" +
                     "from users as u left join participant as p on u.email = p.email " +
                     "where u.email = ? and u.password = ?";
 
-            stmt = conn.prepareStatement(query);
+            stmt = this.conn.prepareStatement(query);
             stmt.setString(1,cred.getEmail());
             stmt.setString(2,cred.getPassword());
 
@@ -151,7 +166,6 @@ public class UserDaoMySQL implements UserDaoInterface {
 
             }
             else{
-                //TODO ERROR HANDLING FORSE
                 throw new EntityNotFound();
             }
         }
@@ -162,7 +176,7 @@ public class UserDaoMySQL implements UserDaoInterface {
             throw new PersistenceGenericException();
         }
 
-        catch (PersistenceServiceUnavailableException e){
+        catch (PersistenceServiceUnavailableException | EntityNotFound | InvalidPersistenceTypeException e){
             // log the error
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);

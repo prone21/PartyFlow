@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controllers.GUI.LoginGraphicControllerGUI">
   <top>
     <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #153A5F; -fx-background-radius: 30 30 0 0;" BorderPane.alignment="CENTER">
       <children>
         <Label layoutX="19.0" layoutY="1.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party" textFill="#F6F7F9"><font><Font size="30.0" /></font></Label>
         <Label layoutX="38.0" layoutY="32.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow" textFill="#F6F7F9"><font><Font size="30.0" /></font></Label>
         <Label layoutX="355.0" layoutY="27.0" style="-fx-font-weight: bold;" text="Log in" textFill="#F6F7F9"><font><Font size="30.0" /></font></Label>
-        <Button fx:id="backwardButton" layoutX="687.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-background-color: #2978DE; -fx-background-radius: 25; -fx-border-width: 0;" text="←" textFill="#F6F7F9" />
+        <Button fx:id="backwardButton" layoutX="687.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#goBackward" prefHeight="66.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-background-color: #2978DE; -fx-background-radius: 25; -fx-border-width: 0;" text="←" textFill="#F6F7F9" />
       </children>
     </AnchorPane>
   </top>
@@ -34,11 +34,11 @@
             <PasswordField fx:id="pwdField" layoutX="145.0" layoutY="9.0" prefHeight="44.0" prefWidth="235.0" promptText="password" style="-fx-background-color: #F6F7F9; -fx-text-fill: #153A5F; -fx-prompt-text-fill: #8999AF; -fx-font-size: 18px; -fx-border-color: #B2C0D0; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-fill: #153A5F;" />
           </children>
         </AnchorPane>
-        <Button fx:id="loginButton" layoutX="265.0" layoutY="185.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="270.0" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-background-color: #2978DE; -fx-background-radius: 20; -fx-border-width: 0;" text="Log in" textFill="#F6F7F9" />
-        <Button fx:id="signupButton" layoutX="215.0" layoutY="260.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 19px; -fx-background-color: #F6F7F9; -fx-background-radius: 20; -fx-border-color: #153A5F; -fx-border-width: 1.5; -fx-border-radius: 20;" text="Don't have an account? Sign up" textFill="#153A5F" />
+        <Button fx:id="loginButton" layoutX="265.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#submitCredentials" prefHeight="58.0" prefWidth="270.0" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-background-color: #2978DE; -fx-background-radius: 20; -fx-border-width: 0;" text="Log in" textFill="#F6F7F9" />
+        <Button fx:id="signupButton" layoutX="215.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#signUp" prefHeight="51.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 19px; -fx-background-color: #F6F7F9; -fx-background-radius: 20; -fx-border-color: #153A5F; -fx-border-width: 1.5; -fx-border-radius: 20;" text="Don't have an account? Sign up" textFill="#153A5F" />
         <Label layoutX="383.0" layoutY="323.0" style="-fx-font-weight: bold; -fx-opacity: 0.6;" text="OR" textFill="#153A5F"><font><Font size="18.0" /></font></Label>
-        <Button fx:id="googleButton" layoutX="215.0" layoutY="358.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 21px; -fx-background-color: #F6F7F9; -fx-background-radius: 20; -fx-border-color: #153A5F; -fx-border-width: 1.5; -fx-border-radius: 20;" text="Continue with Google" textFill="#153A5F" />
-        <Button fx:id="facebookButton" layoutX="215.0" layoutY="425.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 21px; -fx-background-color: #F6F7F9; -fx-background-radius: 20; -fx-border-color: #153A5F; -fx-border-width: 1.5; -fx-border-radius: 20;" text="Continue with Facebook" textFill="#153A5F" />
+        <Button fx:id="googleButton" layoutX="215.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#continueWithGoogle" prefHeight="53.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 21px; -fx-background-color: #F6F7F9; -fx-background-radius: 20; -fx-border-color: #153A5F; -fx-border-width: 1.5; -fx-border-radius: 20;" text="Continue with Google" textFill="#153A5F" />
+        <Button fx:id="facebookButton" layoutX="211.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#continueWithFacebook" prefHeight="53.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 21px; -fx-background-color: #F6F7F9; -fx-background-radius: 20; -fx-border-color: #153A5F; -fx-border-width: 1.5; -fx-border-radius: 20;" text="Continue with Facebook" textFill="#153A5F" />
       </children>
     </AnchorPane>
   </center>

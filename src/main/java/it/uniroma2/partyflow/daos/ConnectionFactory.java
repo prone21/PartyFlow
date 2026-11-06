@@ -1,12 +1,11 @@
 package it.uniroma2.partyflow.daos;
 
-import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.errorhandlers.HandlerUIError;
 import it.uniroma2.partyflow.exceptions.daoexception.PersistenceServiceUnavailableException;
 import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,7 +24,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){}
 
-    public static ConnectionFactory getInstance() throws PersistenceServiceUnavailableException{
+    public static ConnectionFactory getInstance() throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException {
 
         try{
             if (instance == null){
@@ -38,20 +37,11 @@ public class ConnectionFactory {
             return instance;
         }
         catch (InvalidPersistenceTypeException e){
-            HandlerErrorFactory handlerErrorFactory = HandlerErrorFactory.getInstance();
-
-            HandlerSystemError handlerSystemError = handlerErrorFactory.getHandlerSystemError();
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
-
-            HandlerUIError handlerUIError = handlerErrorFactory.getHandlerUIError();
-            handlerUIError.errorMessage("An unexpected internal error has occurred. " +
-                    "The application cannot continue and will be terminated.");
-
-            handlerSystemError.terminateApp();
-
-            return null;
+            throw e;
         }
-        catch (SQLException e){
+        catch (SQLException | IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError("Failed to establish database connection.",e);
             throw new PersistenceServiceUnavailableException();
@@ -62,7 +52,7 @@ public class ConnectionFactory {
     // -----------------------------------------------
 
     // returns the DB connection
-    public Connection getConnection(){
+    public Connection getConnection() {
         return conn;
     }
 

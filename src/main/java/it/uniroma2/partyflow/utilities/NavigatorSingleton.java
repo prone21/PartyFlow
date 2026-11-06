@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * Responsible for displaying views defined in FXML files.
  * It allows the view navigation.
@@ -40,7 +42,7 @@ public class NavigatorSingleton {
 
 
     //Given the view's path, it sets the new scene on the stage
-    public void gotoView(String viewFXMLPath){
+    public void gotoView(String viewFXMLPath) throws IOException {
         this.prevScene = this.stage.getScene(); // obtaining the actual scene that is going to be the prevScene
 
         FXMLLoader loader =

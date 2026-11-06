@@ -13,9 +13,6 @@ module it.uniroma2.partyflow {
     exports it.uniroma2.partyflow.launchers to javafx.graphics;
 
     // Without this, JavaFX cannot inject widgets into fields annotated with @FXML.
-    opens it.uniroma2.partyflow.graphic_controllers.signupgraphiccontroller to javafx.fxml;
-    opens it.uniroma2.partyflow.graphic_controllers.firstscenegraphiccontroller to javafx.fxml;
-    opens it.uniroma2.partyflow.graphic_controllers.logingraphiccontroller to javafx.fxml;
     opens it.uniroma2.partyflow.graphic_controllers.CLI to javafx.fxml;
     opens it.uniroma2.partyflow.graphic_controllers.GUI to javafx.fxml;
 }

@@ -5,8 +5,8 @@ import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
+import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceGenericException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
 
 import java.util.Scanner;
@@ -60,7 +60,8 @@ public class SignUpGraphicControllerCLI {
 
     private void createAccount() {
         while (true) {
-            try {
+
+            try{
                 // 1) create the bean where the user date will be memorized
                 UserBean signUpBean = new UserBean();
 
@@ -90,12 +91,10 @@ public class SignUpGraphicControllerCLI {
                 //---------------------------------------------
 
                 return;
-
             }
-            catch (PersistenceGenericException e){
+            catch (ApplicationException e){
                 HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
-                handlerCLIError.printErrorMessage("Unable to complete registration due to an internal error. " +
-                        "Please try again later or contact support if the problem persists.");
+                handlerCLIError.errorMessage(e.getMessage());
             }
             catch (RequiredFieldException e) {
                 /*
@@ -105,8 +104,8 @@ public class SignUpGraphicControllerCLI {
 
                 HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
                 handlerCLIError.printRequiredFieldError(e.getField());
-
-            } catch (InvalidFieldFormatException e) {
+            }
+            catch (InvalidFieldFormatException e) {
                 /*
                  * Handles invalid field formats.
                  * Delegates the exception message to the CLI error handler.
@@ -114,7 +113,7 @@ public class SignUpGraphicControllerCLI {
                 HandlerCLIError handlerCLIError =
                         HandlerCLIError.getInstance();
 
-                handlerCLIError.printErrorMessage(e.getMessage());
+                handlerCLIError.errorMessage(e.getMessage());
 
                 System.out.println();
                 System.out.println("Please try again.");
@@ -122,5 +121,7 @@ public class SignUpGraphicControllerCLI {
             }
 
         }
+
     }
 }
+

@@ -7,6 +7,7 @@ import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
+import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.model.LoginCredential;
 import it.uniroma2.partyflow.model.User;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
@@ -18,27 +19,36 @@ import java.util.Map;
 
 public class UserDaoCSV implements UserDaoInterface {
 
-    private String file_name;
+    private static String file_name = null;
 
 
-    private void initialize() throws InvalidPersistenceTypeException {
-        // obtain the db directory
-        PersistenceConfigurator pc = PersistenceConfigurator.getInstance();
-        String dbCSV = pc.getDirectoryCSVDB();
-        // set the file which the dao is associated
-        this.file_name = dbCSV + "//Users.csv";
+    private void initialize() throws PersistenceServiceUnavailableException, InvalidPersistenceTypeException {
+        try {
+            // obtain the db directory
+            PersistenceConfigurator pc = PersistenceConfigurator.getInstance();
+            String dbCSV = pc.getDirectoryCSVDB();
+            // set the file which the dao is associated
+            file_name = dbCSV + "//Users.csv";
+        }
+
+        catch (IOException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("Failed to access CSV file.",e);
+            throw new PersistenceServiceUnavailableException();
+        }
+
     }
 
 
-    private Map<String, String> exists(String email) throws IOException, CsvValidationException {
+    private Map<String, String> findUserByEmail(String userEmail) throws IOException, CsvValidationException {
         CSVReaderHeaderAware reader =
-                new CSVReaderHeaderAware(new FileReader(this.file_name));
+                new CSVReaderHeaderAware(new FileReader(file_name));
 
         Map<String, String> row;
 
         while ((row = reader.readMap()) != null) {
 
-            if(email.equals(row.get("email"))) {
+            if(userEmail.equals(row.get("email"))) {
                 return row;
             }
         }
@@ -46,15 +56,29 @@ public class UserDaoCSV implements UserDaoInterface {
         return null;
     }
 
+    private boolean exists (String userEmail) throws IOException, CsvValidationException {
+        CSVReaderHeaderAware reader =
+                new CSVReaderHeaderAware(new FileReader(file_name));
+
+        Map<String, String> row;
+
+        while ((row = reader.readMap()) != null) {
+
+            if(userEmail.equals(row.get("email"))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     @Override
     public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException,
-            PersistenceGenericException, PersistenceConstraintViolationException {
+            InvalidPersistenceTypeException, PersistenceConstraintViolationException {
 
         try{
-
             this.initialize();
-
             // convert user to list of string
             String [] newUser = {
                     user.getEmail(),
@@ -66,82 +90,89 @@ public class UserDaoCSV implements UserDaoInterface {
                     user.getAccountType().name()
             };
 
-
             // check if the user already exists
-            if (this.exists(user.getEmail()) == null){
-                DuplicateEntityException e = new DuplicateEntityException();
-                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-                handlerSystemError.logError(e);
-                throw e;
+            if (this.exists(user.getEmail())){
+                throw new DuplicateEntityException();
             }
 
-
             // true activate append mode
-            CSVWriter writer = new CSVWriter(new FileWriter(this.file_name, true));
+            CSVWriter writer = new CSVWriter(new FileWriter(file_name, true));
             writer.writeNext(newUser);
+
         }
 
-        catch (InvalidPersistenceTypeException e) {
+        catch (PersistenceServiceUnavailableException | DuplicateEntityException |
+                InvalidPersistenceTypeException e) {
+
+            // log the error
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            // throw the exception
+            throw e;
+        }
+        catch (IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw new PersistenceServiceUnavailableException();
         }
+        catch (CsvValidationException e){
 
-        catch (CsvValidationException e) {
+            /*  CsvValidationException is thrown when a CSV record fails
+                validation, for example when a configured row or line
+                validator detects invalid data during file reading.
+            */
+
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw new PersistenceConstraintViolationException();
-        }
-
-        catch (IOException e) {
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
-            throw new PersistenceGenericException();
         }
 
     }
 
 
     @Override
-    public AccountType login(LoginCredential cred) throws PersistenceServiceUnavailableException,
-            PersistenceConstraintViolationException, PersistenceGenericException, EntityNotFound{
+    public AccountType login(LoginCredential cred) throws EntityNotFound, PersistenceServiceUnavailableException,
+            InvalidPersistenceTypeException, PersistenceConstraintViolationException {
 
         try{
             this.initialize();
 
-            Map<String, String> row = this.exists(cred.getEmail());
+            Map<String, String> row = this.findUserByEmail(cred.getEmail());
 
-            if (row == null){
-                EntityNotFound e = new EntityNotFound();
-                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-                handlerSystemError.logError(e);
-                throw e;
+            if ( (row == null) || row.get("password").equals(cred.getPassword()) ){
+                throw new EntityNotFound();
             }
             else{
                 return AccountType.valueOf(row.get("account_type"));
             }
         }
 
-        catch (InvalidPersistenceTypeException e) {
+        catch (PersistenceServiceUnavailableException |
+               InvalidPersistenceTypeException | EntityNotFound e) {
+
+            // log the error
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            // throw the exception
+            throw e;
+        }
+
+        catch (IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw new PersistenceServiceUnavailableException();
         }
+        catch (CsvValidationException e){
 
-        catch (CsvValidationException e) {
+            /*  CsvValidationException is thrown when a CSV record fails
+                validation, for example when a configured row or line
+                validator detects invalid data during file reading.
+            */
+
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw new PersistenceConstraintViolationException();
         }
-
-        catch (IOException e) {
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
-            throw new PersistenceGenericException();
-        }
-
-
-
 
     }
 

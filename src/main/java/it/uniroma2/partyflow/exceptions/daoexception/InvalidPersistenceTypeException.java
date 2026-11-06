@@ -10,5 +10,4 @@ public class InvalidPersistenceTypeException extends Exception{
     public InvalidPersistenceTypeException(String message) {
         super(message);
     }
-
 }

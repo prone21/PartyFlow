@@ -3,6 +3,10 @@ package it.uniroma2.partyflow.graphic_controllers.GUI;
 import it.uniroma2.partyflow.app_controllers.LoginappController;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.enums.AccountType;
+import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
+import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
+import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
+import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,7 +18,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-import static java.lang.System.exit;
 
 public class LoginGraphicControllerGUI {
 
@@ -26,23 +29,37 @@ public class LoginGraphicControllerGUI {
 
     @FXML
     public void goBackward() throws IOException {
-        NavigatorSingleton nav = NavigatorSingleton.getInstance();
-        nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
+        try{
+            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
+        }
+        catch (InternalException e){
+            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
+            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+
+            handlerSysErr.logError(e);
+            handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
+                    "The application cannot continue and will be terminated.");
+
+            handlerSysErr.terminateApp();
+        }
+
     }
 
     @FXML
-    public void submitCredentials() throws SQLException, NoSuchAlgorithmException {
-        NavigatorSingleton nav = NavigatorSingleton.getInstance();
-        String email = emailField.getText();
-        String pwd = pwdField.getText();
-
-        LoginCredentialsBean loginBean = new LoginCredentialsBean();
-        loginBean.setEmail(email);
-        loginBean.setPwd(pwd);
-
-        LoginappController loginController = new LoginappController();
-        AccountType accountType = loginController.login(loginBean);
+    public void submitCredentials() {
         try{
+            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            String email = emailField.getText();
+            String pwd = pwdField.getText();
+
+            LoginCredentialsBean loginBean = new LoginCredentialsBean();
+            loginBean.setEmail(email);
+            loginBean.setPwd(pwd);
+
+            LoginappController loginController = new LoginappController();
+            AccountType accountType = loginController.login(loginBean);
+
             switch(accountType){
                 case Participant:
                     nav.gotoView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
@@ -60,9 +77,21 @@ public class LoginGraphicControllerGUI {
                     break;
             }
         }
-        catch (IOException e) {
-            e.printStackTrace();
-            exit(0);
+
+        catch (InternalException | IOException e){
+            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
+            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+
+            handlerSysErr.logError(e);
+            handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
+                    "The application cannot continue and will be terminated.");
+
+            handlerSysErr.terminateApp();
+        }
+
+        catch (ApplicationException e){
+            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+            handlerJavaFxGUIError.errorMessage(e.getMessage());
         }
     }
 

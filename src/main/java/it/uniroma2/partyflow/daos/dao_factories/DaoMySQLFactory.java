@@ -15,18 +15,9 @@ public class DaoMySQLFactory extends DaoAbstractFactory {
         return instance;
     }
 
+    @Override
     public UserDaoInterface getUserDao(){
         return new UserDaoMySQL();
     }
-
-    /*
-    public SignUpDaoInterface getSignUpDao(User accountInfo){
-        return new SignUpDaoMySQL(accountInfo);
-    }
-
-    public LoginDaoInterface getLoginDao(LoginCredential cred){
-        return new LoginDaoMySQL(cred);
-
-     */
 
 }

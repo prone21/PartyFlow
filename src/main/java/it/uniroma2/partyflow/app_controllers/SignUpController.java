@@ -28,6 +28,7 @@ public class SignUpController {
                     LocalDate.parse(signUpBean.getDateOfBirth(), formatter);
             // -----------------------------------------------
 
+            // ----------- convert bean in model --------------
             User user = new User(signUpBean.getName(), signUpBean.getSurname(),
                     signUpBean.getEmail(), signUpBean.getPassword(),
                     date, signUpBean.getAccountType(),

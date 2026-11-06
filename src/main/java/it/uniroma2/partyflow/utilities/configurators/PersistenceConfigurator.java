@@ -20,7 +20,7 @@ public class PersistenceConfigurator {
     private static PersistenceConfigurator instance = null;
 
 
-    private PersistenceConfigurator(){
+    private PersistenceConfigurator() throws IOException {
         try{
             FileInputStream input =
                     new FileInputStream("src/main/resources/it/uniroma2/partyflow/configurations/configPersistency.ini");
@@ -29,12 +29,13 @@ public class PersistenceConfigurator {
         catch (IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
+            throw e;
 
         }
     }
 
     // Guarantee Singleton
-    public static PersistenceConfigurator getInstance(){
+    public static PersistenceConfigurator getInstance() throws IOException {
         if(instance == null){
             instance = new PersistenceConfigurator();
         }
@@ -72,7 +73,7 @@ public class PersistenceConfigurator {
             return this.properties.getProperty("directory.CSVDB");
         }
         else {
-            throw new InvalidPersistenceTypeException("Persistence Layer is not CSV");
+            throw new InvalidPersistenceTypeException("Persistence layer is not CSV");
         }
     }
 

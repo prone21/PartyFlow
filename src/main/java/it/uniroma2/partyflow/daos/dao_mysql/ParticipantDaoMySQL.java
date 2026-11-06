@@ -2,10 +2,7 @@ package it.uniroma2.partyflow.daos.dao_mysql;
 
 import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.daoexception.DuplicateEntityException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceConstraintViolationException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceGenericException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceServiceUnavailableException;
+import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.model.User;
 
 import java.sql.Connection;
@@ -15,7 +12,6 @@ import java.sql.SQLException;
 /**
  * MySQL implementation of the Data Access Object (DAO) responsible
  * for managing participant persistence.
- *
  * This class provides operations to store participant data in the
  * database using JDBC.
  *
@@ -23,7 +19,7 @@ import java.sql.SQLException;
 
 public class ParticipantDaoMySQL {
     public void insertParticipant(User user) throws PersistenceServiceUnavailableException,
-            PersistenceConstraintViolationException, DuplicateEntityException, PersistenceGenericException {
+            PersistenceConstraintViolationException, DuplicateEntityException, PersistenceGenericException, InvalidPersistenceTypeException {
 
         try{
             ConnectionFactory connFactory = ConnectionFactory.getInstance();
@@ -38,7 +34,7 @@ public class ParticipantDaoMySQL {
             stmt.executeUpdate();
         }
 
-        catch (PersistenceServiceUnavailableException e){
+        catch (PersistenceServiceUnavailableException | InvalidPersistenceTypeException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw e;

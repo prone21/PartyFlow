@@ -6,6 +6,7 @@ import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
+import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -105,31 +106,29 @@ public class LoginGraphicControllerCLI {
             //---------------------------------------------
 
             switch (accountType) {
-
                 case Participant -> {
                     PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
                     System.out.println();
                     homePage.execute();
-                    return true;
                 }
 
                 case PartyPlanner -> {
                     PpHomePageGraphicControllerCLI homePage = new PpHomePageGraphicControllerCLI();
                     System.out.println();
                     homePage.execute();
-                    return true;
                 }
 
             }
+            return true;
 
-        } catch (SQLException | NoSuchAlgorithmException e) {
+        } catch (ApplicationException e) {
             /*
              * Delegates system error logging to the system handler
              * and user-facing error presentation to the CLI handler.
              */
             HandlerSystemError.getInstance().logError(e);
 
-            HandlerCLIError.getInstance().printErrorMessage(
+            HandlerCLIError.getInstance().errorMessage(
                     "An error occurred during login."
             );
 
