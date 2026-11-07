@@ -15,8 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 
 
 public class LoginGraphicControllerGUI {
@@ -41,7 +39,7 @@ public class LoginGraphicControllerGUI {
             handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
                     "The application cannot continue and will be terminated.");
 
-            handlerSysErr.terminateApp();
+            handlerSysErr.handleFatalError();
         }
 
     }
@@ -86,7 +84,7 @@ public class LoginGraphicControllerGUI {
             handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
                     "The application cannot continue and will be terminated.");
 
-            handlerSysErr.terminateApp();
+            handlerSysErr.handleFatalError();
         }
 
         catch (ApplicationException e){

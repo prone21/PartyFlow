@@ -81,7 +81,7 @@ public class SignUpGraphicControllerGUI {
             handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
                     "The application cannot continue and will be terminated.");
 
-            handlerSysErr.terminateApp();
+            handlerSysErr.handleFatalError();
         }
     }
 

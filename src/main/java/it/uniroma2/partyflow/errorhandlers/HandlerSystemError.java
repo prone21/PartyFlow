@@ -1,5 +1,7 @@
 package it.uniroma2.partyflow.errorhandlers;
 
+import it.uniroma2.partyflow.exceptions.FatalError;
+
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -7,7 +9,9 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- *  Its responsibility is to handle errors that occur within the system.
+ * Its responsibility is to handle errors that occur within the system.
+ * It also coordinates the handling of fatal errors, including error
+ * reporting and application termination.
  */
 
 public class HandlerSystemError {
@@ -77,6 +81,21 @@ public class HandlerSystemError {
         this.LOGGER.log(Level.INFO, message);
     }
 
-    // It's useful for fatal errors
-    public void terminateApp(){ System.exit(0);}
+    /*
+     * Handles unrecoverable errors and terminates the application.
+     * The FatalError parameter restricts the operation to exceptions
+     * explicitly classified as fatal.
+     */
+    public void handleFatalError(FatalError e){
+
+        this.logError("A fatal error occurred. The application will terminate.", e);
+
+        HandlerUIErrorFactory handlerUIErrorFactory = HandlerUIErrorFactory.getInstance();
+        HandlerUIError handlerUIError = handlerUIErrorFactory.getHandlerUIError();
+        handlerUIError.errorMessage("An unexpected internal error has occurred. " +
+                "The application cannot continue and will be terminated.");
+
+        handlerUIError.terminateApplication();
+
+    }
 }

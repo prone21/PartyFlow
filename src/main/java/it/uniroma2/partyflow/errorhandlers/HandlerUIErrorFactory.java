@@ -4,25 +4,21 @@ import it.uniroma2.partyflow.enums.UIType;
 import it.uniroma2.partyflow.utilities.configurators.UIConfigurator;
 
 /**
- * Its responsibility is to provide the appropriate error handler.
+ * Its responsibility is to provide the appropriate UI error handler.
  */
 
 
-public class HandlerErrorFactory {
-    private static HandlerErrorFactory instance = null;
+public class HandlerUIErrorFactory {
+    private static HandlerUIErrorFactory instance = null;
 
-    private HandlerErrorFactory (){}
+    private HandlerUIErrorFactory(){}
 
     // Guarantee Singleton
-    public static HandlerErrorFactory getInstance(){
+    public static HandlerUIErrorFactory getInstance(){
         if(instance == null){
-            instance = new HandlerErrorFactory();
+            instance = new HandlerUIErrorFactory();
         }
         return instance;
-    }
-
-    public HandlerSystemError getHandlerSystemError(){
-        return HandlerSystemError.getInstance();
     }
 
     public HandlerUIError getHandlerUIError(){

@@ -29,6 +29,13 @@ public class HandlerCLIError implements HandlerUIError {
         System.out.println("Error: " + message);
     }
 
+    // Terminates the JVM with a non-zero exit code to indicate an error.
+    @Override
+    public void terminateApplication() {
+        System.exit(1);
+    }
+
+
     /*
      * Prints an error message identifying the required field
      * that has not been provided by the user.

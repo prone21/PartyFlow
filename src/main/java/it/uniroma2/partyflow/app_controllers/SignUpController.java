@@ -3,9 +3,7 @@ package it.uniroma2.partyflow.app_controllers;
 import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.daos.dao_factories.DaoAbstractFactory;
-import it.uniroma2.partyflow.errorhandlers.HandlerErrorFactory;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.errorhandlers.HandlerUIError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.models.User;
@@ -74,16 +72,11 @@ public class SignUpController {
         }
 
         catch (InvalidPersistenceTypeException e){
-            HandlerErrorFactory handlerErrorFactory = HandlerErrorFactory.getInstance();
 
-            HandlerSystemError handlerSystemError = handlerErrorFactory.getHandlerSystemError();
-            handlerSystemError.logError(e);
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
 
-            HandlerUIError handlerUIError = handlerErrorFactory.getHandlerUIError();
-            handlerUIError.errorMessage("An unexpected internal error has occurred. " +
-                    "The application cannot continue and will be terminated.");
-
-            handlerSystemError.terminateApp();
+            handlerSystemError.handleFatalError(e);
         }
 
     }

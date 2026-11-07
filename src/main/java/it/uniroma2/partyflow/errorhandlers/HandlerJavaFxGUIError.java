@@ -1,5 +1,6 @@
 package it.uniroma2.partyflow.errorhandlers;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
@@ -34,6 +35,24 @@ public class HandlerJavaFxGUIError implements HandlerUIError{
         alert.setHeaderText(null);
         alert.setContentText(mex);
         alert.showAndWait();
+    }
+
+
+    /*
+     * Requests an orderly shutdown of the JavaFX application.
+     *
+     * This normally triggers GuiApplication.stop(), allowing cleanup
+     * operations to release resources before shutdown.
+     *
+     * Unlike System.exit(), Platform.exit() does not directly terminate
+     * the JVM, but requests the shutdown of the JavaFX runtime.
+     * It also does not immediately interrupt the calling method.
+     *
+     * The JVM terminates automatically if no non-daemon threads remain active.
+     */
+    @Override
+    public void terminateApplication() {
+        Platform.exit();
     }
 
     // Highlights an empty TextField with a red border and automatically
