@@ -8,6 +8,7 @@ import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.models.LoginCredential;
 import it.uniroma2.partyflow.models.User;
+import it.uniroma2.partyflow.utilities.PasswordProtector;
 
 import java.sql.*;
 
@@ -145,18 +146,19 @@ public class UserDaoMySQL implements UserDaoInterface {
 
         try{
             this.connect();
+            String password = cred.getPassword();
 
             // check if the user is a participant or a party planner
-            String query = "select COALESCE(p.email,'PartyPlanner') as account_type\n" +
+            String query = "select u.password as password, COALESCE(p.email,'PartyPlanner') as account_type\n" +
                     "from users as u left join participant as p on u.email = p.email " +
-                    "where u.email = ? and u.password = ?";
+                    "where u.email = ?";
 
             stmt = this.conn.prepareStatement(query);
             stmt.setString(1,cred.getEmail());
-            stmt.setString(2,cred.getPassword());
 
             rs = stmt.executeQuery();
-            if (rs.next()){
+
+            if (rs.next() && PasswordProtector.checkPassword(password, rs.getString("password"))){
                 if (rs.getString("account_type").equals("PartyPlanner")){
                     return AccountType.PartyPlanner;
                 }

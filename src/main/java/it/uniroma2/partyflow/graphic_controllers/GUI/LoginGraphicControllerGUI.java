@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.graphic_controllers.GUI;
 
-import it.uniroma2.partyflow.app_controllers.LoginappController;
+import it.uniroma2.partyflow.app_controllers.LoginController;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
@@ -55,7 +55,7 @@ public class LoginGraphicControllerGUI {
             loginBean.setEmail(email);
             loginBean.setPwd(pwd);
 
-            LoginappController loginController = new LoginappController();
+            LoginController loginController = new LoginController();
             AccountType accountType = loginController.login(loginBean);
 
             switch(accountType){

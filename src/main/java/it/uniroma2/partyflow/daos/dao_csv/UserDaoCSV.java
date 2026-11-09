@@ -10,6 +10,7 @@ import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.models.LoginCredential;
 import it.uniroma2.partyflow.models.User;
+import it.uniroma2.partyflow.utilities.PasswordProtector;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
 import java.io.FileReader;
@@ -139,7 +140,7 @@ public class UserDaoCSV implements UserDaoInterface {
 
             Map<String, String> row = this.findUserByEmail(cred.getEmail());
 
-            if ( (row == null) || row.get("password").equals(cred.getPassword()) ){
+            if ( (row == null) || (PasswordProtector.checkPassword(cred.getPassword(), row.get("password"))) ){
                 throw new EntityNotFound();
             }
             else{

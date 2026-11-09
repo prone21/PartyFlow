@@ -31,5 +31,4 @@ public abstract class DaoAbstractFactory {
     public abstract UserDaoInterface getUserDao();
 
 
-
 }

@@ -1,15 +1,13 @@
 
 package it.uniroma2.partyflow.graphic_controllers.CLI;
 
-import it.uniroma2.partyflow.app_controllers.LoginappController;
+import it.uniroma2.partyflow.app_controllers.LoginController;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class LoginGraphicControllerCLI {
@@ -98,8 +96,8 @@ public class LoginGraphicControllerCLI {
             //---------------------------------------------
             // 2) Pass the Bean to the application controller
 
-            LoginappController loginController =
-                    new LoginappController();
+            LoginController loginController =
+                    new LoginController();
 
             AccountType accountType =
                     loginController.login(loginBean);

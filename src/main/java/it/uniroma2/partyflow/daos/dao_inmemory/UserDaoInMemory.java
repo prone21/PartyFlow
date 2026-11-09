@@ -7,6 +7,7 @@ import it.uniroma2.partyflow.exceptions.daoexception.DuplicateEntityException;
 import it.uniroma2.partyflow.exceptions.daoexception.EntityNotFound;
 import it.uniroma2.partyflow.models.LoginCredential;
 import it.uniroma2.partyflow.models.User;
+import it.uniroma2.partyflow.utilities.PasswordProtector;
 
 public class UserDaoInMemory implements UserDaoInterface {
 
@@ -47,7 +48,7 @@ public class UserDaoInMemory implements UserDaoInterface {
         try{
             User loggedUser = this.memory.findUserByEmail(cred.getEmail());
 
-            if( (loggedUser == null) || !(loggedUser.getPwd().equals(cred.getPassword())) ){
+            if( (loggedUser == null) || !(PasswordProtector.checkPassword(cred.getPassword(),loggedUser.getPwd())) ){
                 throw new EntityNotFound();
             }
             else {
