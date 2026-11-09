@@ -39,7 +39,7 @@ public class LoginGraphicControllerGUI {
             handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
                     "The application cannot continue and will be terminated.");
 
-            handlerSysErr.handleFatalError();
+            handlerSysErr.handleFatalError(e);
         }
 
     }
@@ -84,7 +84,7 @@ public class LoginGraphicControllerGUI {
             handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
                     "The application cannot continue and will be terminated.");
 
-            handlerSysErr.handleFatalError();
+            handlerSysErr.handleFatalError(e);
         }
 
         catch (ApplicationException e){

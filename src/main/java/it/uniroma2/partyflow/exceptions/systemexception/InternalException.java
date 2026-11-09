@@ -1,11 +1,13 @@
 package it.uniroma2.partyflow.exceptions.systemexception;
 
+import it.uniroma2.partyflow.exceptions.FatalError;
+
 /**
  * Exception thrown when an unexpected internal error occurs
  * during the execution of the application.
  */
 
-public class InternalException extends Exception {
+public class InternalException extends FatalError {
     public InternalException(String message) {
         super(message);
     }

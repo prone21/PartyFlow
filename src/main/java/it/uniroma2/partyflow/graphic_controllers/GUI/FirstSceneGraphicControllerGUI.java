@@ -3,7 +3,6 @@ import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
-import java.io.IOException;
 
 public class FirstSceneGraphicControllerGUI {
     @FXML
@@ -12,9 +11,11 @@ public class FirstSceneGraphicControllerGUI {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/login.fxml");
         }
-        catch (InternalException | IOException e){
+        catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
+
+            handlerSystemError.handleFatalError(e);
         }
     }
 
@@ -24,9 +25,11 @@ public class FirstSceneGraphicControllerGUI {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
         }
-        catch (InternalException | IOException e){
+        catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
+
+            handlerSystemError.handleFatalError(e);
         }
     }
 }

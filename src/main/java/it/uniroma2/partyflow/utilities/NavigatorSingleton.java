@@ -42,18 +42,23 @@ public class NavigatorSingleton {
 
 
     //Given the view's path, it sets the new scene on the stage
-    public void gotoView(String viewFXMLPath) throws IOException {
-        this.prevScene = this.stage.getScene(); // obtaining the actual scene that is going to be the prevScene
+    public void gotoView(String viewFXMLPath) throws InternalException {
+        try{
+            this.prevScene = this.stage.getScene(); // obtaining the actual scene that is going to be the prevScene
 
-        FXMLLoader loader =
-                new FXMLLoader(getClass().getResource(viewFXMLPath));
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource(viewFXMLPath));
 
-        Scene scene = new Scene(loader.load()); // load obtains the root node by fxml file
+            Scene scene = new Scene(loader.load()); // load obtains the root node by fxml file
 
-        this.stage.setTitle("PartyFlow");
-        this.stage.setScene(scene);
+            this.stage.setTitle("PartyFlow");
+            this.stage.setScene(scene);
 
-        this.stage.show();
+            this.stage.show();
+        }
+        catch (IOException e){
+            throw new InternalException("Failed to load FXML view: " + viewFXMLPath);
+        }
     }
 
     //sets the given scene on the stage

@@ -1,5 +1,7 @@
 package it.uniroma2.partyflow.graphic_controllers.CLI;
 
+import it.uniroma2.partyflow.launchers.CliApplication;
+
 import java.util.Scanner;
 
 public class FirstSceneGraphicControllerCLI {
@@ -56,6 +58,7 @@ public class FirstSceneGraphicControllerCLI {
 
     private void exit(){
         System.out.println("Goodbye!");
+
     }
 
     private void invalidChoice(){
