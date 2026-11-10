@@ -24,17 +24,27 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){}
 
-    public static ConnectionFactory getInstance() throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException {
+    public static ConnectionFactory getInstance() {
 
+        if (instance == null){
+            instance = new ConnectionFactory();
+        }
+
+        return instance;
+
+
+    }
+
+    // -----------------------------------------------
+
+    // returns the DB connection
+    public Connection getConnection()  throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException {
         try{
-            if (instance == null){
+            if(conn == null){
                 PersistenceConfigurator pc = PersistenceConfigurator.getInstance();
                 List<String> connProp = pc.getDBMSConnectionParameter();
                 conn = DriverManager.getConnection(connProp.get(0), connProp.get(1), connProp.get(2));
-                instance = new ConnectionFactory();
             }
-
-            return instance;
         }
         catch (InvalidPersistenceTypeException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
@@ -47,12 +57,6 @@ public class ConnectionFactory {
             throw new PersistenceServiceUnavailableException();
         }
 
-    }
-
-    // -----------------------------------------------
-
-    // returns the DB connection
-    public Connection getConnection() {
         return conn;
     }
 
@@ -70,4 +74,5 @@ public class ConnectionFactory {
             }
         }
     }
+
 }
