@@ -1,6 +1,7 @@
 package it.uniroma2.partyflow.graphic_controllers.CLI;
 
-import it.uniroma2.partyflow.launchers.CliApplication;
+import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
+import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 
 import java.util.Scanner;
 
@@ -8,35 +9,43 @@ public class FirstSceneGraphicControllerCLI {
 
     private final Scanner scanner = new Scanner(System.in);
 
+
     public void execute() {
 
         while (true) {
+            try {
+                System.out.println();
+                System.out.println("===== PARTYFLOW =====");
+                System.out.println("1 - Log in");
+                System.out.println("2 - Sign up");
+                System.out.println("0 - Exit");
+                System.out.print("Choice: ");
 
-            System.out.println();
-            System.out.println("===== PARTYFLOW =====");
-            System.out.println("1 - Log in");
-            System.out.println("2 - Sign up");
-            System.out.println("0 - Exit");
-            System.out.print("Choice: ");
+                String choice = this.scanner.nextLine();
 
-            String choice = this.scanner.nextLine();
+                switch (choice) {
 
-            switch (choice) {
+                    case "1":
+                        this.login();
+                        break;
 
-                case "1":
-                    this.login();
-                    break;
+                    case "2":
+                        this.signUp();
+                        break;
 
-                case "2":
-                    this.signUp();
-                    break;
+                    case "0":
+                        this.exit();
+                        return;
 
-                case "0":
-                    this.exit();
-                    return;
+                    default:
+                        throw new ApplicationException("Invalid choice");
 
-                default:
-                    this.invalidChoice();
+                }
+            }
+
+            catch (ApplicationException e){
+                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+                handlerCLIError.errorMessage(e.getMessage());
             }
         }
     }
@@ -61,7 +70,4 @@ public class FirstSceneGraphicControllerCLI {
 
     }
 
-    private void invalidChoice(){
-        System.out.println("Invalid choice.");
-    }
 }

@@ -86,7 +86,7 @@ public class HandlerSystemError {
      * The FatalError parameter restricts the operation to exceptions
      * explicitly classified as fatal.
      */
-    public void handleFatalError(FatalError e){
+    public void handleFatalError(FatalError e) {
 
         this.logError("A fatal error occurred. The application will terminate.", e);
 
@@ -94,7 +94,6 @@ public class HandlerSystemError {
         HandlerUIError handlerUIError = handlerUIErrorFactory.getHandlerUIError();
         handlerUIError.errorMessage("An unexpected internal error has occurred. " +
                 "The application cannot continue and will be terminated.");
-
         handlerUIError.terminateApplication();
 
     }

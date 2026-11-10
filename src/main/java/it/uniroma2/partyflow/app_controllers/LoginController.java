@@ -10,8 +10,7 @@ import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.models.LoginCredential;
 
 public class LoginController {
-    public AccountType login(LoginCredentialsBean cred) throws ApplicationException {
-
+    public AccountType login(LoginCredentialsBean cred) throws ApplicationException{
         try {
             // ----------- convert bean in model --------------
             LoginCredential usCred = new LoginCredential(cred.getEmail(), cred.getPassword());

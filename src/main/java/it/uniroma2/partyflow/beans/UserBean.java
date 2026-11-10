@@ -22,21 +22,6 @@ public class UserBean {
 
     public UserBean() {}
 
-
-    public UserBean(String name, String surname, String dateOfBirth,
-                    Gender gender, String email, String password,
-                    AccountType accountType)
-            throws RequiredFieldException, InvalidFieldFormatException {
-
-        this.setName(name);
-        this.setSurname(surname);
-        this.setDateOfBirth(dateOfBirth);
-        this.setGender(gender);
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setAccountType(accountType);
-    }
-
 // ---------------------Name------------------------
     public String getName() {
         return this.name;

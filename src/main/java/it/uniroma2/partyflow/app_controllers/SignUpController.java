@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 public class SignUpController {
 
-    public void createAccount(UserBean signUpBean) throws ApplicationException {
+    public void createAccount(UserBean signUpBean) throws ApplicationException{
 
         try{
             // --------convert the bean to the model---------

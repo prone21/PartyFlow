@@ -14,7 +14,6 @@ public class FirstSceneGraphicControllerGUI {
         catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
-
             handlerSystemError.handleFatalError(e);
         }
     }
@@ -28,7 +27,6 @@ public class FirstSceneGraphicControllerGUI {
         catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
-
             handlerSystemError.handleFatalError(e);
         }
     }

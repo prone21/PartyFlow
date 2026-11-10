@@ -68,20 +68,18 @@ public class SignUpGraphicControllerGUI {
 
     // ----------------------------------
 
+    @FXML
     public void goBackward() {
         try {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             nav.goBackward();
         }
         catch (InternalException e){
-            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
-            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("GoBackward failed: " + e.getMessage(), e);
 
-            handlerSysErr.logError(e);
-            handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
-                    "The application cannot continue and will be terminated.");
+            handlerSystemError.handleFatalError(e);
 
-            handlerSysErr.handleFatalError();
         }
     }
 
@@ -135,8 +133,8 @@ public class SignUpGraphicControllerGUI {
 
     @FXML
     public void createAccount(){
-        try {
 
+        try{
             // 1) create the bean where the user date will be memorized
             UserBean signUpBean = new UserBean();
 
@@ -158,12 +156,6 @@ public class SignUpGraphicControllerGUI {
             SignUpController signUpController = new SignUpController();
             signUpController.createAccount(signUpBean);
             //---------------------------------------------
-
-        }
-
-        catch (ApplicationException e){
-            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
-            handlerJavaFxGUIError.errorMessage(e.getMessage());
         }
 
         catch (RequiredFieldException e){
@@ -172,7 +164,6 @@ public class SignUpGraphicControllerGUI {
              * Uses a switch statement to identify the corresponding JavaFX element
              * and delegates its highlighting to the JavaFxGUI error handler.
              */
-
             HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
 
             switch (e.getField()){
@@ -207,10 +198,15 @@ public class SignUpGraphicControllerGUI {
              * Delegates the display of the exception message
              * to the JavaFX GUI error handler.
              */
+
             HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
             handlerJavaError.errorMessage(e.getMessage());
         }
 
+        catch (ApplicationException e){
+            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+            handlerJavaFxGUIError.errorMessage(e.getMessage());
+        }
 
     }
 

@@ -12,6 +12,7 @@ public class CliApplication implements UIApplication {
     @Override
     public void launch(){
         this.start();
+        this.close();
     }
 
     @Override

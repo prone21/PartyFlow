@@ -69,10 +69,13 @@
                         <Font size="17.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="participantOption" layoutX="189.0" layoutY="43.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17; -fx-mark-color: #2978DE;" text="Participant" textFill="#153a5f" toggleGroup="$accountTypeGroup">
+                  <RadioButton fx:id="participantOption" layoutX="189.0" layoutY="43.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17; -fx-mark-color: #2978DE;" text="Participant" textFill="#153a5f">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="accountTypeGroup" />
+                     </toggleGroup>
                   </RadioButton>
                </children>
             </AnchorPane>
@@ -98,10 +101,13 @@
                         <Font size="17.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="femaleOption" layoutX="108.0" layoutY="45.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17; -fx-mark-color: #2978DE;" text="Female" textFill="#153a5f" toggleGroup="$genderGroup">
+                  <RadioButton fx:id="femaleOption" layoutX="108.0" layoutY="45.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17; -fx-mark-color: #2978DE;" text="Female" textFill="#153a5f">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="genderGroup" />
+                     </toggleGroup>
                   </RadioButton>
                   <RadioButton fx:id="pntsOption" layoutX="107.0" layoutY="84.9775390625" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-font-size: 17; -fx-mark-color: #2978DE;" text="Prefer not to say" textFill="#153a5f" toggleGroup="$genderGroup">
                      <font>

@@ -32,7 +32,7 @@ public class HandlerCLIError implements HandlerUIError {
     // Terminates the JVM with a non-zero exit code to indicate an error.
     @Override
     public void terminateApplication() {
-        System.exit(1);
+        System.err.println("The application was terminated due to a fatal error.");
     }
 
 

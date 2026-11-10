@@ -16,9 +16,31 @@ public class SignUpGraphicControllerCLI {
     private final Scanner scanner = new Scanner(System.in);
 
     public void execute() {
-        System.out.println();
-        System.out.println("=== PARTYFLOW - SIGN UP ===");
-        this.createAccount();
+        try {
+            System.out.println();
+            System.out.println("=== PARTYFLOW - SIGN UP ===");
+            System.out.println("1 - Sign up");
+            System.out.println("0 - Exit");
+
+            String choice = this.readField("Choice");
+
+            switch (choice) {
+                case "1" -> this.createAccount();
+                case "0" -> this.exit();
+                default -> throw new ApplicationException("Invalid choice");
+            }
+
+        }
+        catch (ApplicationException e){
+            HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+            handlerCLIError.errorMessage(e.getMessage());
+        }
+
+    }
+
+    private void exit(){
+        System.out.println("Goodbye!");
+
     }
 
     private String readField(String field) {
@@ -58,7 +80,7 @@ public class SignUpGraphicControllerCLI {
         };
     }
 
-    private void createAccount() {
+    private void createAccount(){
         while (true) {
 
             try{
@@ -92,10 +114,7 @@ public class SignUpGraphicControllerCLI {
 
                 return;
             }
-            catch (ApplicationException e){
-                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
-                handlerCLIError.errorMessage(e.getMessage());
-            }
+
             catch (RequiredFieldException e) {
                 /*
                  * Handles missing required fields.
@@ -105,6 +124,7 @@ public class SignUpGraphicControllerCLI {
                 HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
                 handlerCLIError.printRequiredFieldError(e.getField());
             }
+
             catch (InvalidFieldFormatException e) {
                 /*
                  * Handles invalid field formats.
@@ -119,6 +139,13 @@ public class SignUpGraphicControllerCLI {
                 System.out.println("Please try again.");
                 System.out.println();
             }
+
+            catch (ApplicationException e){
+                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+                handlerCLIError.errorMessage(e.getMessage());
+            }
+
+
 
         }
 
