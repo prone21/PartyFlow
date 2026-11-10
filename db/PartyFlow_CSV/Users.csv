@@ -1,0 +1,23 @@
+﻿email,name,surname,password,dateOfBirth,gender,account_type
+alice.rossi@partyflow.test,Alice,Rossi,DemoPwd1!,1998-04-12,FEMALE,PARTY PLANNER
+chiara.mancini@partyflow.test,Chiara,Mancini,DemoPwd7!,2000-05-19,FEMALE,PARTICIPANT
+ciao@k.com,fdfa,fdfd,b8474de9a4accc7a633d5c29f07c713052180787bf04fd440be1fd1bb6c9a37b,2003-08-21,FEMALE,PARTICIPANT
+fdfs@gfg.com,gio,porco,b748da6ca9acd193237f03f73e72b2370ac8dca1c12bf32e2c3cbabcc8b5f76d,2001-12-01,MALE,PARTICIPANT
+ff@p.com,NOT_SPECIFIED,gfg,fdgfdgfdgd,2018-10-05,FEMALE,PARTICIPANT
+gfg@g.com,fdsfdsfs,dfsfdsfsd,d417576425252a9bc971601d081e9ba35471c05ea35ca7d51180e509cd7a6a97,2022-08-04,FEMALE,PARTICIPANT
+giulia.verdi@partyflow.test,Giulia,Verdi,DemoPwd3!,1999-06-21,FEMALE,PARTY PLANNER
+io@gfg.com,pr,r,c132910ac51048a51c7e0022eba569490bc00205f7ea0af95c5d20325945a817,2022-02-09,MALE,PARTICIPANT
+ioi@gm.com,iooi,oiiuoip,1b46e68976334ab2d83d4d873b50a15a38fda91d3001eba9d393c2758fc81449,2023-03-02,FEMALE,PARTICIPANT
+luca.ferrari@partyflow.test,Luca,Ferrari,DemoPwd4!,1999-02-10,MALE,PARTICIPANT
+marco.bianchi@partyflow.test,Marco,Bianchi,DemoPwd2!,1997-11-03,MALE,PARTY PLANNER
+matteo.greco@partyflow.test,Matteo,Greco,DemoPwd8!,1999-10-27,MALE,PARTICIPANT
+paolo.gallo@partyflow.test,Paolo,Gallo,DemoPwd6!,1997-12-02,MALE,PARTICIPANT
+paperino,pippo,pluto,ciao,1985-11-21,MALE,PARTY PLANNER
+pd@gmail.com,gino,fastidio,pippo,1999-05-21,MALE,PARTICIPANT
+perronedavide64@gmail.com,davide,perrone,pippo,2000-11-21,MALE,PARTICIPANT
+perroneGennaro@gmail.com,Gennaro,Perrone,pippo,1964-03-23,MALE,PARTICIPANT
+pippo@pluto.com,davide,grgrete,b8474de9a4accc7a633d5c29f07c713052180787bf04fd440be1fd1bb6c9a37b,2000-11-21,MALE,PARTICIPANT
+sara.esposito@partyflow.test,Sara,Esposito,DemoPwd5!,1998-07-14,FEMALE,PARTICIPANT
+userp@gmail.com,jtuiyj,gfg,c7786a7a0759e0a45a616e5a64009ece3aed80465aa9edf011bffe90f84a2413,2000-05-21,MALE,PARTICIPANT
+userpp@gmail.com,ghhtrhtr,ytytr,0b7d2068b5a3eb22559d14922c170f79483c109618c339ecd895a75077453ee7,2000-06-21,FEMALE,PARTICIPANT
+uy@g.com,jhyjyj,uytuy,65c8f72b3729b79f1af10c194180344f4c31991bc700175cef0b969a9e968f84,1963-07-02,MALE,PARTICIPANT
