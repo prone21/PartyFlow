@@ -5,8 +5,8 @@ import it.uniroma2.partyflow.app_controllers.LoginController;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
-import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
+import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
 
 import java.util.Scanner;
 
@@ -17,45 +17,48 @@ public class LoginGraphicControllerCLI {
     public void execute() {
 
         while (true) {
-            System.out.println();
-            System.out.println("=== PARTYFLOW - LOGIN ===");
-            System.out.println("1 - Log in");
-            System.out.println("2 - Sign up");
-            System.out.println("3 - Continue with Google");
-            System.out.println("4 - Continue with Facebook");
-            System.out.println("0 - Go backward");
+            try {
+                System.out.println();
+                System.out.println("=== PARTYFLOW - LOGIN ===");
+                System.out.println("1 - Log in");
+                System.out.println("2 - Don't have an account? Sign up");
+                System.out.println("3 - Continue with Google");
+                System.out.println("4 - Continue with Facebook");
+                System.out.println("0 - Exit");
 
-            String choice = this.readField("Choice");
+                String choice = this.readField("Choice");
 
-            switch (choice) {
-                case "1" -> {
-                    if (this.submitCredentials()) {
+                switch (choice) {
+                    case "1" -> {
+                        if (this.submitCredentials()) {
+                            return;
+                        }
+                    }
+
+                    case "2" -> {
+                        this.signUp();
                         return;
                     }
+
+                    case "3" -> this.continueWithGoogle();
+
+                    case "4" -> this.continueWithFacebook();
+
+                    case "0" -> {
+                        this.exit();
+                        return;
+                    }
+
+                    default -> throw new ApplicationException("Invalid choice");
                 }
-
-                case "2" -> {
-                    this.signUp();
-                    return;
-                }
-
-                case "3" -> this.continueWithGoogle();
-
-                case "4" -> this.continueWithFacebook();
-
-                case "0" -> {
-                    this.goBackward();
-                    return;
-                }
-
-                default -> this.invalidChoice();
+            } catch (ApplicationException e) {
+                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+                handlerCLIError.errorMessage(e.getMessage());
             }
+
         }
     }
 
-    private void invalidChoice(){
-        System.out.println("Invalid choice.");
-    }
 
     private void continueWithGoogle() {
         System.out.println("Google log-in is not implemented yet.");
@@ -73,15 +76,13 @@ public class LoginGraphicControllerCLI {
     private void signUp() {
         SignUpGraphicControllerCLI signUpController =
                 new SignUpGraphicControllerCLI();
-
+        System.out.println();
         signUpController.execute();
     }
 
-    private void goBackward() {
-        /*
-         * The calling controller manages the previous screen.
-         * Returning from execute() restores its execution flow.
-         */
+    private void exit(){
+        System.out.println("Goodbye!");
+
     }
 
     private boolean submitCredentials() {
@@ -92,8 +93,9 @@ public class LoginGraphicControllerCLI {
                     new LoginCredentialsBean();
 
             loginBean.setEmail(this.readField("Email"));
-            loginBean.setPwd(this.readField("Password"));
+            loginBean.setPassword(this.readField("Password"));
             //---------------------------------------------
+
             // 2) Pass the Bean to the application controller
 
             LoginController loginController =
@@ -103,6 +105,8 @@ public class LoginGraphicControllerCLI {
                     loginController.login(loginBean);
             //---------------------------------------------
 
+
+            // 3) show the right homepage
             switch (accountType) {
                 case Participant -> {
                     PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
@@ -117,22 +121,28 @@ public class LoginGraphicControllerCLI {
                 }
 
             }
+            //---------------------------------------------
+
             return true;
+        }
 
-        } catch (ApplicationException e) {
+        catch (RequiredFieldException e) {
             /*
-             * Delegates system error logging to the system handler
-             * and user-facing error presentation to the CLI handler.
+             * Handles missing required fields.
+             * Delegates the error message to the CLI error handler.
              */
-            HandlerSystemError.getInstance().logError(e);
 
-            HandlerCLIError.getInstance().errorMessage(
-                    "An error occurred during login."
-            );
-
+            HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+            handlerCLIError.printRequiredFieldError(e.getField());
             return false;
         }
+
+        catch (ApplicationException e){
+            HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+            handlerCLIError.errorMessage(e.getMessage());
+            return false;
+        }
+
     }
-
-
 }
+

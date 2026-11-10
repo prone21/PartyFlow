@@ -7,14 +7,11 @@ import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
+import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
 import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import java.io.IOException;
 
 
 public class LoginGraphicControllerGUI {
@@ -44,7 +41,6 @@ public class LoginGraphicControllerGUI {
     public void submitCredentials() {
         try{
             // 0) fetch user data
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
             String email = emailField.getText();
             String pwd = pwdField.getText();
             //---------------------------------------------
@@ -62,6 +58,7 @@ public class LoginGraphicControllerGUI {
 
 
             // 3) show the right homepage
+            NavigatorSingleton nav = NavigatorSingleton.getInstance();
             switch(accountType){
                 case Participant:
                     nav.gotoView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
@@ -73,35 +70,48 @@ public class LoginGraphicControllerGUI {
             }
             //---------------------------------------------
         }
+        catch (RequiredFieldException e) {
+            /*
+             * Handles missing required fields in the sign-up form.
+             * Uses a switch statement to identify the corresponding JavaFX element
+             * and delegates its highlighting to the JavaFxGUI error handler.
+             */
+            HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
 
-/*
-        catch (InternalException | IOException e){
-            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
-            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
-
-            handlerSysErr.logError(e);
-            handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
-                    "The application cannot continue and will be terminated.");
-
-            handlerSysErr.handleFatalError(e);
+            switch (e.getField()) {
+                case EMAIL -> {
+                    handlerJavaError.highlightMissingFormElement(this.emailField);
+                }
+                case PASSWORD -> {
+                    handlerJavaError.highlightMissingFormElement(this.pwdField);
+                }
+            }
         }
-
         catch (ApplicationException e){
             HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
             handlerJavaFxGUIError.errorMessage(e.getMessage());
         }
+        catch (InternalException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("Log in failed: " + e.getMessage(), e);
 
- */
+            handlerSystemError.handleFatalError(e);
+
+        }
     }
 
     @FXML
-    public void signUp(MouseEvent event) throws IOException {
-        //REVIEW MA CHE FAI
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
+    public void signUp(){
+        try {
+            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
+        }
+        catch (InternalException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("Failed to navigate to the sign-up page: " + e.getMessage(), e);
 
-        NavigatorSingleton nav = NavigatorSingleton.getInstance(stage);
-        nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
+            handlerSystemError.handleFatalError(e);
+        }
     }
 
     @FXML

@@ -8,7 +8,6 @@ import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
-import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 
 import java.util.Scanner;
 
@@ -17,24 +16,32 @@ public class SignUpGraphicControllerCLI {
     private final Scanner scanner = new Scanner(System.in);
 
     public void execute() {
-        try {
-            System.out.println();
-            System.out.println("=== PARTYFLOW - SIGN UP ===");
-            System.out.println("1 - Sign up");
-            System.out.println("0 - Exit");
+        while (true) {
+            try {
+                System.out.println();
+                System.out.println("=== PARTYFLOW - SIGN UP ===");
+                System.out.println("1 - Sign up");
+                System.out.println("0 - Exit");
 
-            String choice = this.readField("Choice");
+                String choice = this.readField("Choice");
 
-            switch (choice) {
-                case "1" -> this.createAccount();
-                case "0" -> this.exit();
-                default -> throw new ApplicationException("Invalid choice");
+                switch (choice) {
+                    case "1" -> {
+                        if(this.createAccount()){
+                            return;
+                        }
+                    }
+                    case "0" -> {
+                        this.exit();
+                        return;
+                    }
+                    default -> throw new ApplicationException("Invalid choice");
+                }
+
+            } catch (ApplicationException e) {
+                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+                handlerCLIError.errorMessage(e.getMessage());
             }
-
-        }
-        catch (ApplicationException e){
-            HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
-            handlerCLIError.errorMessage(e.getMessage());
         }
 
     }
@@ -81,89 +88,86 @@ public class SignUpGraphicControllerCLI {
         };
     }
 
-    private void createAccount(){
-        while (true) {
+    private boolean createAccount(){
+        try{
+            // 1) create the bean where the user date will be memorized
+            UserBean signUpBean = new UserBean();
 
-            try{
-                // 1) create the bean where the user date will be memorized
-                UserBean signUpBean = new UserBean();
+            signUpBean.setName(readField("Name"));
+            signUpBean.setSurname(readField("Surname"));
+            signUpBean.setDateOfBirth(
+                    readField("Date of birth (DD/MM/YYYY)")
+            );
 
-                signUpBean.setName(readField("Name"));
-                signUpBean.setSurname(readField("Surname"));
-                signUpBean.setDateOfBirth(
-                        readField("Date of birth (DD/MM/YYYY)")
-                );
+            signUpBean.setEmail(readField("Email"));
+            signUpBean.setPassword(readField("Password"));
 
-                signUpBean.setEmail(readField("Email"));
-                signUpBean.setPassword(readField("Password"));
+            signUpBean.setGender(
+                    this.obtainSelectedGender()
+            );
 
-                signUpBean.setGender(
-                        this.obtainSelectedGender()
-                );
+            signUpBean.setAccountType(
+                    this.obtainSelectedAccountType()
+            );
+            //---------------------------------------------
 
-                signUpBean.setAccountType(
-                        this.obtainSelectedAccountType()
-                );
-                //---------------------------------------------
+            // 2) Pass the UserBean to the application controller
+            SignUpController signUpController =
+                    new SignUpController();
 
-                // 2) Pass the UserBean to the application controller
-                SignUpController signUpController =
-                        new SignUpController();
+            signUpController.createAccount(signUpBean);
+            //---------------------------------------------
 
-                signUpController.createAccount(signUpBean);
-                //---------------------------------------------
-
-                // 3) show the right homepage
-                switch (signUpBean.getAccountType()) {
-                    case Participant -> {
-                        PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
-                        System.out.println();
-                        homePage.execute();
-                    }
-
-                    case PartyPlanner -> {
-                        PpHomePageGraphicControllerCLI homePage = new PpHomePageGraphicControllerCLI();
-                        System.out.println();
-                        homePage.execute();
-                    }
-
+            // 3) show the right homepage
+            switch (signUpBean.getAccountType()) {
+                case Participant -> {
+                    PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
+                    System.out.println();
+                    homePage.execute();
                 }
 
-                return;
+                case PartyPlanner -> {
+                    PpHomePageGraphicControllerCLI homePage = new PpHomePageGraphicControllerCLI();
+                    System.out.println();
+                    homePage.execute();
+                }
+
             }
 
-            catch (RequiredFieldException e) {
-                /*
-                 * Handles missing required fields.
-                 * Delegates the error message to the CLI error handler.
-                 */
+            return true;
+        }
 
-                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
-                handlerCLIError.printRequiredFieldError(e.getField());
-            }
+        catch (RequiredFieldException e) {
+            /*
+             * Handles missing required fields.
+             * Delegates the error message to the CLI error handler.
+             */
 
-            catch (InvalidFieldFormatException e) {
-                /*
-                 * Handles invalid field formats.
-                 * Delegates the exception message to the CLI error handler.
-                 */
-                HandlerCLIError handlerCLIError =
-                        HandlerCLIError.getInstance();
+            HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+            handlerCLIError.printRequiredFieldError(e.getField());
+            return false;
+        }
 
-                handlerCLIError.errorMessage(e.getMessage());
+        catch (InvalidFieldFormatException e) {
+            /*
+             * Handles invalid field formats.
+             * Delegates the exception message to the CLI error handler.
+             */
+            HandlerCLIError handlerCLIError =
+                    HandlerCLIError.getInstance();
 
-                System.out.println();
-                System.out.println("Please try again.");
-                System.out.println();
-            }
+            handlerCLIError.errorMessage(e.getMessage());
 
-            catch (ApplicationException e){
-                HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
-                handlerCLIError.errorMessage(e.getMessage());
-            }
+            System.out.println();
+            System.out.println("Please try again.");
+            System.out.println();
+            return false;
+        }
 
-
-
+        catch (ApplicationException e){
+            HandlerCLIError handlerCLIError = HandlerCLIError.getInstance();
+            handlerCLIError.errorMessage(e.getMessage());
+            return  false;
         }
 
     }
