@@ -3,6 +3,7 @@ package it.uniroma2.partyflow.launchers;
 import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
+import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationException;
 import it.uniroma2.partyflow.graphic_controllers.CLI.FirstSceneGraphicControllerCLI;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
@@ -10,15 +11,22 @@ public class CliApplication implements UIApplication {
 
     // ----------------- UIApplication java methods ------------------
     @Override
-    public void launch(){
-        this.start();
-        this.close();
+    public void launch() {
+        try {
+            start();
+        } catch (ApplicationTerminationException e) {
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logWarning(
+                    "CLI application terminated due to a fatal error."
+            );
+        } finally {
+            close();
+        }
     }
 
     @Override
-    public void close(){
-        this.cleanup();
-        System.exit(0);
+    public void close() {
+        cleanup();
     }
     // ---------------------------------------------------------------
 
