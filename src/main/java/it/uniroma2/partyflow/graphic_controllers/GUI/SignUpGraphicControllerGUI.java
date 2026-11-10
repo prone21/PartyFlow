@@ -156,6 +156,15 @@ public class SignUpGraphicControllerGUI {
             SignUpController signUpController = new SignUpController();
             signUpController.createAccount(signUpBean);
             //---------------------------------------------
+
+            // 3) show the right homepage
+            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            switch (signUpBean.getAccountType()){
+                case PartyPlanner -> nav.gotoView("it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
+                case Participant -> nav.gotoView("it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
+            }
+            //---------------------------------------------
+
         }
 
         catch (RequiredFieldException e){
@@ -206,6 +215,14 @@ public class SignUpGraphicControllerGUI {
         catch (ApplicationException e){
             HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
             handlerJavaFxGUIError.errorMessage(e.getMessage());
+        }
+
+        catch (InternalException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("Sign up failed: " + e.getMessage(), e);
+
+            handlerSystemError.handleFatalError(e);
+
         }
 
     }

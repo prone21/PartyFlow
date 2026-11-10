@@ -4,6 +4,7 @@ import it.uniroma2.partyflow.exceptions.daoexception.EntityNotFound;
 import it.uniroma2.partyflow.models.LoginCredential;
 import it.uniroma2.partyflow.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class InMemoryDB {
     // ------------------------------------------------
 
     // -------------------Users----------------------
-    private List<User> users = null;
+    private List<User> users = new ArrayList<>();
 
     public void write (User user){
         this.users.add(user);

@@ -26,38 +26,42 @@ public class LoginGraphicControllerGUI {
 
 
     @FXML
-    public void goBackward() throws IOException {
-        try{
+    public void goBackward() {
+        try {
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
-            nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
+            nav.goBackward();
         }
         catch (InternalException e){
-            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
-            HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError("GoBackward failed: " + e.getMessage(), e);
 
-            handlerSysErr.logError(e);
-            handlerJavaFxGUIError.errorMessage("An unexpected internal error has occurred. " +
-                    "The application cannot continue and will be terminated.");
+            handlerSystemError.handleFatalError(e);
 
-            handlerSysErr.handleFatalError(e);
         }
-
     }
 
     @FXML
     public void submitCredentials() {
         try{
+            // 0) fetch user data
             NavigatorSingleton nav = NavigatorSingleton.getInstance();
             String email = emailField.getText();
             String pwd = pwdField.getText();
+            //---------------------------------------------
 
+            // 1) create the bean where the user date will be memorized
             LoginCredentialsBean loginBean = new LoginCredentialsBean();
             loginBean.setEmail(email);
-            loginBean.setPwd(pwd);
+            loginBean.setPassword(pwd);
+            //---------------------------------------------
 
+            // 2) pass the LoginCredentialsBean to the application controller
             LoginController loginController = new LoginController();
             AccountType accountType = loginController.login(loginBean);
+            //---------------------------------------------
 
+
+            // 3) show the right homepage
             switch(accountType){
                 case Participant:
                     nav.gotoView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
@@ -66,16 +70,11 @@ public class LoginGraphicControllerGUI {
                 case PartyPlanner:
                     nav.gotoView("/it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
                     break;
-
-                default:
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Account non esistente, registrati!");
-                    alert.showAndWait();
-                    break;
             }
+            //---------------------------------------------
         }
 
+/*
         catch (InternalException | IOException e){
             HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
             HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
@@ -91,6 +90,8 @@ public class LoginGraphicControllerGUI {
             HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();
             handlerJavaFxGUIError.errorMessage(e.getMessage());
         }
+
+ */
     }
 
     @FXML

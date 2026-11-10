@@ -140,7 +140,7 @@ public class UserDaoCSV implements UserDaoInterface {
 
             Map<String, String> row = this.findUserByEmail(cred.getEmail());
 
-            if ( (row == null) || (PasswordProtector.checkPassword(cred.getPassword(), row.get("password"))) ){
+            if ( (row == null) || !(PasswordProtector.checkPassword(cred.getPassword(), row.get("password"))) ){
                 throw new EntityNotFound();
             }
             else{

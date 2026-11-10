@@ -8,6 +8,7 @@ import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
+import it.uniroma2.partyflow.utilities.NavigatorSingleton;
 
 import java.util.Scanner;
 
@@ -111,6 +112,22 @@ public class SignUpGraphicControllerCLI {
 
                 signUpController.createAccount(signUpBean);
                 //---------------------------------------------
+
+                // 3) show the right homepage
+                switch (signUpBean.getAccountType()) {
+                    case Participant -> {
+                        PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
+                        System.out.println();
+                        homePage.execute();
+                    }
+
+                    case PartyPlanner -> {
+                        PpHomePageGraphicControllerCLI homePage = new PpHomePageGraphicControllerCLI();
+                        System.out.println();
+                        homePage.execute();
+                    }
+
+                }
 
                 return;
             }

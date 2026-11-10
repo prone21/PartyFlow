@@ -1,22 +1,44 @@
 package it.uniroma2.partyflow.beans;
 
+import it.uniroma2.partyflow.enums.UserField;
+import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
+
 public class LoginCredentialsBean {
     private String email;
-    private String pwd;
+    private String password;
 
-    public String getEmail(){
+    // --------------------------Manage email--------------------------------
+    public String getEmail() {
         return this.email;
     }
 
-    public String getPassword(){
-        return this.pwd;
+    public void setEmail(String email) throws RequiredFieldException {
+        if (email == null || email.isEmpty()){
+            throw new RequiredFieldException(UserField.EMAIL);
+        }
+        else{
+            this.email = email;
+        }
+    }
+    // -------------------------------------------------------------------
+
+
+    // -------------------------Manage password---------------------------
+    public String getPassword() {
+        return this.password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) throws RequiredFieldException {
+        if (password == null || password.isEmpty()){
+            throw new RequiredFieldException(UserField.PASSWORD);
+        }
+        else{
+            this.password = password;
+        }
     }
+    // --------------------------------------------------------------------
 
-    public void setPwd(String pwd){
-        this.pwd = pwd;
-    }
+
+
+
 }
