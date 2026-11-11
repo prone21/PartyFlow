@@ -176,27 +176,13 @@ public class SignUpGraphicControllerGUI {
             HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
 
             switch (e.getField()){
-                case NAME->{
-                    handlerJavaError.highlightMissingFormElement(this.nameField);
-                }
-                case SURNAME -> {
-                    handlerJavaError.highlightMissingFormElement(this.surnameField);
-                }
-                case DATE_OF_BIRTH -> {
-                    handlerJavaError.highlightMissingFormElement(this.dateField);
-                }
-                case EMAIL -> {
-                    handlerJavaError.highlightMissingFormElement(this.emailField);
-                }
-                case PASSWORD -> {
-                    handlerJavaError.highlightMissingFormElement(this.pwdField);
-                }
-                case GENDER -> {
-                    handlerJavaError.highlightMissingFormElement(this.genderPane);
-                }
-                case ACCOUNT_TYPE -> {
-                    handlerJavaError.highlightMissingFormElement(this.accountTypePane);
-                }
+                case NAME-> handlerJavaError.highlightMissingFormElement(this.nameField);
+                case SURNAME -> handlerJavaError.highlightMissingFormElement(this.surnameField);
+                case DATE_OF_BIRTH -> handlerJavaError.highlightMissingFormElement(this.dateField);
+                case EMAIL -> handlerJavaError.highlightMissingFormElement(this.emailField);
+                case PASSWORD -> handlerJavaError.highlightMissingFormElement(this.pwdField);
+                case GENDER -> handlerJavaError.highlightMissingFormElement(this.genderPane);
+                case ACCOUNT_TYPE -> handlerJavaError.highlightMissingFormElement(this.accountTypePane);
             }
 
         }

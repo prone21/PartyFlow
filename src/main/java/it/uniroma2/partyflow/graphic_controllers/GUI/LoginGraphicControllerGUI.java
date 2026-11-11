@@ -79,12 +79,8 @@ public class LoginGraphicControllerGUI {
             HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
 
             switch (e.getField()) {
-                case EMAIL -> {
-                    handlerJavaError.highlightMissingFormElement(this.emailField);
-                }
-                case PASSWORD -> {
-                    handlerJavaError.highlightMissingFormElement(this.pwdField);
-                }
+                case EMAIL -> handlerJavaError.highlightMissingFormElement(this.emailField);
+                case PASSWORD -> handlerJavaError.highlightMissingFormElement(this.pwdField);
             }
         }
         catch (ApplicationException e){

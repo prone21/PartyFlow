@@ -57,8 +57,7 @@ public class PersistenceConfigurator {
             defaultProperties.setProperty("username.mysql","root");
             defaultProperties.setProperty("password.mysql","root");
 
-            PersistenceConfigurator persconf = new PersistenceConfigurator(defaultProperties);
-            return persconf;
+            return new PersistenceConfigurator(defaultProperties);
             // ------------------------------------------------------------------
         }
 
