@@ -1,11 +1,16 @@
-ott 10, 2026 1:09:05 PM it.uniroma2.partyflow.utilities.Configurator <init>
-SEVERE: IOException
-java.io.FileNotFoundException: src\main\resources\it\uniroma2\partyflow\fdf.ini (Impossibile trovare il file specificato)
-	at java.base/java.io.FileInputStream.open0(Native Method)
-	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
-	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:139)
-	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:109)
-	at it.uniroma2.partyflow/it.uniroma2.partyflow.utilities.Configurator.<init>(Configurator.java:36)
-	at it.uniroma2.partyflow/it.uniroma2.partyflow.utilities.Configurator.getConfigurator(Configurator.java:51)
-	at it.uniroma2.partyflow/it.uniroma2.partyflow.Main.main(Main.java:17)
+nov 11, 2026 12:25:59 PM it.uniroma2.partyflow.errorhandlers.HandlerSystemError logError
+SEVERE: Error cleaning up
+java.lang.NullPointerException: Cannot invoke "java.sql.Connection.isClosed()" because "it.uniroma2.partyflow.daos.ConnectionFactory.conn" is null
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.daos.ConnectionFactory.closeConnection(ConnectionFactory.java:69)
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.launchers.GuiApplication.cleanup(GuiApplication.java:86)
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.launchers.GuiApplication.stop(GuiApplication.java:72)
+	at javafx.graphics@26/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$5(LauncherImpl.java:864)
+	at javafx.graphics@26/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$0(PlatformImpl.java:449)
+	at javafx.graphics@26/com.sun.javafx.application.PlatformImpl.lambda$runLater$0(PlatformImpl.java:424)
+	at javafx.graphics@26/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@26/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@26/com.sun.glass.ui.win.WinApplication.lambda$runLoop$0(WinApplication.java:173)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
 
+nov 11, 2026 12:25:59 PM it.uniroma2.partyflow.errorhandlers.HandlerSystemError logInfo
+INFO: GUI application shutdown complete

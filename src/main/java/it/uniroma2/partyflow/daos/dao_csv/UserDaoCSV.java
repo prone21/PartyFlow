@@ -23,7 +23,7 @@ public class UserDaoCSV implements UserDaoInterface {
     private static String file_name = null;
 
 
-    private void initialize() throws PersistenceServiceUnavailableException, InvalidPersistenceTypeException {
+    private void initialize() throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException{
         try {
             // obtain the db directory
             PersistenceConfigurator pc = PersistenceConfigurator.getInstance();

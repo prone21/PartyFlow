@@ -2,6 +2,8 @@ package it.uniroma2.partyflow.launchers;
 
 import it.uniroma2.partyflow.utilities.configurators.UIConfigurator;
 
+import java.io.IOException;
+
 public class UIApplicationFactory {
     private static UIApplicationFactory instance = null;
 
@@ -16,10 +18,19 @@ public class UIApplicationFactory {
     }
 
     public UIApplication getUIApplication(){
-        UIConfigurator uic = UIConfigurator.getInstance();
-        return switch (uic.getUI()){
-            case JavaFxGUI -> new GuiApplication();
-            case CLI -> new CliApplication();
-        };
+        try{
+            UIConfigurator uic = UIConfigurator.getInstance();
+            return switch (uic.getUI()){
+                case JavaFxGUI -> new GuiApplication();
+                case CLI -> new CliApplication();
+            };
+        }
+
+        catch (IOException e){
+            // default UI
+            return new GuiApplication();
+        }
+
+
     }
 }
