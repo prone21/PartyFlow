@@ -3,7 +3,7 @@ import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
-import it.uniroma2.partyflow.utilities.NavigatorSingleton;
+import it.uniroma2.partyflow.utilities.navigators.GUINavigatorSingleton;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -42,7 +42,7 @@ public class GuiApplication extends Application implements UIApplication {
     @Override
     public void start(Stage stage){
         try {
-            NavigatorSingleton nav = NavigatorSingleton.getInstance(stage);
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance(stage);
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
         }
         catch (InternalException e){

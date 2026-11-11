@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.utilities;
+package it.uniroma2.partyflow.utilities.navigators;
 
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import javafx.fxml.FXMLLoader;
@@ -12,25 +12,25 @@ import java.io.IOException;
  * It allows the view navigation.
  */
 
-public class NavigatorSingleton {
+public class GUINavigatorSingleton {
     private final Stage stage; // The Stage in which the views (scenes) are displayed.
     private Scene prevScene;
-    private static NavigatorSingleton instance = null;
+    private static GUINavigatorSingleton instance = null;
 
-    private NavigatorSingleton(Stage stage) {
+    private GUINavigatorSingleton(Stage stage) {
         this.stage = stage;
     }
 
 
     // guarantee singleton
-    public static NavigatorSingleton getInstance(Stage stage){
+    public static GUINavigatorSingleton getInstance(Stage stage){
         if(instance == null){
-            instance = new NavigatorSingleton(stage);
+            instance = new GUINavigatorSingleton(stage);
         }
         return instance;
     }
 
-    public static NavigatorSingleton getInstance() throws InternalException {
+    public static GUINavigatorSingleton getInstance() throws InternalException {
         if(instance == null){
             throw new InternalException("NavigatorSingleton is not initialized. " +
                     "Use getInstance(Stage) to initialize it first.");

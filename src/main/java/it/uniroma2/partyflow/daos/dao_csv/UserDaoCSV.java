@@ -23,7 +23,7 @@ public class UserDaoCSV implements UserDaoInterface {
     private static String file_name = null;
 
     // --------------------------------loggers----------------------------------------------
-    private static void standardLog(Exception e) {
+    private static void stdLog(Exception e) {
         // log the error
         HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
         handlerSystemError.logError(e);
@@ -146,7 +146,7 @@ public class UserDaoCSV implements UserDaoInterface {
         catch (PersistenceServiceUnavailableException | DuplicateEntityException |
                 InvalidPersistenceTypeException e) {
 
-            UserDaoCSV.standardLog(e);
+            UserDaoCSV.stdLog(e);
             // throw the exception
             throw e;
 
@@ -193,7 +193,7 @@ public class UserDaoCSV implements UserDaoInterface {
         catch (PersistenceServiceUnavailableException |
                InvalidPersistenceTypeException | EntityNotFound e) {
 
-            UserDaoCSV.standardLog(e);
+            UserDaoCSV.stdLog(e);
             // throw the exception
             throw e;
         }

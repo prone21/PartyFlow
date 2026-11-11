@@ -8,7 +8,7 @@ import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.exceptions.uiexception.*;
-import it.uniroma2.partyflow.utilities.NavigatorSingleton;
+import it.uniroma2.partyflow.utilities.navigators.GUINavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -71,7 +71,7 @@ public class SignUpGraphicControllerGUI {
     @FXML
     public void goBackward() {
         try {
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             nav.goBackward();
         }
         catch (InternalException e){
@@ -158,7 +158,7 @@ public class SignUpGraphicControllerGUI {
             //---------------------------------------------
 
             // 3) show the right homepage
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             switch (signUpBean.getAccountType()){
                 case PartyPlanner -> nav.gotoView("it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
                 case Participant -> nav.gotoView("it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");

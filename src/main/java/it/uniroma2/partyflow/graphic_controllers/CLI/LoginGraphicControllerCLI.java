@@ -7,6 +7,7 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
+import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
 
 import java.util.Scanner;
 
@@ -107,20 +108,8 @@ public class LoginGraphicControllerCLI {
 
 
             // 3) show the right homepage
-            switch (accountType) {
-                case Participant -> {
-                    PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
-                    System.out.println();
-                    homePage.execute();
-                }
-
-                case PartyPlanner -> {
-                    PpHomePageGraphicControllerCLI homePage = new PpHomePageGraphicControllerCLI();
-                    System.out.println();
-                    homePage.execute();
-                }
-
-            }
+            CLINavigatorSingleton cliNavigatorSingleton = CLINavigatorSingleton.getInstance();
+            cliNavigatorSingleton.goToHomePage(accountType);
             //---------------------------------------------
 
             return true;

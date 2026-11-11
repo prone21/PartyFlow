@@ -8,7 +8,7 @@ import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
-import it.uniroma2.partyflow.utilities.NavigatorSingleton;
+import it.uniroma2.partyflow.utilities.navigators.GUINavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -25,7 +25,7 @@ public class LoginGraphicControllerGUI {
     @FXML
     public void goBackward() {
         try {
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             nav.goBackward();
         }
         catch (InternalException e){
@@ -58,7 +58,7 @@ public class LoginGraphicControllerGUI {
 
 
             // 3) show the right homepage
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             switch(accountType){
                 case Participant:
                     nav.gotoView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
@@ -99,7 +99,7 @@ public class LoginGraphicControllerGUI {
     @FXML
     public void signUp(){
         try {
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
         }
         catch (InternalException e){

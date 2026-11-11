@@ -1,14 +1,14 @@
 package it.uniroma2.partyflow.graphic_controllers.GUI;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
-import it.uniroma2.partyflow.utilities.NavigatorSingleton;
+import it.uniroma2.partyflow.utilities.navigators.GUINavigatorSingleton;
 import javafx.fxml.FXML;
 
 public class FirstSceneGraphicControllerGUI {
     @FXML
     public void login(){
         try{
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/login.fxml");
         }
         catch (InternalException e){
@@ -21,7 +21,7 @@ public class FirstSceneGraphicControllerGUI {
     @FXML
     public void signUp (){
         try {
-            NavigatorSingleton nav = NavigatorSingleton.getInstance();
+            GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
         }
         catch (InternalException e){
