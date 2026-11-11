@@ -154,7 +154,6 @@ public class UserDaoCSV implements UserDaoInterface {
             catch (IOException e){
                 HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
                 handlerSystemError.logError(e);
-                throw new PersistenceServiceUnavailableException();
             }
         }
 
