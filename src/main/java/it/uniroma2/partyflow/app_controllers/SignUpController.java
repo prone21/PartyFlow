@@ -46,6 +46,7 @@ public class SignUpController {
             DaoAbstractFactory factory = DaoAbstractFactory.getFactory();
             UserDaoInterface signUpDao = factory.getUserDao();
             signUpDao.signUp(user);
+            // ------------------------------------------------
         }
 
         catch (PersistenceGenericException e){

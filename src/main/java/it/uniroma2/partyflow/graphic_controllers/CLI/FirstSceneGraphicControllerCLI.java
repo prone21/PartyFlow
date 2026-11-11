@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.graphic_controllers.CLI;
 
-import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
+import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 
 import java.util.Scanner;

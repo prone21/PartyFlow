@@ -21,26 +21,47 @@ public class PersistenceConfigurator {
 
 
     private PersistenceConfigurator() throws IOException {
-        try{
-            FileInputStream input =
-                    new FileInputStream("src/main/resources/it/uniroma2/partyflow/configurations/configPersistency.ini");
-            this.properties.load(input); // it puts the content of the .ini file into the properties var
-        }
-        catch (IOException e){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
-            throw e;
+        FileInputStream input =
+                new FileInputStream("configurations/configPersistency.ini");
+        this.properties.load(input); // it puts the content of the .ini file into the properties var
 
-        }
+    }
+
+    private PersistenceConfigurator(Properties properties) {
+        // Copies all key-value pairs from the provided Properties object into this.properties
+        this.properties.putAll(properties);
     }
 
     // Guarantee Singleton
-    public static PersistenceConfigurator getInstance() throws IOException {
-        if(instance == null){
-            instance = new PersistenceConfigurator();
+    public static PersistenceConfigurator getInstance(){
+        try{
+            if(instance == null){
+                instance = new PersistenceConfigurator();
+            }
+
+            return instance;
+        }
+        catch (IOException e){
+            HandlerSystemError handlerSysErr = HandlerSystemError.getInstance();
+            handlerSysErr.logWarning(
+                    "Unable to load persistency configuration from configurations/configPersistency.ini. "
+                            + "Falling back to default persistency configuration."
+            );
+
+            // ---------------return persistency default configuration--------------------
+            Properties defaultProperties = new Properties();
+
+            defaultProperties.setProperty("application.modalities", "FULL");
+            defaultProperties.setProperty("persistence.type","MySQL");
+            defaultProperties.setProperty("url.mysql","jdbc:mysql://localhost:3306/partyflow");
+            defaultProperties.setProperty("username.mysql","root");
+            defaultProperties.setProperty("password.mysql","root");
+
+            PersistenceConfigurator persconf = new PersistenceConfigurator(defaultProperties);
+            return persconf;
+            // ------------------------------------------------------------------
         }
 
-        return instance;
     }
 
 

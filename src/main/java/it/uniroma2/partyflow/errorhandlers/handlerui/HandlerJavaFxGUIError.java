@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.errorhandlers;
+package it.uniroma2.partyflow.errorhandlers.handlerui;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -14,7 +14,7 @@ import java.util.Objects;
  *
  */
 
-public class HandlerJavaFxGUIError implements HandlerUIError{
+public class HandlerJavaFxGUIError implements HandlerUIError {
     private static HandlerJavaFxGUIError instance = null;
 
     private HandlerJavaFxGUIError(){

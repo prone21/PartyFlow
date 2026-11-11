@@ -8,11 +8,9 @@ import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 /**
  * Entry point for the JavaFX GUI application.
- *
  * Extends {@link Application} to integrate with JavaFX lifecycle.
  *
  */
@@ -26,7 +24,6 @@ public class GuiApplication extends Application implements UIApplication {
      * and displays the login screen.</p>
      *
      * @param stage the primary stage provided by JavaFX
-     * @throws IOException if FXML loading fails
      */
 
 
@@ -61,18 +58,11 @@ public class GuiApplication extends Application implements UIApplication {
      * Called by JavaFX when the application is stopping.
      *
      * @throws Exception if cleanup fails
-     */
-
-
-    /**
      * When is stop() called?
-     *
      * There are mainly two situations:
      * 1. The user closes the last JavaFX window, if implicitExit is enabled (default).
      * 2. The program calls Platform.exit() after the JavaFX runtime has started.
-     *
      * In both cases, JavaFX normally invokes stop().
-     *
      * IMPORTANT:
      * Calling System.exit() does not guarantee that stop() will be invoked.
      */

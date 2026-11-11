@@ -1,5 +1,7 @@
 package it.uniroma2.partyflow.errorhandlers;
 
+import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerUIError;
+import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerUIErrorFactory;
 import it.uniroma2.partyflow.exceptions.FatalError;
 
 import java.io.IOException;
@@ -25,7 +27,7 @@ public class HandlerSystemError {
             // Associates the log file with the logger.
             // The file will contain logs only for the current execution.
             FileHandler fileHandler =
-                    new FileHandler("src/main/resources/it/uniroma2/partyflow/partyflow.log", false); // false means the existing file is overwritten
+                    new FileHandler("logs/partyflow.log", false); // false means the existing file is overwritten
 
             fileHandler.setFormatter(new SimpleFormatter()); // sets the format of the log entries
 

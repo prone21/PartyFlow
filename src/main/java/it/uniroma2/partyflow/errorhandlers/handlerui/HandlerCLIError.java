@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.errorhandlers;
+package it.uniroma2.partyflow.errorhandlers.handlerui;
 
 
 import it.uniroma2.partyflow.enums.UserField;

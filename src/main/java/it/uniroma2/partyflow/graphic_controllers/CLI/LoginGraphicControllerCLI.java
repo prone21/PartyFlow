@@ -4,7 +4,7 @@ package it.uniroma2.partyflow.graphic_controllers.CLI;
 import it.uniroma2.partyflow.app_controllers.LoginController;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;
 import it.uniroma2.partyflow.enums.AccountType;
-import it.uniroma2.partyflow.errorhandlers.HandlerCLIError;
+import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
 

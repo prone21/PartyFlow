@@ -4,7 +4,7 @@ import it.uniroma2.partyflow.app_controllers.SignUpController;
 import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
-import it.uniroma2.partyflow.errorhandlers.HandlerJavaFxGUIError;
+import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerJavaFxGUIError;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.exceptions.uiexception.*;
