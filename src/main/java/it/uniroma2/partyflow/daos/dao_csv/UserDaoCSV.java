@@ -95,6 +95,7 @@ public class UserDaoCSV implements UserDaoInterface {
     public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException,
             InvalidPersistenceTypeException, PersistenceConstraintViolationException {
 
+        CSVWriter writer = null;
         try{
             this.initialize();
             // convert user to list of string
@@ -114,7 +115,7 @@ public class UserDaoCSV implements UserDaoInterface {
             }
 
             // true activate append mode
-            CSVWriter writer = new CSVWriter(new FileWriter(file_name, true));
+            writer = new CSVWriter(new FileWriter(file_name, true));
             writer.writeNext(newUser);
 
         }
@@ -143,6 +144,18 @@ public class UserDaoCSV implements UserDaoInterface {
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw new PersistenceConstraintViolationException();
+        }
+        finally {
+            try{
+                if(writer != null){
+                    writer.close();
+                }
+            }
+            catch (IOException e){
+                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+                handlerSystemError.logError(e);
+                throw new PersistenceServiceUnavailableException();
+            }
         }
 
     }

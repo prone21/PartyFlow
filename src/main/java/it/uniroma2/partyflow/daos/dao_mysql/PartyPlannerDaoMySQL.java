@@ -22,7 +22,7 @@ public class PartyPlannerDaoMySQL {
     public void insertPartyPlanner(User user) throws PersistenceServiceUnavailableException,
             PersistenceConstraintViolationException, DuplicateEntityException, PersistenceGenericException, InvalidPersistenceTypeException {
 
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         try{
             ConnectionFactory connFactory = ConnectionFactory.getInstance();
@@ -61,13 +61,19 @@ public class PartyPlannerDaoMySQL {
             }
         }
 
-        try {
-            stmt.close();
+        finally {
+            try {
+                if(stmt != null){
+                    stmt.close();
+                }
+            }
+            catch (SQLException e2){
+                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+                handlerSystemError.logError(e2);
+            }
         }
-        catch (SQLException e2){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e2);
-        }
+
+
 
 
     }
