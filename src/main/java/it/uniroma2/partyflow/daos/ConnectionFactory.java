@@ -66,7 +66,7 @@ public class ConnectionFactory {
     public void closeConnection() {
         HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
         try{
-            if(conn != null || conn.isClosed()){
+            if(conn != null && !conn.isClosed()){
                 conn.close();
                 conn = null;
                 handlerSystemError.logInfo(("Database connection closed successfully"));

@@ -17,15 +17,20 @@ public class UIConfigurator {
 
 
     private UIConfigurator() throws IOException{
+        FileInputStream input = null;
         try {
-            FileInputStream input =
-                    new FileInputStream("configurations/configUI.ini");
+             input = new FileInputStream("configurations/configUI.ini");
             this.properties.load(input); // it puts the content of the .ini file into the properties var
         }
         catch (IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw e;
+        }
+        finally {
+            if (input != null) {
+                input.close();
+            }
         }
     }
 

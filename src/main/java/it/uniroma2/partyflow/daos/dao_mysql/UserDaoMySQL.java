@@ -120,11 +120,17 @@ public class UserDaoMySQL implements UserDaoInterface {
         }
 
         finally {
-            try {
+            try{
                 if (this.conn != null){
                     this.conn.setAutoCommit(true);
                 }
+            }
+            catch (SQLException e1){
+                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+                handlerSystemError.logError(e1);
+            }
 
+            try {
                 if (stmt != null) {
                     stmt.close();
                 }

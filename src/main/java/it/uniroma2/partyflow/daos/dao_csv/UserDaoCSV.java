@@ -42,35 +42,52 @@ public class UserDaoCSV implements UserDaoInterface {
 
 
     private Map<String, String> findUserByEmail(String userEmail) throws IOException, CsvValidationException {
-        CSVReaderHeaderAware reader =
-                new CSVReaderHeaderAware(new FileReader(file_name));
+        CSVReaderHeaderAware reader = null ;
+        try {
+             reader = new CSVReaderHeaderAware(new FileReader(file_name));
 
-        Map<String, String> row;
+            Map<String, String> row;
 
-        while ((row = reader.readMap()) != null) {
+            while ((row = reader.readMap()) != null) {
 
-            if(userEmail.equals(row.get("email"))) {
-                return row;
+                if (userEmail.equals(row.get("email"))) {
+                    return row;
+                }
+            }
+
+            return null;
+        }
+        finally {
+            if(reader != null){
+                reader.close();
             }
         }
-
-        return null;
     }
 
     private boolean exists (String userEmail) throws IOException, CsvValidationException {
-        CSVReaderHeaderAware reader =
-                new CSVReaderHeaderAware(new FileReader(file_name));
+        CSVReaderHeaderAware reader = null ;
+        try{
+            reader = new CSVReaderHeaderAware(new FileReader(file_name));
 
-        Map<String, String> row;
+            Map<String, String> row;
 
-        while ((row = reader.readMap()) != null) {
+            while ((row = reader.readMap()) != null) {
 
-            if(userEmail.equals(row.get("email"))) {
-                return true;
+                if(userEmail.equals(row.get("email"))) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        finally {
+            if(reader != null){
+                reader.close();
             }
         }
 
-        return false;
+
     }
 
 

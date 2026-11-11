@@ -21,6 +21,8 @@ public class ParticipantDaoMySQL {
     public void insertParticipant(User user) throws PersistenceServiceUnavailableException,
             PersistenceConstraintViolationException, DuplicateEntityException, PersistenceGenericException, InvalidPersistenceTypeException {
 
+        PreparedStatement stmt;
+
         try{
             ConnectionFactory connFactory = ConnectionFactory.getInstance();
             Connection conn = connFactory.getConnection();
@@ -28,7 +30,7 @@ public class ParticipantDaoMySQL {
             // insert the new account in the 'Participant' table
             String query = "insert into participant (email) value (?)";
 
-            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(query);
             stmt.setString(1, user.getEmail());
 
             stmt.executeUpdate();
@@ -56,6 +58,14 @@ public class ParticipantDaoMySQL {
                 default:
                     throw new PersistenceGenericException();
             }
+        }
+
+        try {
+            stmt.close();
+        }
+        catch (SQLException e2){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e2);
         }
 
 
