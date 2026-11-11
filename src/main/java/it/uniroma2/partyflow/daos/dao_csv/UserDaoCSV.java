@@ -22,6 +22,30 @@ public class UserDaoCSV implements UserDaoInterface {
 
     private static String file_name = null;
 
+    // --------------------------------loggers----------------------------------------------
+    private static void standardLog(Exception e) {
+        // log the error
+        HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+        handlerSystemError.logError(e);
+    }
+
+    private static void logIOException(IOException e){
+        HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+        handlerSystemError.logError(e);
+    }
+
+    private static void logCsvValidationException(CsvValidationException e){
+
+            /*  CsvValidationException is thrown when a CSV record fails
+                validation, for example when a configured row or line
+                validator detects invalid data during file reading.
+            */
+
+        HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+        handlerSystemError.logError(e);
+    }
+
+    // ------------------------------------------------------------------------------------
 
     private void initialize() throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException{
         try {
@@ -90,7 +114,6 @@ public class UserDaoCSV implements UserDaoInterface {
 
     }
 
-
     @Override
     public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException,
             InvalidPersistenceTypeException, PersistenceConstraintViolationException {
@@ -123,26 +146,17 @@ public class UserDaoCSV implements UserDaoInterface {
         catch (PersistenceServiceUnavailableException | DuplicateEntityException |
                 InvalidPersistenceTypeException e) {
 
-            // log the error
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
+            UserDaoCSV.standardLog(e);
             // throw the exception
             throw e;
+
         }
         catch (IOException e){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
+            UserDaoCSV.logIOException(e);
             throw new PersistenceServiceUnavailableException();
         }
         catch (CsvValidationException e){
-
-            /*  CsvValidationException is thrown when a CSV record fails
-                validation, for example when a configured row or line
-                validator detects invalid data during file reading.
-            */
-
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
+            UserDaoCSV.logCsvValidationException(e);
             throw new PersistenceConstraintViolationException();
         }
         finally {
@@ -152,8 +166,7 @@ public class UserDaoCSV implements UserDaoInterface {
                 }
             }
             catch (IOException e){
-                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-                handlerSystemError.logError(e);
+                UserDaoCSV.logIOException(e);
             }
         }
 
@@ -180,27 +193,17 @@ public class UserDaoCSV implements UserDaoInterface {
         catch (PersistenceServiceUnavailableException |
                InvalidPersistenceTypeException | EntityNotFound e) {
 
-            // log the error
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
+            UserDaoCSV.standardLog(e);
             // throw the exception
             throw e;
         }
 
         catch (IOException e){
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
+            UserDaoCSV.logIOException(e);
             throw new PersistenceServiceUnavailableException();
         }
         catch (CsvValidationException e){
-
-            /*  CsvValidationException is thrown when a CSV record fails
-                validation, for example when a configured row or line
-                validator detects invalid data during file reading.
-            */
-
-            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(e);
+            UserDaoCSV.logCsvValidationException(e);
             throw new PersistenceConstraintViolationException();
         }
 
