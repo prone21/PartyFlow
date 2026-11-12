@@ -13,7 +13,7 @@
         <maven.compiler.target>26</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.projectKey>prone21_PartyFlow</sonar.projectKey>
-        <sonar.organization>partyflow</sonar.organization>
+        <sonar.organization>southerner_man</sonar.organization>
     </properties>
 
 
