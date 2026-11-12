@@ -3,6 +3,7 @@ package it.uniroma2.partyflow.daos.dao_mysql;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.models.User;
+import it.uniroma2.partyflow.utilities.QueryMySQLManager;
 
 /**
  * MySQL implementation of the Data Access Object (DAO) responsible

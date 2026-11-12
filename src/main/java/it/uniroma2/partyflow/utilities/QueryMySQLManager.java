@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.daos.dao_mysql;
+package it.uniroma2.partyflow.utilities;
 
 import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.enums.AccountType;
@@ -8,6 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Utility class responsible for executing MySQL operations
+ * shared by multiple DAOs.
+ */
 
 public class QueryMySQLManager {
 

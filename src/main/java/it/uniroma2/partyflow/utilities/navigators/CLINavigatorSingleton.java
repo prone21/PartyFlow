@@ -4,6 +4,11 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.graphic_controllers.CLI.PHomePageGraphicControllerCLI;
 import it.uniroma2.partyflow.graphic_controllers.CLI.PpHomePageGraphicControllerCLI;
 
+
+/**
+ * Singleton responsible for managing navigation between CLI "pages".
+ */
+
 public class CLINavigatorSingleton {
     private static CLINavigatorSingleton instance;
 
