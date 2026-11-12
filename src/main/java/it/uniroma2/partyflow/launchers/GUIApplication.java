@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class GuiApplication extends Application implements UIApplication {
+public class GUIApplication extends Application implements UIApplication {
 
     /*
      * Starts the JavaFX application.
@@ -30,7 +30,7 @@ public class GuiApplication extends Application implements UIApplication {
     // ----------------- UIApplication java methods ------------------
     @Override
     public void launch(){
-        Application.launch(GuiApplication.class);
+        Application.launch(GUIApplication.class);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class GuiApplication extends Application implements UIApplication {
     public void start(Stage stage){
         try {
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance(stage);
-            nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
+            nav.goToView("/it/uniroma2/partyflow/view/view_in_common/firstScene.fxml");
         }
         catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();

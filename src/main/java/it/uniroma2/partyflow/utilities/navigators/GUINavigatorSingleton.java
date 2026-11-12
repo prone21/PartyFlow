@@ -42,7 +42,7 @@ public class GUINavigatorSingleton {
 
 
     //Given the view's path, it sets the new scene on the stage
-    public void gotoView(String viewFXMLPath) throws InternalException {
+    public void goToView(String viewFXMLPath) throws InternalException {
         try{
             this.prevScene = this.stage.getScene(); // obtaining the actual scene that is going to be the prevScene
 
@@ -62,7 +62,7 @@ public class GUINavigatorSingleton {
     }
 
     //sets the given scene on the stage
-    private void gotoScene(Scene scene) {
+    private void goToScene(Scene scene) {
         this.stage.setTitle("PartyFlow");
         this.stage.setScene(scene);
 
@@ -71,7 +71,7 @@ public class GUINavigatorSingleton {
 
     //It's used to go back at the precedent view
     public void goBackward() {
-        this.gotoScene(this.prevScene);
+        this.goToScene(this.prevScene);
     }
 
 }

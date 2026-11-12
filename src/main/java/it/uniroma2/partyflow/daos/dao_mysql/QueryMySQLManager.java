@@ -41,7 +41,7 @@ public class QueryMySQLManager {
 
             switch (e.getErrorCode()){
                 case 1062:
-                    // Primary key o UNIQUE duplicated
+                    // Primary key or UNIQUE duplicated
                     throw new DuplicateEntityException();
 
                 case 1451, 1452:

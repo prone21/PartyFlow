@@ -21,14 +21,14 @@ public class UIApplicationFactory {
         try{
             UIConfigurator uic = UIConfigurator.getInstance();
             return switch (uic.getUI()){
-                case JavaFxGUI -> new GuiApplication();
-                case CLI -> new CliApplication();
+                case JavaFxGUI -> new GUIApplication();
+                case CLI -> new CLIApplication();
             };
         }
 
         catch (IOException e){
             // default UI
-            return new GuiApplication();
+            return new GUIApplication();
         }
 
 

@@ -2,8 +2,8 @@ nov 11, 2026 12:25:59 PM it.uniroma2.partyflow.errorhandlers.HandlerSystemError 
 SEVERE: Error cleaning up
 java.lang.NullPointerException: Cannot invoke "java.sql.Connection.isClosed()" because "it.uniroma2.partyflow.daos.ConnectionFactory.conn" is null
 	at it.uniroma2.partyflow/it.uniroma2.partyflow.daos.ConnectionFactory.closeConnection(ConnectionFactory.java:69)
-	at it.uniroma2.partyflow/it.uniroma2.partyflow.launchers.GuiApplication.cleanup(GuiApplication.java:86)
-	at it.uniroma2.partyflow/it.uniroma2.partyflow.launchers.GuiApplication.stop(GuiApplication.java:72)
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.launchers.GUIApplication.cleanup(GuiApplication.java:86)
+	at it.uniroma2.partyflow/it.uniroma2.partyflow.launchers.GUIApplication.stop(GuiApplication.java:72)
 	at javafx.graphics@26/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$5(LauncherImpl.java:864)
 	at javafx.graphics@26/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$0(PlatformImpl.java:449)
 	at javafx.graphics@26/com.sun.javafx.application.PlatformImpl.lambda$runLater$0(PlatformImpl.java:424)

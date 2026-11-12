@@ -7,7 +7,7 @@ import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationEx
 import it.uniroma2.partyflow.graphic_controllers.CLI.FirstSceneGraphicControllerCLI;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
-public class CliApplication implements UIApplication {
+public class CLIApplication implements UIApplication {
 
     // ----------------- UIApplication java methods ------------------
     @Override

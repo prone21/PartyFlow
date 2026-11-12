@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class UserDaoCSV implements UserDaoInterface {
 
-    private static String file_name = null;
+    private static String fileName = null;
 
     // --------------------------------loggers----------------------------------------------
     private static void stdLog(Exception e) {
@@ -53,7 +53,7 @@ public class UserDaoCSV implements UserDaoInterface {
             PersistenceConfigurator pc = PersistenceConfigurator.getInstance();
             String dbCSV = pc.getDirectoryCSVDB();
             // set the file which the dao is associated
-            file_name = dbCSV + "//Users.csv";
+            fileName = dbCSV + "//Users.csv";
         }
 
         catch (IOException e){
@@ -68,7 +68,7 @@ public class UserDaoCSV implements UserDaoInterface {
     private Map<String, String> findUserByEmail(String userEmail) throws IOException, CsvValidationException {
         CSVReaderHeaderAware reader = null ;
         try {
-             reader = new CSVReaderHeaderAware(new FileReader(file_name));
+             reader = new CSVReaderHeaderAware(new FileReader(fileName));
 
             Map<String, String> row;
 
@@ -91,7 +91,7 @@ public class UserDaoCSV implements UserDaoInterface {
     private boolean exists (String userEmail) throws IOException, CsvValidationException {
         CSVReaderHeaderAware reader = null ;
         try{
-            reader = new CSVReaderHeaderAware(new FileReader(file_name));
+            reader = new CSVReaderHeaderAware(new FileReader(fileName));
 
             Map<String, String> row;
 
@@ -138,7 +138,7 @@ public class UserDaoCSV implements UserDaoInterface {
             }
 
             // true activate append mode
-            writer = new CSVWriter(new FileWriter(file_name, true));
+            writer = new CSVWriter(new FileWriter(fileName, true));
             writer.writeNext(newUser);
 
         }
