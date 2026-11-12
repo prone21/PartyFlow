@@ -61,11 +61,11 @@ public class LoginGraphicControllerGUI {
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             switch(accountType){
                 case Participant:
-                    nav.gotoView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
+                    nav.goToView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
                     break;
 
                 case PartyPlanner:
-                    nav.gotoView("/it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
+                    nav.goToView("/it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
                     break;
             }
             //---------------------------------------------
@@ -100,7 +100,7 @@ public class LoginGraphicControllerGUI {
     public void signUp(){
         try {
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
-            nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
+            nav.goToView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
         }
         catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();

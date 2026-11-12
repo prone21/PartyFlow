@@ -160,8 +160,8 @@ public class SignUpGraphicControllerGUI {
             // 3) show the right homepage
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             switch (signUpBean.getAccountType()){
-                case PartyPlanner -> nav.gotoView("it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
-                case Participant -> nav.gotoView("it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
+                case PartyPlanner -> nav.goToView("it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
+                case Participant -> nav.goToView("it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
             }
             //---------------------------------------------
 

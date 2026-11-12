@@ -9,7 +9,7 @@ public class FirstSceneGraphicControllerGUI {
     public void login(){
         try{
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
-            nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/login.fxml");
+            nav.goToView("/it/uniroma2/partyflow/view/view_in_common/login.fxml");
         }
         catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
@@ -22,7 +22,7 @@ public class FirstSceneGraphicControllerGUI {
     public void signUp (){
         try {
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
-            nav.gotoView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
+            nav.goToView("/it/uniroma2/partyflow/view/view_in_common/signUp.fxml");
         }
         catch (InternalException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
