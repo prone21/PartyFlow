@@ -58,15 +58,15 @@ public class HandlerJavaFxGUIError implements HandlerUIError {
     // Highlights an empty TextField with a red border and automatically
     // restores its original style when the text changes.
     public void highlightMissingFormElement(TextField field) {
-        String ERROR_KEY = "errorHighlighted";
+        String errorKey = "errorHighlighted";
         // If the text field is already highlighted, do nothing.
         // This prevents multiple listeners from being registered.
-        if (Boolean.TRUE.equals(field.getProperties().get(ERROR_KEY))) {
+        if (Boolean.TRUE.equals(field.getProperties().get(errorKey))) {
             return;
         }
 
         // Mark the text field as highlighted.
-        field.getProperties().put(ERROR_KEY, true);
+        field.getProperties().put(errorKey, true);
 
         // Save the original style before applying the error style.
         String oldStyle = field.getStyle();
@@ -87,7 +87,7 @@ public class HandlerJavaFxGUIError implements HandlerUIError {
                 field.setStyle(oldStyle);
 
                 // Remove the highlighted flag, allowing future errors.
-                field.getProperties().remove(ERROR_KEY);
+                field.getProperties().remove(errorKey);
 
                 // Unregister this listener because its task is complete.
                 field.textProperty().removeListener(this);
@@ -101,14 +101,14 @@ public class HandlerJavaFxGUIError implements HandlerUIError {
 
 
     public void highlightMissingFormElement(AnchorPane pane) {
-        String ERROR_KEY = "errorHighlighted";
+        String errorKey = "errorHighlighted";
 
         // Avoid highlighting the same pane multiple times.
-        if (Boolean.TRUE.equals(pane.getProperties().get(ERROR_KEY))) {
+        if (Boolean.TRUE.equals(pane.getProperties().get(errorKey))) {
             return;
         }
 
-        pane.getProperties().put(ERROR_KEY, true);
+        pane.getProperties().put(errorKey, true);
 
         // Save the original style and highlight the pane.
         String oldStyle = pane.getStyle();
@@ -135,7 +135,7 @@ public class HandlerJavaFxGUIError implements HandlerUIError {
                 // Restore the original style when a RadioButton is selected.
                 if (newValue != null) {
                     pane.setStyle(oldStyle);
-                    pane.getProperties().remove(ERROR_KEY);
+                    pane.getProperties().remove(errorKey);
 
                     // Unregister the listener after restoring the style.
                     group.selectedToggleProperty().removeListener(this);

@@ -34,7 +34,7 @@ public class HandlerUIErrorFactory {
             };
         }
 
-        catch (IOException e){
+        catch (IOException _){
             return HandlerJavaFxGUIError.getInstance();
         }
     }

@@ -19,7 +19,7 @@ import java.util.logging.SimpleFormatter;
 public class HandlerSystemError {
 
     private static HandlerSystemError instance = null;
-    private final Logger LOGGER =
+    private final Logger logger =
             Logger.getLogger(HandlerSystemError.class.getName());
 
     private HandlerSystemError(){
@@ -31,8 +31,8 @@ public class HandlerSystemError {
 
             fileHandler.setFormatter(new SimpleFormatter()); // sets the format of the log entries
 
-            this.LOGGER.addHandler(fileHandler);
-            this.LOGGER.setUseParentHandlers(false); // disable the default handlers
+            this.logger.addHandler(fileHandler);
+            this.logger.setUseParentHandlers(false); // disable the default handlers
             //--------------------------------------------------------------------------------------------------------
         }
         catch (IOException e){
@@ -58,29 +58,29 @@ public class HandlerSystemError {
      * in which the error occurred.
      */
     public void logError(String message, Throwable exception) {
-        this.LOGGER.log(Level.SEVERE, message, exception);
+        this.logger.log(Level.SEVERE, message, exception);
     }
 
     // Logs an error message without an exception.
     public void logError(String message) {
-        this.LOGGER.log(Level.SEVERE, message);
+        this.logger.log(Level.SEVERE, message);
     }
 
     // Logs an exception at SEVERE level, including
     // its type, message, and stack trace.
     public void logError(Throwable exception){
-        this.LOGGER.log(Level.SEVERE, "", exception);
+        this.logger.log(Level.SEVERE, "", exception);
     }
 
 
     // Logs a warning message.
     public void logWarning(String message) {
-        this.LOGGER.log(Level.WARNING, message);
+        this.logger.log(Level.WARNING, message);
     }
 
     // Logs an informational message.
     public void logInfo(String message) {
-        this.LOGGER.log(Level.INFO, message);
+        this.logger.log(Level.INFO, message);
     }
 
     /*

@@ -15,10 +15,7 @@ public class UserDaoInMemory implements UserDaoInterface {
 
 
     private boolean exists(User user){
-        if (this.memory.read(user) == null){
-            return false;
-        }
-        return true;
+        return this.memory.read(user) != null;
     }
 
 

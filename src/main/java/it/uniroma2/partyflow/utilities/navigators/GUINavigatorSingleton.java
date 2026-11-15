@@ -56,7 +56,7 @@ public class GUINavigatorSingleton {
 
             this.stage.show();
         }
-        catch (IOException e){
+        catch (IOException _){
             throw new InternalException("Failed to load FXML view: " + viewFXMLPath);
         }
     }

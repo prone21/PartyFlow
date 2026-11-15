@@ -58,11 +58,11 @@ public class PersistenceConfigurator {
 
     public List<String> getDBMSConnectionParameter() throws InvalidPersistenceTypeException {
         if( this.getPersistenceType() == PersistenceType.MY_SQL ) {
-            List<String> DBMSConnproperties = new ArrayList<>();
-            DBMSConnproperties.add(this.properties.getProperty("url.mysql"));
-            DBMSConnproperties.add(this.properties.getProperty("username.mysql"));
-            DBMSConnproperties.add(this.properties.getProperty("password.mysql"));
-            return DBMSConnproperties;
+            List<String> dbmsConnProperties = new ArrayList<>();
+            dbmsConnProperties.add(this.properties.getProperty("url.mysql"));
+            dbmsConnProperties.add(this.properties.getProperty("username.mysql"));
+            dbmsConnProperties.add(this.properties.getProperty("password.mysql"));
+            return dbmsConnProperties;
         }
 
         else{

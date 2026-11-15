@@ -14,7 +14,7 @@ public class CLIApplication implements UIApplication {
     public void launch() {
         try {
             start();
-        } catch (ApplicationTerminationException e) {
+        } catch (ApplicationTerminationException _) {
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logWarning(
                     "CLI application terminated due to a fatal error."

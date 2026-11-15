@@ -26,7 +26,7 @@ public class UIApplicationFactory {
             };
         }
 
-        catch (IOException e){
+        catch (IOException _){
             // default UI
             return new GUIApplication();
         }

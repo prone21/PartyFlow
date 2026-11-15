@@ -76,7 +76,7 @@ public class UserBean {
 
         try {
             LocalDate.parse(date, formatter);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException _) {
             // Thrown when the date doesn't respect the format
             return false;
         }

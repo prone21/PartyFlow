@@ -13,6 +13,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
+import static it.uniroma2.partyflow.enums.UserField.EMAIL;
+import static it.uniroma2.partyflow.enums.UserField.PASSWORD;
+
 
 public class LoginGraphicControllerGUI {
 
@@ -60,11 +63,11 @@ public class LoginGraphicControllerGUI {
             // 3) show the right homepage
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             switch(accountType){
-                case Participant:
+                case PARTICIPANT:
                     nav.goToView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
                     break;
 
-                case PartyPlanner:
+                case PARTY_PLANNER:
                     nav.goToView("/it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
                     break;
             }
@@ -78,10 +81,13 @@ public class LoginGraphicControllerGUI {
              */
             HandlerJavaFxGUIError handlerJavaError = HandlerJavaFxGUIError.getInstance();
 
-            switch (e.getField()) {
-                case EMAIL -> handlerJavaError.highlightMissingFormElement(this.emailField);
-                case PASSWORD -> handlerJavaError.highlightMissingFormElement(this.pwdField);
+            if(e.getField() == EMAIL){
+                handlerJavaError.highlightMissingFormElement(this.emailField);
             }
+            else if(e.getField() == PASSWORD){
+                handlerJavaError.highlightMissingFormElement(this.pwdField);
+            }
+
         }
         catch (ApplicationException e){
             HandlerJavaFxGUIError handlerJavaFxGUIError = HandlerJavaFxGUIError.getInstance();

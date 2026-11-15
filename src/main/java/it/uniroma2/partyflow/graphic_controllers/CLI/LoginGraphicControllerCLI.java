@@ -31,7 +31,8 @@ public class LoginGraphicControllerCLI {
 
                 switch (choice) {
                     case "1" -> {
-                        if (this.submitCredentials()) {
+                        boolean statusSubmitCredentials = this.submitCredentials();
+                        if (statusSubmitCredentials) {
                             return;
                         }
                     }
