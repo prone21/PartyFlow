@@ -36,7 +36,7 @@ public class InMemoryDB {
     // ------------------------------------------------
 
     // -------------------Users----------------------
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
     public void write (User user){
         this.users.add(user);

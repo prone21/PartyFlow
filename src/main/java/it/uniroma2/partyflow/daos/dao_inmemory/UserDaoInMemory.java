@@ -11,7 +11,7 @@ import it.uniroma2.partyflow.utilities.PasswordProtector;
 
 public class UserDaoInMemory implements UserDaoInterface {
 
-    private InMemoryDB memory = InMemoryDB.getInstance();
+    private final InMemoryDB memory = InMemoryDB.getInstance();
 
 
     private boolean exists(User user){
