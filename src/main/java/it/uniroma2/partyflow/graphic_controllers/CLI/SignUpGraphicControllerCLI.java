@@ -8,22 +8,23 @@ import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
+import it.uniroma2.partyflow.utilities.ConsolePrinter;
 import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
 
 import java.util.Scanner;
 
 public class SignUpGraphicControllerCLI {
     private static final String SELECTION_CHOICE = "Choice";
-
+    private final ConsolePrinter printer = ConsolePrinter.getInstance();
     private final Scanner scanner = new Scanner(System.in);
 
     public void execute() {
         while (true) {
             try {
-                System.out.println();
-                System.out.println("=== PARTYFLOW - SIGN UP ===");
-                System.out.println("1 - Sign up");
-                System.out.println("0 - Exit");
+                printer.println();
+                printer.println("=== PARTYFLOW - SIGN UP ===");
+                printer.println("1 - Sign up");
+                printer.println("0 - Exit");
 
                 String choice = this.readField(SELECTION_CHOICE);
 
@@ -51,21 +52,20 @@ public class SignUpGraphicControllerCLI {
     }
 
     private void exit(){
-        System.out.println("Goodbye!");
-
+        printer.println("Goodbye!");
     }
 
     private String readField(String field) {
-        System.out.print(field + ": ");
+        printer.println(field + ": ");
         return scanner.nextLine();
     }
 
     private Gender obtainSelectedGender() {
-        System.out.println();
-        System.out.println("Gender:");
-        System.out.println("1 - Male");
-        System.out.println("2 - Female");
-        System.out.println("3 - Prefer not to say");
+        printer.println();
+        printer.println("Gender:");
+        printer.println("1 - Male");
+        printer.println("2 - Female");
+        printer.println("3 - Prefer not to say");
 
         String choice = this.readField(SELECTION_CHOICE);
 
@@ -78,10 +78,10 @@ public class SignUpGraphicControllerCLI {
     }
 
     private AccountType obtainSelectedAccountType() {
-        System.out.println();
-        System.out.println("Account type:");
-        System.out.println("1 - Participant");
-        System.out.println("2 - Party Planner");
+        printer.println();
+        printer.println("Account type:");
+        printer.println("1 - Participant");
+        printer.println("2 - Party Planner");
 
         String choice = this.readField(SELECTION_CHOICE);
 
@@ -151,9 +151,9 @@ public class SignUpGraphicControllerCLI {
 
             handlerCLIError.errorMessage(e.getMessage());
 
-            System.out.println();
-            System.out.println("Please try again.");
-            System.out.println();
+            printer.println();
+            printer.println("Please try again.");
+            printer.println();
             return false;
         }
 
