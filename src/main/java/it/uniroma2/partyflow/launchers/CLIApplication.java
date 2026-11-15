@@ -4,7 +4,7 @@ import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationException;
-import it.uniroma2.partyflow.graphic_controllers.CLI.FirstSceneGraphicControllerCLI;
+import it.uniroma2.partyflow.graphic_controllers.cli.FirstSceneGraphicControllerCLI;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
 public class CLIApplication implements UIApplication {

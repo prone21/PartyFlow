@@ -1,5 +1,5 @@
 
-package it.uniroma2.partyflow.graphic_controllers.CLI;
+package it.uniroma2.partyflow.graphic_controllers.cli;
 
 import it.uniroma2.partyflow.app_controllers.LoginController;
 import it.uniroma2.partyflow.beans.LoginCredentialsBean;

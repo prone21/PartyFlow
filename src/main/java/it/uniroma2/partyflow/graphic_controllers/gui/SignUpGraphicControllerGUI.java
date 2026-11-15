@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.graphic_controllers.GUI;
+package it.uniroma2.partyflow.graphic_controllers.gui;
 
 import it.uniroma2.partyflow.app_controllers.SignUpController;
 import it.uniroma2.partyflow.beans.UserBean;
@@ -123,9 +123,9 @@ public class SignUpGraphicControllerGUI {
         AccountType account = null;
 
         if(selectedAccountType == partyPlannerOption){
-            account = AccountType.PartyPlanner;
+            account = AccountType.PARTY_PLANNER;
         } else if (selectedAccountType == participantOption) {
-            account = AccountType.Participant;
+            account = AccountType.PARTICIPANT;
         }
 
         return account;
@@ -160,8 +160,8 @@ public class SignUpGraphicControllerGUI {
             // 3) show the right homepage
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             switch (signUpBean.getAccountType()){
-                case PartyPlanner -> nav.goToView("it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
-                case Participant -> nav.goToView("it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
+                case PARTY_PLANNER -> nav.goToView("it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
+                case PARTICIPANT -> nav.goToView("it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
             }
             //---------------------------------------------
 

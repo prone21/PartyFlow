@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.graphic_controllers.GUI;
+package it.uniroma2.partyflow.graphic_controllers.gui;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.utilities.navigators.GUINavigatorSingleton;

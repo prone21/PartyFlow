@@ -23,7 +23,7 @@ public class UserDaoMySQL implements UserDaoInterface {
     }
 
     // rollback all the action done
-    private void rollBack() throws PersistenceGenericException {
+    private void rollBack() {
         try{
             if(this.conn != null){
                 this.conn.rollback();
