@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class UserDaoCSV implements UserDaoInterface {
 
-    private static String fileName = null;
+    private String fileName = null;
 
     // --------------------------------loggers----------------------------------------------
     private static void stdLog(Exception e) {
@@ -79,7 +79,7 @@ public class UserDaoCSV implements UserDaoInterface {
                 }
             }
 
-            return null;
+            return Map.of();
         }
         finally {
             if(reader != null){

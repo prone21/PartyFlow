@@ -17,16 +17,6 @@ import javafx.stage.Stage;
 
 public class GUIApplication extends Application implements UIApplication {
 
-    /*
-     * Starts the JavaFX application.
-     *
-     * <p>Loads custom fonts, initializes the navigator singleton,
-     * and displays the login screen.</p>
-     *
-     * @param stage the primary stage provided by JavaFX
-     */
-
-
     // ----------------- UIApplication java methods ------------------
     @Override
     public void launch(){
@@ -38,6 +28,17 @@ public class GUIApplication extends Application implements UIApplication {
         Platform.exit();
     }
     // ---------------------------------------------------------------
+
+
+
+    /**
+     * Starts the JavaFX application.
+     *
+     * <p>Loads custom fonts, initializes the navigator singleton,
+     * and displays the firstscene screen.</p>
+     *
+     * @param stage the primary stage provided by JavaFX
+     **/
 
     @Override
     public void start(Stage stage){

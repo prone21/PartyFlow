@@ -13,6 +13,7 @@ import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
 import java.util.Scanner;
 
 public class SignUpGraphicControllerCLI {
+    private static final String SELECTION_CHOICE = "Choice";
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -24,14 +25,16 @@ public class SignUpGraphicControllerCLI {
                 System.out.println("1 - Sign up");
                 System.out.println("0 - Exit");
 
-                String choice = this.readField("Choice");
+                String choice = this.readField(SELECTION_CHOICE);
 
                 switch (choice) {
                     case "1" -> {
-                        if(this.createAccount()){
+                        boolean accountCreated = this.createAccount();
+                        if (accountCreated) {
                             return;
                         }
                     }
+
                     case "0" -> {
                         this.exit();
                         return;
@@ -64,7 +67,7 @@ public class SignUpGraphicControllerCLI {
         System.out.println("2 - Female");
         System.out.println("3 - Prefer not to say");
 
-        String choice = this.readField("Choice");
+        String choice = this.readField(SELECTION_CHOICE);
 
         return switch (choice) {
             case "1" -> Gender.MALE;
@@ -80,11 +83,11 @@ public class SignUpGraphicControllerCLI {
         System.out.println("1 - Participant");
         System.out.println("2 - Party Planner");
 
-        String choice = this.readField("Choice");
+        String choice = this.readField(SELECTION_CHOICE);
 
         return switch (choice) {
-            case "1" -> AccountType.Participant;
-            case "2" -> AccountType.PartyPlanner;
+            case "1" -> AccountType.PARTICIPANT;
+            case "2" -> AccountType.PARTY_PLANNER;
             default -> null;
         };
     }
