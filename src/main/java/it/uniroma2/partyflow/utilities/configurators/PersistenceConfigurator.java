@@ -21,20 +21,13 @@ public class PersistenceConfigurator {
 
 
     private PersistenceConfigurator() throws IOException {
-        FileInputStream input = null;
-        try{
-            input = new FileInputStream("configurations/configPersistency.ini");
-            this.properties.load(input); // it puts the content of the .ini file into the properties var
+        try (FileInputStream input = new FileInputStream("configurations/configPersistency.ini")){
+            this.properties.load(input);
         }
         catch (IOException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(e);
             throw e;
-        }
-        finally {
-            if (input != null) {
-                input.close();
-            }
         }
     }
 

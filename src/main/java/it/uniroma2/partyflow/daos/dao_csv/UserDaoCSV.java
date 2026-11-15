@@ -66,9 +66,7 @@ public class UserDaoCSV implements UserDaoInterface {
 
 
     private Map<String, String> findUserByEmail(String userEmail) throws IOException, CsvValidationException {
-        CSVReaderHeaderAware reader = null ;
-        try {
-             reader = new CSVReaderHeaderAware(new FileReader(fileName));
+        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(fileName))){
 
             Map<String, String> row;
 
@@ -81,18 +79,11 @@ public class UserDaoCSV implements UserDaoInterface {
 
             return Map.of();
         }
-        finally {
-            if(reader != null){
-                reader.close();
-            }
-        }
     }
 
     private boolean exists (String userEmail) throws IOException, CsvValidationException {
-        CSVReaderHeaderAware reader = null ;
-        try{
-            reader = new CSVReaderHeaderAware(new FileReader(fileName));
 
+        try(CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(fileName)) ){
             Map<String, String> row;
 
             while ((row = reader.readMap()) != null) {
@@ -105,20 +96,12 @@ public class UserDaoCSV implements UserDaoInterface {
             return false;
         }
 
-        finally {
-            if(reader != null){
-                reader.close();
-            }
-        }
-
-
     }
 
     @Override
     public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException,
             InvalidPersistenceTypeException, PersistenceConstraintViolationException {
 
-        CSVWriter writer = null;
         try{
             this.initialize();
             // convert user to list of string
@@ -138,8 +121,9 @@ public class UserDaoCSV implements UserDaoInterface {
             }
 
             // true activate append mode
-            writer = new CSVWriter(new FileWriter(fileName, true));
-            writer.writeNext(newUser);
+            try (CSVWriter writer = new CSVWriter(new FileWriter(fileName, true)) ){
+                writer.writeNext(newUser);
+            }
 
         }
 
@@ -159,16 +143,6 @@ public class UserDaoCSV implements UserDaoInterface {
             UserDaoCSV.logCsvValidationException(e);
             throw new PersistenceConstraintViolationException();
         }
-        finally {
-            try{
-                if(writer != null){
-                    writer.close();
-                }
-            }
-            catch (IOException e){
-                UserDaoCSV.logIOException(e);
-            }
-        }
 
     }
 
@@ -182,7 +156,7 @@ public class UserDaoCSV implements UserDaoInterface {
 
             Map<String, String> row = this.findUserByEmail(cred.getEmail());
 
-            if ( (row == null) || !(PasswordProtector.checkPassword(cred.getPassword(), row.get("password"))) ){
+            if ( (row.isEmpty()) || !(PasswordProtector.checkPassword(cred.getPassword(), row.get("password"))) ){
                 throw new EntityNotFound();
             }
             else{
