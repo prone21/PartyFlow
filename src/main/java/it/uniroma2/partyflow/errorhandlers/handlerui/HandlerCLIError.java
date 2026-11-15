@@ -3,6 +3,7 @@ package it.uniroma2.partyflow.errorhandlers.handlerui;
 
 import it.uniroma2.partyflow.enums.UserField;
 import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationException;
+import it.uniroma2.partyflow.utilities.ConsolePrinter;
 
 /**
  * This class handles the error that may occur in a CLI GUI.
@@ -11,6 +12,7 @@ import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationEx
 
 public class HandlerCLIError implements HandlerUIError {
     private static HandlerCLIError instance = null;
+    private final ConsolePrinter printer = ConsolePrinter.getInstance();
 
     private HandlerCLIError(){}
 
@@ -27,7 +29,7 @@ public class HandlerCLIError implements HandlerUIError {
      */
     @Override
     public void errorMessage(String message) {
-        System.out.println("Error: " + message);
+        printer.println("Error: " + message);
     }
 
     // Terminates the JVM with a non-zero exit code to indicate an error.
@@ -53,10 +55,9 @@ public class HandlerCLIError implements HandlerUIError {
             case ACCOUNT_TYPE -> "Account type";
         };
 
-        System.out.println("Error: " + fieldName + " is required.");
-
-        System.out.println();
-        System.out.println("Please try again.");
-        System.out.println();
+        printer.println("Error: " + fieldName + " is required.");
+        printer.println();
+        printer.println("Please try again.");
+        printer.println();
     }
 }

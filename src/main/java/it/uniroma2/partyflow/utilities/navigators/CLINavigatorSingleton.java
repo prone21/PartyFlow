@@ -3,6 +3,7 @@ package it.uniroma2.partyflow.utilities.navigators;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.graphic_controllers.CLI.PHomePageGraphicControllerCLI;
 import it.uniroma2.partyflow.graphic_controllers.CLI.PpHomePageGraphicControllerCLI;
+import it.uniroma2.partyflow.utilities.ConsolePrinter;
 
 
 /**
@@ -11,7 +12,7 @@ import it.uniroma2.partyflow.graphic_controllers.CLI.PpHomePageGraphicController
 
 public class CLINavigatorSingleton {
     private static CLINavigatorSingleton instance;
-
+    private final ConsolePrinter printer = ConsolePrinter.getInstance();
     private CLINavigatorSingleton(){}
 
     // guarantee singleton
@@ -26,13 +27,13 @@ public class CLINavigatorSingleton {
         switch (accountType) {
             case PARTICIPANT -> {
                 PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
-                System.out.println();
+                printer.println();
                 homePage.execute();
             }
 
             case PARTY_PLANNER -> {
                 PpHomePageGraphicControllerCLI homePage = new PpHomePageGraphicControllerCLI();
-                System.out.println();
+                printer.println();
                 homePage.execute();
             }
 
