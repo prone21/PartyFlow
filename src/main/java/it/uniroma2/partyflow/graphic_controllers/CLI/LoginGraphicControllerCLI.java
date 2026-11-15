@@ -7,6 +7,7 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
+import it.uniroma2.partyflow.utilities.ConsolePrinter;
 import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
 
 import java.util.Scanner;
@@ -14,18 +15,18 @@ import java.util.Scanner;
 public class LoginGraphicControllerCLI {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final ConsolePrinter printer = ConsolePrinter.getInstance();
 
     public void execute() {
-
         while (true) {
             try {
-                System.out.println();
-                System.out.println("=== PARTYFLOW - LOGIN ===");
-                System.out.println("1 - Log in");
-                System.out.println("2 - Don't have an account? Sign up");
-                System.out.println("3 - Continue with Google");
-                System.out.println("4 - Continue with Facebook");
-                System.out.println("0 - Exit");
+                printer.println();
+                printer.println("=== PARTYFLOW - LOGIN ===");
+                printer.println("1 - Log in");
+                printer.println("2 - Don't have an account? Sign up");
+                printer.println("3 - Continue with Google");
+                printer.println("4 - Continue with Facebook");
+                printer.println("0 - Exit");
 
                 String choice = this.readField("Choice");
 
@@ -63,27 +64,27 @@ public class LoginGraphicControllerCLI {
 
 
     private void continueWithGoogle() {
-        System.out.println("Google log-in is not implemented yet.");
+        printer.println("Google log-in is not implemented yet.");
     }
 
     private void continueWithFacebook() {
-        System.out.println("Facebook log-in is not implemented yet.");
+        printer.println("Facebook log-in is not implemented yet.");
     }
 
     private String readField(String field) {
-        System.out.print(field + ": ");
+        printer.println(field + ": ");
         return scanner.nextLine();
     }
 
     private void signUp() {
         SignUpGraphicControllerCLI signUpController =
                 new SignUpGraphicControllerCLI();
-        System.out.println();
+        printer.println();
         signUpController.execute();
     }
 
     private void exit(){
-        System.out.println("Goodbye!");
+        printer.println("Goodbye!");
 
     }
 

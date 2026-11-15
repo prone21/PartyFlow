@@ -24,13 +24,13 @@ public class CLINavigatorSingleton {
 
     public void goToHomePage(AccountType accountType){
         switch (accountType) {
-            case Participant -> {
+            case PARTICIPANT -> {
                 PHomePageGraphicControllerCLI homePage = new PHomePageGraphicControllerCLI();
                 System.out.println();
                 homePage.execute();
             }
 
-            case PartyPlanner -> {
+            case PARTY_PLANNER -> {
                 PpHomePageGraphicControllerCLI homePage = new PpHomePageGraphicControllerCLI();
                 System.out.println();
                 homePage.execute();

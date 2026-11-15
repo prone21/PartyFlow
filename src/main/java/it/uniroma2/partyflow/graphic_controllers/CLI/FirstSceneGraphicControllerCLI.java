@@ -2,24 +2,26 @@ package it.uniroma2.partyflow.graphic_controllers.CLI;
 
 import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
+import it.uniroma2.partyflow.utilities.ConsolePrinter;
 
 import java.util.Scanner;
+
 
 public class FirstSceneGraphicControllerCLI {
 
     private final Scanner scanner = new Scanner(System.in);
-
+    private final ConsolePrinter printer = ConsolePrinter.getInstance();
 
     public void execute() {
 
         while (true) {
             try {
-                System.out.println();
-                System.out.println("===== PARTYFLOW =====");
-                System.out.println("1 - Log in");
-                System.out.println("2 - Sign up");
-                System.out.println("0 - Exit");
-                System.out.print("Choice: ");
+                printer.println();
+                printer.println("===== PARTYFLOW =====");
+                printer.println("1 - Log in");
+                printer.println("2 - Sign up");
+                printer.println("0 - Exit");
+                printer.println("Choice: ");
 
                 String choice = this.scanner.nextLine();
 
@@ -66,7 +68,7 @@ public class FirstSceneGraphicControllerCLI {
     }
 
     private void exit(){
-        System.out.println("Goodbye!");
+        printer.println("Goodbye!");
 
     }
 
