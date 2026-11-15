@@ -51,9 +51,8 @@ public class CLIApplication implements UIApplication {
 
         try{
             PersistenceConfigurator pc = PersistenceConfigurator.getInstance();
-            if(pc.getPersistenceType() == PersistenceType.MySQL){
-                ConnectionFactory cf = ConnectionFactory.getInstance();
-                cf.closeConnection();
+            if(pc.getPersistenceType() == PersistenceType.MY_SQL){
+                ConnectionFactory.closeConnection();
                 handlerSystemError.logInfo("Database connection closed");
             }
         }

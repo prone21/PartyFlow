@@ -21,7 +21,7 @@ public class UIApplicationFactory {
         try{
             UIConfigurator uic = UIConfigurator.getInstance();
             return switch (uic.getUI()){
-                case JavaFxGUI -> new GUIApplication();
+                case JAVA_FX_GUI -> new GUIApplication();
                 case CLI -> new CLIApplication();
             };
         }

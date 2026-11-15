@@ -1,7 +1,7 @@
 package it.uniroma2.partyflow.enums;
 
 public enum PersistenceType {
-    MySQL,
+    MY_SQL,
     CSV,
-    InMemory
+    IN_MEMORY
 }

@@ -12,33 +12,24 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Database connection factory using the <b>Singleton pattern (GoF)</b>.
- * <p>Maintains a single database connection for the application.
+ * Factory responsible for managing a database connection.
+ *
+ * <p>Provides centralized access to a single JDBC connection,
+ * lazily initialized on the first request and reused by
+ * subsequent calls until explicitly closed.</p>
+ *
+ * <p>All operations are static; no instance of this class
+ * can be created.</p>
  */
 
 public class ConnectionFactory {
 
-    // ---------------singleton-----------------------
-    private static ConnectionFactory instance = null;
     private static Connection conn = null;
 
     private ConnectionFactory(){}
 
-    public static ConnectionFactory getInstance() {
-
-        if (instance == null){
-            instance = new ConnectionFactory();
-        }
-
-        return instance;
-
-
-    }
-
-    // -----------------------------------------------
-
     // returns the DB connection
-    public Connection getConnection()  throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException {
+    public static Connection getConnection()  throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException {
         try{
             if(conn == null){
                 PersistenceConfigurator pc = PersistenceConfigurator.getInstance();
@@ -63,7 +54,7 @@ public class ConnectionFactory {
     /*
      * Closes the database connection.
      */
-    public void closeConnection() {
+    public static void closeConnection() {
         HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
         try{
             if(conn != null && !conn.isClosed()){

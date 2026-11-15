@@ -14,9 +14,9 @@ public abstract class DaoAbstractFactory {
         try {
             PersistenceConfigurator persconf = PersistenceConfigurator.getInstance();
             return switch (persconf.getPersistenceType()) {
-                case PersistenceType.MySQL -> DaoMySQLFactory.getInstance();
+                case PersistenceType.MY_SQL -> DaoMySQLFactory.getInstance();
                 case PersistenceType.CSV -> DaoCSVFactory.getInstance();
-                case PersistenceType.InMemory -> DaoInMemoryFactory.getInstance();
+                case PersistenceType.IN_MEMORY -> DaoInMemoryFactory.getInstance();
             };
         }
 

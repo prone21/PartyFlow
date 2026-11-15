@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class SignUpController {
 
     public void createAccount(UserBean signUpBean) throws ApplicationException{
-
+        String signUpErrStr = "SignUp failed: ";
         try{
             // --------convert the bean to the model---------
 
@@ -51,7 +51,7 @@ public class SignUpController {
 
         catch (PersistenceGenericException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
+            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
 
             throw new ApplicationException("An unexpected error occurred while creating your account. " +
                     "Please try again.");
@@ -59,7 +59,7 @@ public class SignUpController {
 
         catch (PersistenceServiceUnavailableException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
+            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
 
             throw new ApplicationException("We couldn't complete your registration because the service is currently unavailable. " +
                     "Please try again later.");
@@ -67,7 +67,7 @@ public class SignUpController {
 
         catch (DuplicateEntityException | PersistenceConstraintViolationException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
+            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
 
             throw new ApplicationException("This account already exists.");
         }
@@ -75,7 +75,7 @@ public class SignUpController {
         catch (InvalidPersistenceTypeException e){
 
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("SignUp failed: " + e.getMessage(),e);
+            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
 
             handlerSystemError.handleFatalError(e);
         }

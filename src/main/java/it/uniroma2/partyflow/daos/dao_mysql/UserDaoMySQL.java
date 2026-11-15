@@ -19,8 +19,7 @@ public class UserDaoMySQL implements UserDaoInterface {
     private void connect() throws PersistenceServiceUnavailableException,
             InvalidPersistenceTypeException {
 
-            ConnectionFactory connectionFactory = ConnectionFactory.getInstance();
-            this.conn = connectionFactory.getConnection();
+            this.conn = ConnectionFactory.getConnection();
     }
 
     // rollback all the action done
@@ -63,11 +62,11 @@ public class UserDaoMySQL implements UserDaoInterface {
 
             // Insert the user into the table corresponding to their account type.
             switch (user.getAccountType()) {
-                case PartyPlanner -> {
+                case PARTY_PLANNER -> {
                     PartyPlannerDaoMySQL plannerDaoMySQL = new PartyPlannerDaoMySQL();
                     plannerDaoMySQL.insertPartyPlanner(user);
                 }
-                case Participant -> {
+                case PARTICIPANT -> {
                     ParticipantDaoMySQL participantDaoMySQL = new ParticipantDaoMySQL();
                     participantDaoMySQL.insertParticipant(user);
                 }
@@ -166,10 +165,10 @@ public class UserDaoMySQL implements UserDaoInterface {
 
             if (rs.next() && PasswordProtector.checkPassword(password, rs.getString("password"))){
                 if (rs.getString("account_type").equals("PartyPlanner")){
-                    return AccountType.PartyPlanner;
+                    return AccountType.PARTY_PLANNER;
                 }
                 else{
-                    return AccountType.Participant;
+                    return AccountType.PARTICIPANT;
                 }
 
             }

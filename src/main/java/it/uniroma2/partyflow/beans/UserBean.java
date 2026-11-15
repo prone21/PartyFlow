@@ -20,7 +20,6 @@ public class UserBean {
     private String password;
     private AccountType accountType;
 
-    public UserBean() {}
 
 // ---------------------Name------------------------
     public String getName() {

@@ -30,7 +30,7 @@ public class HandlerUIErrorFactory {
 
             return switch (uiType){
                 case CLI ->  HandlerCLIError.getInstance();
-                case JavaFxGUI ->  HandlerJavaFxGUIError.getInstance();
+                case JAVA_FX_GUI ->  HandlerJavaFxGUIError.getInstance();
             };
         }
 

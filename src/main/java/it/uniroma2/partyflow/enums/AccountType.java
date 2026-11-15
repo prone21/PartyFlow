@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.enums;
 
 public enum AccountType {
-    Participant,
-    PartyPlanner
+    PARTICIPANT,
+    PARTY_PLANNER
 }

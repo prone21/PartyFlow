@@ -22,12 +22,11 @@ public class QueryMySQLManager {
         PreparedStatement stmt = null;
 
         try{
-            ConnectionFactory connFactory = ConnectionFactory.getInstance();
-            Connection conn = connFactory.getConnection();
+            Connection conn = ConnectionFactory.getConnection();
             String query = null;
             switch (at){
-                case Participant -> query = "insert into participant (email) value (?)";
-                case PartyPlanner -> query = "insert into partyplanner (email) value (?)";
+                case PARTICIPANT -> query = "insert into participant (email) value (?)";
+                case PARTY_PLANNER -> query = "insert into partyplanner (email) value (?)";
             }
             stmt = conn.prepareStatement(query);
             stmt.setString(1,email);

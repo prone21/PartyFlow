@@ -52,12 +52,12 @@ public class PersistenceConfigurator {
 
         return switch (ApplicationModalities.valueOf(this.properties.getProperty("application.modalities"))){
             case ApplicationModalities.FULL -> PersistenceType.valueOf(this.properties.getProperty("persistence.type"));
-            case ApplicationModalities.DEMO -> PersistenceType.InMemory;
+            case ApplicationModalities.DEMO -> PersistenceType.IN_MEMORY;
         };
     }
 
     public List<String> getDBMSConnectionParameter() throws InvalidPersistenceTypeException {
-        if( this.getPersistenceType() == PersistenceType.MySQL ) {
+        if( this.getPersistenceType() == PersistenceType.MY_SQL ) {
             List<String> DBMSConnproperties = new ArrayList<>();
             DBMSConnproperties.add(this.properties.getProperty("url.mysql"));
             DBMSConnproperties.add(this.properties.getProperty("username.mysql"));
