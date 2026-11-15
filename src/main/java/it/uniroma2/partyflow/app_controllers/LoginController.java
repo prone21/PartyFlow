@@ -11,6 +11,7 @@ import it.uniroma2.partyflow.models.LoginCredential;
 
 public class LoginController {
     public AccountType login(LoginCredentialsBean cred) throws ApplicationException{
+        String loginErrorStr = "Login failed: ";
         try {
             // ----------- convert bean in model --------------
             LoginCredential usCred = new LoginCredential(cred.getEmail(), cred.getPassword());
@@ -23,28 +24,28 @@ public class LoginController {
 
         } catch (PersistenceGenericException | PersistenceConstraintViolationException e) {
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("Login failed: " + e.getMessage(), e);
+            handlerSystemError.logError(loginErrorStr + e.getMessage(), e);
 
             throw new ApplicationException("An unexpected error occurred while logging into your account. " +
                     "Please try again.");
 
         } catch (PersistenceServiceUnavailableException e) {
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("Login failed: " + e.getMessage(), e);
+            handlerSystemError.logError(loginErrorStr + e.getMessage(), e);
 
             throw new ApplicationException("The service is temporarily unavailable. " +
                     "Please try again later.");
 
         } catch (EntityNotFound e) {
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("Login failed: " + e.getMessage(), e);
+            handlerSystemError.logError(loginErrorStr + e.getMessage(), e);
 
             throw new ApplicationException("Invalid username or password. Please try again.");
 
         } catch (InvalidPersistenceTypeException e) {
 
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError("Login failed: " + e.getMessage(), e);
+            handlerSystemError.logError(loginErrorStr + e.getMessage(), e);
 
             handlerSystemError.handleFatalError(e);
 
