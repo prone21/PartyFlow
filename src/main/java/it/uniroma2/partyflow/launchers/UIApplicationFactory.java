@@ -4,6 +4,17 @@ import it.uniroma2.partyflow.utilities.configurators.UIConfigurator;
 
 import java.io.IOException;
 
+
+/**
+ * Factory responsible for creating the appropriate PartyFlow UI application.
+ *
+ * <p>Implements the Singleton pattern and selects the UI implementation
+ * (CLI or GUI) based on the configuration provided by UIConfigurator.
+ * If the configuration cannot be loaded, the GUI implementation
+ * is used as the default.</p>
+ */
+
+
 public class UIApplicationFactory {
     private static UIApplicationFactory instance = null;
 

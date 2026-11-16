@@ -1,7 +1,7 @@
 package it.uniroma2.partyflow.utilities.configurators;
 
 import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
-import it.uniroma2.partyflow.enums.ApplicationModalities;
+import it.uniroma2.partyflow.enums.ApplicationMode;
 import it.uniroma2.partyflow.enums.PersistenceType;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 
@@ -43,9 +43,9 @@ public class PersistenceConfigurator {
 
     public PersistenceType getPersistenceType(){
 
-        return switch (ApplicationModalities.valueOf(this.properties.getProperty("application.modalities"))){
-            case ApplicationModalities.FULL -> PersistenceType.valueOf(this.properties.getProperty("persistence.type"));
-            case ApplicationModalities.DEMO -> PersistenceType.IN_MEMORY;
+        return switch (ApplicationMode.valueOf(this.properties.getProperty("application.modalities"))){
+            case ApplicationMode.FULL -> PersistenceType.valueOf(this.properties.getProperty("persistence.type"));
+            case ApplicationMode.DEMO -> PersistenceType.IN_MEMORY;
         };
     }
 

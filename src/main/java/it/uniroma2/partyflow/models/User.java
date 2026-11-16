@@ -4,6 +4,15 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.enums.Gender;
 import java.time.LocalDate;
 
+/**
+ * Domain model representing a user of the PartyFlow application.
+ *
+ * <p>Stores the user's personal information, login credentials,
+ * account type, and gender. Provides a constructor and getter/setter
+ * methods to initialize and manage these attributes.</p>
+ */
+
+
 public class User {
     private String name;
     private String surname;

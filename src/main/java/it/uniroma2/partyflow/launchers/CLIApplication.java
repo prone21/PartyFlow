@@ -7,9 +7,15 @@ import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationEx
 import it.uniroma2.partyflow.graphic_controllers.cli.FirstSceneGraphicControllerCLI;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
+/**
+ * Entry point for the CLI application.
+ *
+ * <p>Manages the CLI application lifecycle, including startup,
+ * execution, and resource cleanup during shutdown.</p>
+ */
+
 public class CLIApplication implements UIApplication {
 
-    // ----------------- UIApplication java methods ------------------
     @Override
     public void launch() {
         try {
@@ -23,7 +29,6 @@ public class CLIApplication implements UIApplication {
             cleanup();
         }
     }
-    // ---------------------------------------------------------------
 
 
     private void start() {

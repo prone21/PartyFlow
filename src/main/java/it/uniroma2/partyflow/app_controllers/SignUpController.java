@@ -13,10 +13,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
+/**
+ * Application controller responsible for handling the user registration process.
+ *
+ * <p>Converts user data from a Bean into a domain model, including date parsing
+ * and password hashing, and delegates account creation to the persistence layer
+ * through the DAO. It also handles persistence-related exceptions by logging
+ * errors and translating them into application-level exceptions.</p>
+ */
+
+
 public class SignUpController {
+    private static final String SIGN_UP_ERRSTR = "SignUp failed: ";
 
     public void createAccount(UserBean signUpBean) throws ApplicationException{
-        String signUpErrStr = "SignUp failed: ";
+
         try{
             // --------convert the bean to the model---------
 
@@ -51,7 +62,7 @@ public class SignUpController {
 
         catch (PersistenceGenericException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
+            handlerSystemError.logError(SIGN_UP_ERRSTR + e.getMessage(),e);
 
             throw new ApplicationException("An unexpected error occurred while creating your account. " +
                     "Please try again.");
@@ -59,7 +70,7 @@ public class SignUpController {
 
         catch (PersistenceServiceUnavailableException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
+            handlerSystemError.logError(SIGN_UP_ERRSTR + e.getMessage(),e);
 
             throw new ApplicationException("We couldn't complete your registration because the service is currently unavailable. " +
                     "Please try again later.");
@@ -67,7 +78,7 @@ public class SignUpController {
 
         catch (DuplicateEntityException | PersistenceConstraintViolationException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
+            handlerSystemError.logError(SIGN_UP_ERRSTR + e.getMessage(),e);
 
             throw new ApplicationException("This account already exists.");
         }
@@ -75,7 +86,7 @@ public class SignUpController {
         catch (InvalidPersistenceTypeException e){
 
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
-            handlerSystemError.logError(signUpErrStr + e.getMessage(),e);
+            handlerSystemError.logError(SIGN_UP_ERRSTR + e.getMessage(),e);
 
             handlerSystemError.handleFatalError(e);
         }

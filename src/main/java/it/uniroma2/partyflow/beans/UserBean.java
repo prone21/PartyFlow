@@ -11,6 +11,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
+/**
+ * Bean responsible for storing user registration data and performing syntactic checks.
+ *
+ * <p>Validates mandatory fields, email format, password length,
+ * and date of birth format and validity.
+ * Throws specific exceptions when required fields are missing
+ * or their values do not satisfy the validation rules.</p>
+ */
+
+
 public class UserBean {
     private String name;
     private String surname;
@@ -69,7 +79,7 @@ public class UserBean {
          * STRICT mode ensures that the date actually exists.
          */
 
-        // declare the parser
+        // Defines the expected date format and enables strict validation.
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("dd/MM/uuuu") // define the date-format
                         .withResolverStyle(ResolverStyle.STRICT); // check the existence of the date
