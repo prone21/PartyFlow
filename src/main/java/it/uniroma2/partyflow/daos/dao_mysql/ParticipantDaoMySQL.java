@@ -17,7 +17,7 @@ public class ParticipantDaoMySQL {
     public void insertParticipant(User user) throws PersistenceServiceUnavailableException,
             PersistenceConstraintViolationException, DuplicateEntityException, PersistenceGenericException, InvalidPersistenceTypeException {
 
-        QueryMySQLManager.persistAccountType(user.getEmail(), AccountType.Participant);
+        QueryMySQLManager.persistAccountType(user.getEmail(), AccountType.PARTICIPANT);
 
     }
 }

@@ -18,7 +18,7 @@ public class PartyPlannerDaoMySQL {
     public void insertPartyPlanner(User user) throws PersistenceServiceUnavailableException,
             PersistenceConstraintViolationException, DuplicateEntityException, PersistenceGenericException, InvalidPersistenceTypeException {
 
-        QueryMySQLManager.persistAccountType(user.getEmail(), AccountType.PartyPlanner);
+        QueryMySQLManager.persistAccountType(user.getEmail(), AccountType.PARTY_PLANNER);
 
     }
 
