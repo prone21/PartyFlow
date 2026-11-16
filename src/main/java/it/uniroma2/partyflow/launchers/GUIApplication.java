@@ -6,7 +6,6 @@ import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.utilities.navigators.GUINavigatorSingleton;
 import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 
 /**
@@ -23,10 +22,6 @@ public class GUIApplication extends Application implements UIApplication {
         Application.launch(GUIApplication.class);
     }
 
-    @Override
-    public void close(){
-        Platform.exit();
-    }
     // ---------------------------------------------------------------
 
 

@@ -8,7 +8,7 @@
 
 <!-- Single item in the My Hangouts list. Insert into the ScrollPane's VBox. -->
 
-<HBox minHeight="145.0" prefHeight="145.0" prefWidth="600.0" spacing="0.0" style="-fx-background-color: #F6F7F9; -fx-background-radius: 12; -fx-border-color: rgba(21,58,95,0.25); -fx-border-radius: 12; -fx-border-width: 1.5;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<HBox minHeight="145.0" prefHeight="145.0" prefWidth="600.0" style="-fx-background-color: #F6F7F9; -fx-background-radius: 12; -fx-border-color: rgba(21,58,95,0.25); -fx-border-radius: 12; -fx-border-width: 1.5;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
 
       <AnchorPane minHeight="145.0" prefHeight="145.0" prefWidth="600.0" style="-fx-background-color: transparent;">
 

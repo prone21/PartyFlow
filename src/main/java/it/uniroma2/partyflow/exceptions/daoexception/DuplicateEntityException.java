@@ -11,8 +11,5 @@ public class DuplicateEntityException extends Exception{
         super("Duplicate entity detected in the persistence layer.");
     }
 
-    public DuplicateEntityException(String message) {
-        super(message);
-    }
 
 }

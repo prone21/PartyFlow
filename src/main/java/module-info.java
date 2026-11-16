@@ -4,9 +4,7 @@ module it.uniroma2.partyflow {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires mysql.connector.j;
     requires com.opencsv;
-    requires jdk.jshell;
     requires jbcrypt;
 
 

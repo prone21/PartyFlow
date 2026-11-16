@@ -2,7 +2,6 @@ package it.uniroma2.partyflow.daos.dao_interfaces;
 
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
-import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
 import it.uniroma2.partyflow.models.LoginCredential;
 import it.uniroma2.partyflow.models.User;
 

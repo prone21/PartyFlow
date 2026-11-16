@@ -11,8 +11,4 @@ public class PersistenceConstraintViolationException extends Exception {
         super("Persistence constraint violated.");
     }
 
-    public PersistenceConstraintViolationException(String message) {
-        super(message);
-    }
-
 }

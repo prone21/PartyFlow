@@ -20,17 +20,10 @@ public class CLIApplication implements UIApplication {
                     "CLI application terminated due to a fatal error."
             );
         } finally {
-            close();
+            cleanup();
         }
     }
-
-    @Override
-    public void close() {
-        cleanup();
-    }
     // ---------------------------------------------------------------
-
-
 
 
     private void start() {

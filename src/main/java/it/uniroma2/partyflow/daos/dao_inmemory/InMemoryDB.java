@@ -9,10 +9,8 @@ import java.util.List;
 
 /**
  * Centralized in-memory data store implementing Singleton pattern (GoF).
- *
  * Acts as a "RAM database" for the IN_MEMORY persistence type.
  * All InMemory DAOs read/write to this shared store.
- *
  * Data Lifecycle
  * Data exists only during application runtime. On application exit,
  * all data is lost. This is intentional for demo purposes.

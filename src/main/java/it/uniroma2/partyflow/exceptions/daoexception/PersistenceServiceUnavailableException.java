@@ -10,8 +10,4 @@ public class PersistenceServiceUnavailableException extends Exception {
         super("Persistence service unavailable.");
     }
 
-    public PersistenceServiceUnavailableException(String message) {
-        super(message);
-    }
-
 }
