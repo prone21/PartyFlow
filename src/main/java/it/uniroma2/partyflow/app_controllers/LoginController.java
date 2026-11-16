@@ -9,9 +9,21 @@ import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.models.LoginCredential;
 
+
+/**
+ * Application controller responsible for handling the user login process.
+ *
+ * <p>Converts login credentials from a Bean into a domain model and
+ * delegates authentication to the persistence layer through the DAO.
+ * It also handles persistence-related exceptions by logging errors
+ * and translating them into application-level exceptions.</p>
+ */
+
+
 public class LoginController {
+    private final String loginErrorStr = "Login failed: ";
+
     public AccountType login(LoginCredentialsBean cred) throws ApplicationException{
-        String loginErrorStr = "Login failed: ";
         try {
             // ----------- convert bean in model --------------
             LoginCredential usCred = new LoginCredential(cred.getEmail(), cred.getPassword());
@@ -20,6 +32,7 @@ public class LoginController {
             // pass the model to the persistence layer
             DaoAbstractFactory factory = DaoAbstractFactory.getFactory();
             UserDaoInterface loginDao = factory.getUserDao();
+            // -----------------------------------------------
             return loginDao.login(usCred);
 
         } catch (PersistenceGenericException | PersistenceConstraintViolationException e) {
