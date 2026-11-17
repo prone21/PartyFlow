@@ -6,11 +6,33 @@ import it.uniroma2.partyflow.utilities.ConsolePrinter;
 
 import java.util.Scanner;
 
+/**
+ * Graphic controller responsible for managing the initial CLI menu.
+ *
+ * <p>Displays the available options, retrieves the user's input,
+ * and delegates the execution of login and registration operations
+ * to the corresponding graphic controllers.</p>
+ *
+ * <p>Handles invalid menu choices and allows the user to exit
+ * the application.</p>
+ */
+
 
 public class FirstSceneGraphicControllerCLI {
 
     private final Scanner scanner = new Scanner(System.in);
     private final ConsolePrinter printer = ConsolePrinter.getInstance();
+
+
+    /**
+     * Displays the initial CLI menu and processes the user's input.
+     *
+     * <p>Repeatedly displays the menu and executes the operation
+     * corresponding to the selected option until the user chooses to exit.</p>
+     *
+     * <p>Delegates the display of error messages related to invalid
+     * menu choices to HandlerCLIError.</p>
+     */
 
     public void execute() {
 
@@ -52,6 +74,12 @@ public class FirstSceneGraphicControllerCLI {
         }
     }
 
+
+    /**
+     * Instantiates and executes the CLI login graphic controller
+     * to start the authentication process.
+     */
+
     private void login(){
         LoginGraphicControllerCLI loginController =
                 new LoginGraphicControllerCLI();
@@ -60,12 +88,22 @@ public class FirstSceneGraphicControllerCLI {
     }
 
 
+    /**
+     * Instantiates and executes the CLI sign-up graphic controller
+     * to start the registration process.
+     */
+
     private void signUp(){
         SignUpGraphicControllerCLI signUpController =
                 new SignUpGraphicControllerCLI();
 
         signUpController.execute();
     }
+
+
+    /**
+     * Displays a farewell message before exiting the initial CLI menu.
+     */
 
     private void exit(){
         printer.println("Goodbye!");

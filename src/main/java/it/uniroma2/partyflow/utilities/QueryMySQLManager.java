@@ -10,12 +10,30 @@ import java.sql.SQLException;
 
 /**
  * Utility class responsible for executing MySQL operations
- * shared by multiple DAOs.
+ * shared by multiple dao_mysql.
  */
 
 public class QueryMySQLManager {
 
     private QueryMySQLManager() {}
+
+
+    /**
+     * Persists the user's account type by inserting their email
+     * into the corresponding MySQL table (participant or partyplanner).
+     *
+     * <p>Uses a prepared statement to execute the SQL query, logs
+     * persistence-related errors, and translates SQL exceptions into
+     * application-specific persistence exceptions.</p>
+     *
+     * @param email the email identifying the user
+     * @param at the account type to persist
+     * @throws PersistenceServiceUnavailableException if the database is unavailable
+     * @throws InvalidPersistenceTypeException if the configured persistence type is invalid
+     * @throws DuplicateEntityException if the record already exists
+     * @throws PersistenceConstraintViolationException if a foreign key constraint is violated
+     * @throws PersistenceGenericException if an unexpected SQL error occurs
+     */
 
     public static void persistAccountType(String email, AccountType at) throws PersistenceServiceUnavailableException,
             InvalidPersistenceTypeException, DuplicateEntityException, PersistenceConstraintViolationException, PersistenceGenericException {

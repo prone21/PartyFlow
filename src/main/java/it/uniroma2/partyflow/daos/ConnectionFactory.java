@@ -11,15 +11,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
+
 /**
- * Factory responsible for managing a database connection.
+ * Factory responsible for managing the database connection.
  *
- * <p>Provides centralized access to a single JDBC connection,
- * lazily initialized on the first request and reused by
- * subsequent calls until explicitly closed.</p>
+ * <p>Provides centralized access to a shared JDBC connection,
+ * lazily initialized on the first request using the connection
+ * parameters provided by PersistenceConfigurator.</p>
  *
- * <p>All operations are static; no instance of this class
- * can be created.</p>
+ * <p>All operations are static, and the private constructor
+ * prevents instantiation of the class.</p>
  */
 
 public class ConnectionFactory {
@@ -28,7 +29,22 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){}
 
-    // returns the DB connection
+
+    /**
+     * Returns the shared JDBC connection.
+     *
+     * <p>If the connection has not yet been established, retrieves
+     * the database connection parameters from PersistenceConfigurator
+     * and establishes a new connection through DriverManager.
+     * Otherwise, returns the existing connection.</p>
+     *
+     * @return the JDBC database connection
+     * @throws InvalidPersistenceTypeException if MySQL is not the
+     * configured persistence type
+     * @throws PersistenceServiceUnavailableException if the database connection
+     * cannot be established or the configuration file cannot be loaded
+     */
+
     public static Connection getConnection()  throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException {
         try{
             if(conn == null){
@@ -51,9 +67,18 @@ public class ConnectionFactory {
         return conn;
     }
 
-    /*
-     * Closes the database connection.
+
+    /**
+     * Closes the shared JDBC connection if it exists and is still open.
+     *
+     * <p>After successfully closing the connection, resets its reference
+     * to null, allowing a new connection to be established on a subsequent
+     * invocation of getConnection().</p>
+     *
+     * <p>Any SQLException occurring during this operation is logged
+     * through HandlerSystemError without being propagated to the caller.</p>
      */
+
     public static void closeConnection() {
         HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
         try{

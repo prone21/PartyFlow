@@ -8,9 +8,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Responsible for displaying views defined in FXML files.
- * It allows the view navigation.
+ * Singleton responsible for managing navigation between JavaFX views.
+ *
+ * <p>Loads views defined in FXML files and displays them as scenes
+ * within the same Stage. It also stores the previous scene
+ * to support backward navigation.</p>
  */
+
 
 public class GUINavigatorSingleton {
     private final Stage stage; // The Stage in which the views (scenes) are displayed.
@@ -41,14 +45,29 @@ public class GUINavigatorSingleton {
     }
 
 
-    //Given the view's path, it sets the new scene on the stage
+    /**
+     * Navigates to the view defined by the specified FXML file.
+     *
+     * <p>Stores the current scene to support backward navigation,
+     * loads the FXML file, creates a new scene, and displays it
+     * within the current Stage.</p>
+     *
+     * @param viewFXMLPath the resource path of the FXML file to load
+     * @throws InternalException if an IOException occurs while loading the FXML file
+     */
+
     public void goToView(String viewFXMLPath) throws InternalException {
         try{
             this.prevScene = this.stage.getScene(); // obtaining the actual scene that is going to be the prevScene
 
+            // FXMLLoader is the class responsible for converting an FXML file into JavaFX objects.
             FXMLLoader loader =
                     new FXMLLoader(getClass().getResource(viewFXMLPath));
 
+            /* The load() method converts the FXML file into JavaFX objects,
+             * preserves the hierarchical structure defined in the file,
+             * and returns the root node of the resulting scene graph.
+             */
             Scene scene = new Scene(loader.load()); // load obtains the root node by fxml file
 
             this.stage.setTitle("PartyFlow");

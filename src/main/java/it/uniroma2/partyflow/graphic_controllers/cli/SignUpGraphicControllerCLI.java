@@ -13,10 +13,36 @@ import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
 
 import java.util.Scanner;
 
+
+/**
+ * Graphic controller responsible for managing the CLI registration interface.
+ *
+ * <p>Displays the registration menu, collects user data, and populates
+ * a UserBean whose setters perform syntactic checks.
+ * Delegates account creation to SignUpController.</p>
+ *
+ * <p>Manages navigation to the appropriate home page after successful
+ * registration and delegates the display of error messages
+ * to HandlerCLIError.</p>
+ */
+
+
 public class SignUpGraphicControllerCLI {
     private static final String SELECTION_CHOICE = "Choice";
     private final ConsolePrinter printer = ConsolePrinter.getInstance();
     private final Scanner scanner = new Scanner(System.in);
+
+
+
+    /**
+     * Displays the CLI registration menu and processes the user's input.
+     *
+     * <p>Repeatedly displays the menu until the user successfully creates
+     * an account or chooses to exit the menu.</p>
+     *
+     * <p>Delegates the display of error messages related to invalid
+     * menu choices to HandlerCLIError.</p>
+     */
 
     public void execute() {
         while (true) {
@@ -51,14 +77,35 @@ public class SignUpGraphicControllerCLI {
 
     }
 
+    /**
+     * Displays a farewell message before exiting the CLI registration menu.
+     */
+
     private void exit(){
         printer.println("Goodbye!");
     }
+
+
+    /**
+     * Displays a prompt for the specified field and reads the user's input
+     * from the standard input stream.
+     *
+     * @param field the name of the field to display
+     * @return the value entered by the user
+     */
 
     private String readField(String field) {
         printer.println(field + ": ");
         return scanner.nextLine();
     }
+
+
+    /**
+     * Displays the available gender options and maps the user's
+     * selection to the corresponding Gender enum constant.
+     *
+     * @return the selected gender, or null if the choice is invalid
+     */
 
     private Gender obtainSelectedGender() {
         printer.println();
@@ -77,6 +124,14 @@ public class SignUpGraphicControllerCLI {
         };
     }
 
+
+    /**
+     * Displays the available account types and maps the user's
+     * selection to the corresponding AccountType enum constant.
+     *
+     * @return the selected account type, or null if the choice is invalid
+     */
+
     private AccountType obtainSelectedAccountType() {
         printer.println();
         printer.println("Account type:");
@@ -91,6 +146,24 @@ public class SignUpGraphicControllerCLI {
             default -> null;
         };
     }
+
+
+    /**
+     * Handles the account creation request.
+     *
+     * <p>Collects user data and populates a UserBean,
+     * whose setters perform syntactic checks.</p>
+     *
+     * <p>Delegates account creation to SignUpController and navigation
+     * to the appropriate home page to CLINavigatorSingleton.</p>
+     *
+     * <p>Handles missing mandatory fields, invalid field formats,
+     * and application errors by delegating the display of error
+     * messages to HandlerCLIError.</p>
+     *
+     * @return true if account creation succeeds and home page execution
+     * completes normally, false if a validation or application error occurs
+     */
 
     private boolean createAccount(){
         try{
@@ -146,6 +219,7 @@ public class SignUpGraphicControllerCLI {
              * Handles invalid field formats.
              * Delegates the exception message to the CLI error handler.
              */
+
             HandlerCLIError handlerCLIError =
                     HandlerCLIError.getInstance();
 

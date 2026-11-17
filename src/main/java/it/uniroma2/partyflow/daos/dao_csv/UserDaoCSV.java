@@ -17,34 +17,78 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+
+/**
+ * CSV implementation of the Data Access Object (DAO)
+ * responsible for managing user persistence.
+ *
+ * <p>Provides operations for user registration and authentication
+ * using a CSV file as a persistent data store.</p>
+ *
+ * <p>Uses the OpenCSV library to read and write user records
+ * and PersistenceConfigurator to retrieve the CSV database directory.</p>
+ */
+
+
 public class UserDaoCSV implements UserDaoInterface {
 
     private String fileName = null;
 
     // --------------------------------loggers----------------------------------------------
+
+    /**
+     * Logs an exception through HandlerSystemError.
+     *
+     * @param e the exception to log
+     */
+
     private static void stdLog(Exception e) {
         // log the error
         HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
         handlerSystemError.logError(e);
     }
 
+
+    /**
+     * Logs an IOException through HandlerSystemError.
+     *
+     * @param e the IOException to log
+     */
+
     private static void logIOException(IOException e){
         HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
         handlerSystemError.logError(e);
     }
 
-    private static void logCsvValidationException(CsvValidationException e){
 
-            /*  CsvValidationException is thrown when a CSV record fails
-                validation, for example when a configured row or line
-                validator detects invalid data during file reading.
-            */
+    /**
+     * Logs a CSV validation exception through HandlerSystemError.
+     *
+     * @param e the CsvValidationException to log
+     */
+
+    private static void logCsvValidationException(CsvValidationException e){
+        // CsvValidationException is thrown when a CSV record fails
+        // validation, for example when a configured row or line validator detects invalid data during file reading.
 
         HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
         handlerSystemError.logError(e);
     }
 
     // ------------------------------------------------------------------------------------
+
+
+    /**
+     * Initializes the file path associated with this DAO.
+     *
+     * <p>Retrieves the CSV database directory from PersistenceConfigurator
+     * and sets the path to the Users.csv file.</p>
+     *
+     * @throws InvalidPersistenceTypeException if CSV is not the
+     * configured persistence type
+     * @throws PersistenceServiceUnavailableException if an IOException
+     * occurs while loading the persistence configuration
+     */
 
     private void initialize() throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException{
         try {
@@ -64,6 +108,23 @@ public class UserDaoCSV implements UserDaoInterface {
     }
 
 
+
+    /**
+     * Searches for a stored user by email address.
+     *
+     * <p>Reads the CSV file sequentially using CSVReaderHeaderAware,
+     * which represents each record as a map associating column
+     * headers with their corresponding values.</p>
+     *
+     * <p>Uses try-with-resources to automatically close the reader.</p>
+     *
+     * @param userEmail the email address identifying the user
+     * @return the map containing the user's data, or an empty map
+     * if no matching user is found
+     * @throws IOException if an I/O error occurs
+     * @throws CsvValidationException if a CSV record fails validation
+     */
+
     private Map<String, String> findUserByEmail(String userEmail) throws IOException, CsvValidationException {
         try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(fileName))){
 
@@ -76,26 +137,50 @@ public class UserDaoCSV implements UserDaoInterface {
                 }
             }
 
-            return Map.of();
+            return Map.of(); // returns an empty map
         }
     }
 
-    private boolean exists (String userEmail) throws IOException, CsvValidationException {
 
-        try(CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(fileName)) ){
-            Map<String, String> row;
+    /**
+     * Checks whether a user with the specified email address
+     * already exists in the CSV database.
+     *
+     * <p>Uses try-with-resources to automatically close the reader.</p>
+     *
+     * @param userEmail the email address to check
+     * @return true if the user exists, false otherwise
+     * @throws IOException if an I/O error occurs
+     * @throws CsvValidationException if a CSV record fails validation
+     */
 
-            while ((row = reader.readMap()) != null) {
-
-                if(userEmail.equals(row.get("email"))) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
+    private boolean exists(String userEmail)
+            throws IOException, CsvValidationException {
+        return !this.findUserByEmail(userEmail).isEmpty();
     }
+
+
+    /**
+     * Persists a new user in the CSV database.
+     *
+     * <p>Initializes the CSV file path and converts the user's
+     * data into an array of strings.</p>
+     *
+     * <p>Checks whether a user with the same email address already
+     * exists before appending the new record to the CSV file.</p>
+     *
+     * <p>Uses try-with-resources to automatically close the writer.
+     * Logs and translates I/O and CSV validation exceptions
+     * into application-specific persistence exceptions.</p>
+     *
+     * @param user the user to persist
+     * @throws PersistenceServiceUnavailableException if an I/O error occurs
+     * @throws DuplicateEntityException if the user already exists
+     * @throws InvalidPersistenceTypeException if CSV is not the
+     * configured persistence type
+     * @throws PersistenceConstraintViolationException if a CSV record
+     * fails validation
+     */
 
     @Override
     public void signUp(User user) throws PersistenceServiceUnavailableException, DuplicateEntityException,
@@ -130,7 +215,6 @@ public class UserDaoCSV implements UserDaoInterface {
                 InvalidPersistenceTypeException e) {
 
             UserDaoCSV.stdLog(e);
-            // throw the exception
             throw e;
 
         }
@@ -145,6 +229,28 @@ public class UserDaoCSV implements UserDaoInterface {
 
     }
 
+
+
+    /**
+     * Authenticates a user against the CSV database.
+     *
+     * <p>Retrieves the user's record by email address and verifies
+     * the provided password against the stored password hash
+     * through PasswordProtector.</p>
+     *
+     * <p>If authentication succeeds, returns the corresponding account type.
+     * Logs and translates I/O and CSV validation exceptions
+     * into application-specific persistence exceptions.</p>
+     *
+     * @param cred the login credentials provided by the user
+     * @return the account type of the authenticated user
+     * @throws EntityNotFound if the user does not exist or the password is incorrect
+     * @throws PersistenceServiceUnavailableException if an I/O error occurs
+     * @throws InvalidPersistenceTypeException if CSV is not the
+     * configured persistence type
+     * @throws PersistenceConstraintViolationException if a CSV record
+     * fails validation
+     */
 
     @Override
     public AccountType login(LoginCredential cred) throws EntityNotFound, PersistenceServiceUnavailableException,
@@ -167,7 +273,6 @@ public class UserDaoCSV implements UserDaoInterface {
                InvalidPersistenceTypeException | EntityNotFound e) {
 
             UserDaoCSV.stdLog(e);
-            // throw the exception
             throw e;
         }
 

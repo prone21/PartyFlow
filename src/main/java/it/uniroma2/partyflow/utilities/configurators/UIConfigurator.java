@@ -7,9 +7,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+
 /**
- * Its responsibility is to obtain the application UI type
+ * Singleton responsible for managing the application UI configuration.
+ *
+ * <p>Loads UI properties from a configuration file and determines
+ * which user interface type (CLI or JavaFX GUI) must be used.</p>
  */
+
 
 public class UIConfigurator {
     private final Properties properties = new Properties();
@@ -36,6 +41,16 @@ public class UIConfigurator {
 
     }
 
+
+    /**
+     * Retrieves the user interface type specified in the configuration file.
+     *
+     * @return the configured UI type
+     * @throws IllegalArgumentException thrown by UIType.valueOf()
+     * if the configured UI type does not match any enum constant
+     * @throws NullPointerException thrown by UIType.valueOf()
+     * if the 'interface.type' property is missing
+     */
 
     public UIType getUI(){
         return UIType.valueOf(this.properties.getProperty("interface.type"));

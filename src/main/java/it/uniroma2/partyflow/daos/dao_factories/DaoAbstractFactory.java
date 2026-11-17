@@ -8,6 +8,18 @@ import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 
 import java.io.IOException;
 
+
+/**
+ * Abstract factory responsible for providing DAO objects
+ * independently of the underlying persistence technology.
+ *
+ * <p>Implements the GoF Abstract Factory pattern by defining
+ * a common contract for concrete DAO factories.
+ * Selects the appropriate concrete factory (MySQL, CSV, or In-Memory)
+ * according to the persistence type provided by PersistenceConfigurator.</p>
+ */
+
+
 public abstract class DaoAbstractFactory {
 
     public static DaoAbstractFactory getFactory() throws PersistenceGenericException {

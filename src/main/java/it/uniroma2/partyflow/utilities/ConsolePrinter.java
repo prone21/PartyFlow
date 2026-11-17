@@ -7,6 +7,7 @@ import java.io.PrintWriter;
  *
  * <p>Provides centralized console output using a PrintWriter.</p>
  */
+
 public class ConsolePrinter {
 
     private static ConsolePrinter instance;
@@ -25,10 +26,7 @@ public class ConsolePrinter {
         this.writer = new PrintWriter(System.out, true);
     }
 
-    /**
-     * Returns the unique instance of CLIWriter.
-     * Creates it on the first invocation (lazy initialization).
-     */
+
     public static ConsolePrinter getInstance() {
         if (instance == null) {
             instance = new ConsolePrinter();
@@ -37,14 +35,16 @@ public class ConsolePrinter {
     }
 
     /**
-     * Prints a message followed by a new line.
+     * Prints the specified message followed by a line separator.
+     *
+     * @param message the message to print
      */
     public void println(String message) {
         writer.println(message);
     }
 
     /**
-     * Prints an empty line.
+     * Prints a line separator without displaying any text.
      */
     public void println() {
         writer.println();

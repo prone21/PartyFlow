@@ -12,8 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Its responsibility is to obtain the application persistence layer
+ * Singleton responsible for managing the application persistence configuration.
+ *
+ * <p>Loads persistence properties from a configuration file,
+ * determines the persistence type according to the application mode,
+ * and provides the parameters required to access the persistence layer.</p>
  */
+
 
 public class PersistenceConfigurator {
     private final Properties properties = new Properties();
@@ -41,6 +46,16 @@ public class PersistenceConfigurator {
     }
 
 
+    /**
+     * Determines the persistence type according to the application mode.
+     *
+     * <p>In FULL mode, the persistence type is obtained from the
+     * configuration file. In DEMO mode, in-memory persistence
+     * is automatically selected.</p>
+     *
+     * @return the active persistence type
+     */
+
     public PersistenceType getPersistenceType(){
 
         return switch (ApplicationMode.valueOf(this.properties.getProperty("application.modalities"))){
@@ -48,6 +63,15 @@ public class PersistenceConfigurator {
             case ApplicationMode.DEMO -> PersistenceType.IN_MEMORY;
         };
     }
+
+
+    /**
+     * Retrieves the connection parameters required to access the MySQL database.
+     *
+     * @return a list containing the database URL, username, and password,
+     * in this order
+     * @throws InvalidPersistenceTypeException if MySQL is not the active persistence type
+     */
 
     public List<String> getDBMSConnectionParameter() throws InvalidPersistenceTypeException {
         if( this.getPersistenceType() == PersistenceType.MY_SQL ) {
@@ -64,6 +88,14 @@ public class PersistenceConfigurator {
 
     }
 
+
+
+    /**
+     * Retrieves the directory where the CSV database files are stored.
+     *
+     * @return the configured CSV database directory
+     * @throws InvalidPersistenceTypeException if CSV is not the active persistence type
+     */
 
     public String getDirectoryCSVDB() throws InvalidPersistenceTypeException {
         if (this.getPersistenceType() == PersistenceType.CSV ){

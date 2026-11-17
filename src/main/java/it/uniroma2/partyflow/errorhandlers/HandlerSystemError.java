@@ -52,38 +52,58 @@ public class HandlerSystemError {
     }
 
 
-    /*
+    /**
      * Logs an error including the original exception's stack trace.
      * An additional message can be provided to describe the context
      * in which the error occurred.
+     *
+     * @param message the error description
+     * @param exception the exception associated with the error
      */
+
     public void logError(String message, Throwable exception) {
         this.logger.log(Level.SEVERE, message, exception);
     }
 
-    // Logs an error message without an exception.
+    /**
+     * Logs an error message without an exception.
+     *
+     * @param message the error description
+     */
     public void logError(String message) {
         this.logger.log(Level.SEVERE, message);
     }
 
-    // Logs an exception at SEVERE level, including
-    // its type, message, and stack trace.
+    /**
+     * Logs an error including the type, message, and stack trace of the exception.
+     *
+     * @param exception the exception associated with the error
+     */
     public void logError(Throwable exception){
         this.logger.log(Level.SEVERE, "", exception);
     }
 
 
-    // Logs a warning message.
+    /**
+     * Logs a warning message.
+     *
+     * @param message the warning description
+     */
     public void logWarning(String message) {
         this.logger.log(Level.WARNING, message);
     }
 
-    // Logs an informational message.
+
+    /**
+     * Logs an informational message.
+     *
+     * @param message the info description
+     */
     public void logInfo(String message) {
         this.logger.log(Level.INFO, message);
     }
 
-    /*
+    /**
      * Handles unrecoverable errors and terminates the application.
      * The FatalError parameter restricts the operation to exceptions
      * explicitly classified as fatal.

@@ -12,10 +12,33 @@ import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
 
 import java.util.Scanner;
 
+
+/**
+ * Graphic controller responsible for managing the CLI login interface.
+ *
+ * <p>Displays the login menu, collects user credentials, and populates
+ * a LoginCredentialsBean to perform syntactic checks.
+ * Delegates authentication to LoginController.</p>
+ *
+ * <p>Manages navigation between CLI pages and delegates the display
+ * of error messages to HandlerCLIError.</p>
+ */
+
 public class LoginGraphicControllerCLI {
 
     private final Scanner scanner = new Scanner(System.in);
     private final ConsolePrinter printer = ConsolePrinter.getInstance();
+
+
+    /**
+     * Displays the CLI login menu and processes the user's input.
+     *
+     * <p>Repeatedly displays the menu until the user successfully logs in,
+     * navigates to the registration page, or chooses to exit the menu.</p>
+     *
+     * <p>Delegates the display of error messages related to invalid
+     * menu choices to HandlerCLIError.</p>
+     */
 
     public void execute() {
         while (true) {
@@ -63,18 +86,43 @@ public class LoginGraphicControllerCLI {
     }
 
 
+    /**
+     * Displays a message informing the user that authentication
+     * through Google has not been implemented yet.
+     */
+
     private void continueWithGoogle() {
         printer.println("Google log-in is not implemented yet.");
     }
+
+    /**
+     * Displays a message informing the user that authentication
+     * through Facebook has not been implemented yet.
+     */
 
     private void continueWithFacebook() {
         printer.println("Facebook log-in is not implemented yet.");
     }
 
+
+    /**
+     * Displays a prompt for the specified field and reads the user's input
+     * from the standard input stream.
+     *
+     * @param field the name of the field to display
+     * @return the value entered by the user
+     */
+
     private String readField(String field) {
         printer.println(field + ": ");
         return scanner.nextLine();
     }
+
+
+    /**
+     * Instantiates and executes the CLI sign-up graphic controller
+     * to start the registration process.
+     */
 
     private void signUp() {
         SignUpGraphicControllerCLI signUpController =
@@ -83,10 +131,32 @@ public class LoginGraphicControllerCLI {
         signUpController.execute();
     }
 
+    /**
+     * Displays a farewell message before exiting the CLI login menu.
+     */
+
     private void exit(){
         printer.println("Goodbye!");
 
     }
+
+
+    /**
+     * Handles the submission of user login credentials.
+     *
+     * <p>Collects the user's credentials and populates a
+     * LoginCredentialsBean, whose setters perform syntactic checks.</p>
+     *
+     * <p>Delegates authentication to LoginController and navigation
+     * to the appropriate home page to CLINavigatorSingleton.</p>
+     *
+     * <p>Handles missing mandatory fields and authentication errors
+     * by delegating the display of error messages to HandlerCLIError.</p>
+     *
+     * @return true if authentication succeeds and home page execution
+     * completes normally, false if a required field or application error occurs
+     */
+
 
     private boolean submitCredentials() {
 
