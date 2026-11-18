@@ -2,9 +2,9 @@ package it.uniroma2.partyflow.graphic_controllers.cli;
 
 import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
-import it.uniroma2.partyflow.utilities.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsoleReader;
 
-import java.util.Scanner;
 
 /**
  * Graphic controller responsible for managing the initial CLI menu.
@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 public class FirstSceneGraphicControllerCLI {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final ConsoleReader consoleReader = ConsoleReader.getInstance();
     private final ConsolePrinter printer = ConsolePrinter.getInstance();
 
 
@@ -45,7 +45,7 @@ public class FirstSceneGraphicControllerCLI {
                 printer.println("0 - Exit");
                 printer.println("Choice: ");
 
-                String choice = this.scanner.nextLine();
+                String choice = consoleReader.readLine();
 
                 switch (choice) {
 

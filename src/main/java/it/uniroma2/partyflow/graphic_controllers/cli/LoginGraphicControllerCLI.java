@@ -7,10 +7,9 @@ import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
-import it.uniroma2.partyflow.utilities.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsoleReader;
 import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
-
-import java.util.Scanner;
 
 
 /**
@@ -26,9 +25,8 @@ import java.util.Scanner;
 
 public class LoginGraphicControllerCLI {
 
-    private final Scanner scanner = new Scanner(System.in);
     private final ConsolePrinter printer = ConsolePrinter.getInstance();
-
+    private final ConsoleReader consoleReader = ConsoleReader.getInstance();
 
     /**
      * Displays the CLI login menu and processes the user's input.
@@ -71,7 +69,6 @@ public class LoginGraphicControllerCLI {
                     case "4" -> this.continueWithFacebook();
 
                     case "0" -> {
-                        this.exit();
                         return;
                     }
 
@@ -115,8 +112,21 @@ public class LoginGraphicControllerCLI {
 
     private String readField(String field) {
         printer.println(field + ": ");
-        return scanner.nextLine();
+        return consoleReader.readLine();
     }
+
+
+    /**
+     * Displays a password field prompt and reads the user's password,
+     * hiding the entered characters when a system console is available.
+     *
+     * @return the password entered by the user
+     */
+    private String readPasswordField() {
+        printer.println("Password: ");
+        return consoleReader.readPassword();
+    }
+
 
 
     /**
@@ -130,16 +140,6 @@ public class LoginGraphicControllerCLI {
         printer.println();
         signUpController.execute();
     }
-
-    /**
-     * Displays a farewell message before exiting the CLI login menu.
-     */
-
-    private void exit(){
-        printer.println("Goodbye!");
-
-    }
-
 
     /**
      * Handles the submission of user login credentials.
@@ -163,10 +163,7 @@ public class LoginGraphicControllerCLI {
         try {
             // 1) Create and populate the credentials Bean
             LoginCredentialsBean loginBean =
-                    new LoginCredentialsBean();
-
-            loginBean.setEmail(this.readField("Email"));
-            loginBean.setPassword(this.readField("Password"));
+                    new LoginCredentialsBean(this.readField("Email"),this.readPasswordField());
             //---------------------------------------------
 
             // 2) Pass the Bean to the application controller

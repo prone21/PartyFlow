@@ -191,20 +191,10 @@ public class SignUpGraphicControllerGUI {
     public void createAccount(){
 
         try{
-            // 1) create the bean where the user date will be memorized
-            UserBean signUpBean = new UserBean();
-
-            signUpBean.setName(nameField.getText());
-            signUpBean.setSurname(surnameField.getText());
-            signUpBean.setDateOfBirth(dateField.getText());
-
-
-            signUpBean.setEmail(emailField.getText());
-            signUpBean.setPassword(pwdField.getText());
-
-            signUpBean.setGender(this.obtainSelectedGender());
-
-            signUpBean.setAccountType(this.obtainSelectedAccountType());
+            // 1) create the bean where the user data will be stored
+            UserBean signUpBean = new UserBean(nameField.getText(), surnameField.getText(),
+                    dateField.getText(), emailField.getText(), pwdField.getText(),
+                    this.obtainSelectedGender(), this.obtainSelectedAccountType());
             //---------------------------------------------
 
 
@@ -216,8 +206,8 @@ public class SignUpGraphicControllerGUI {
             // 3) show the right homepage
             GUINavigatorSingleton nav = GUINavigatorSingleton.getInstance();
             switch (signUpBean.getAccountType()){
-                case PARTY_PLANNER -> nav.goToView("it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
-                case PARTICIPANT -> nav.goToView("it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
+                case PARTY_PLANNER -> nav.goToView("/it/uniroma2/partyflow/view/Party_Planner/partyPlannerHomePage.fxml");
+                case PARTICIPANT -> nav.goToView("/it/uniroma2/partyflow/view/Participant/participantHomePage.fxml");
             }
             //---------------------------------------------
 

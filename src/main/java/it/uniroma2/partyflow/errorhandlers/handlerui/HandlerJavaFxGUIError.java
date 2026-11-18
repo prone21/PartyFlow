@@ -1,5 +1,6 @@
 package it.uniroma2.partyflow.errorhandlers.handlerui;
 
+import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationException;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -83,6 +84,7 @@ public class HandlerJavaFxGUIError implements HandlerUIError {
     @Override
     public void terminateApplication() {
         Platform.exit();
+        throw new ApplicationTerminationException();
     }
 
 

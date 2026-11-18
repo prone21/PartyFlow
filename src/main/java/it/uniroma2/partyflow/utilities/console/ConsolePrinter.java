@@ -1,11 +1,17 @@
-package it.uniroma2.partyflow.utilities;
+package it.uniroma2.partyflow.utilities.console;
 
 import java.io.PrintWriter;
 
 /**
- * Singleton responsible for managing CLI output.
+ * Singleton responsible for centralizing the management of CLI output.
  *
- * <p>Provides centralized console output using a PrintWriter.</p>
+ * <p>Encapsulates access to the standard output stream ({@code System.out})
+ * through a shared PrintWriter, avoiding direct calls to System.out
+ * scattered throughout the application.</p>
+ *
+ * <p>This centralized approach simplifies debugging, troubleshooting,
+ * and maintenance by providing a single entry point for managing
+ * CLI output.</p>
  */
 
 public class ConsolePrinter {

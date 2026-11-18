@@ -30,6 +30,16 @@ public class UserBean {
     private String password;
     private AccountType accountType;
 
+    public UserBean(String name, String surname, String dateOfBirth, String email, String password, Gender gender,
+                    AccountType accountType) throws RequiredFieldException, InvalidFieldFormatException {
+        this.setName(name);
+        this.setSurname(surname);
+        this.setDateOfBirth(dateOfBirth);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setGender(gender);
+        this.setAccountType(accountType);
+    }
 
 // ---------------------Name------------------------
     public String getName() {
@@ -37,7 +47,7 @@ public class UserBean {
     }
 
     public void setName(String name) throws RequiredFieldException {
-        if(name == null || name.isEmpty()){
+        if(name == null || name.isBlank()){
             throw new RequiredFieldException(UserField.NAME);
         }
         else {
@@ -55,7 +65,7 @@ public class UserBean {
     }
 
     public void setSurname(String surname) throws RequiredFieldException {
-        if(surname == null || surname.isEmpty()){
+        if(surname == null || surname.isBlank()){
             throw new RequiredFieldException(UserField.SURNAME);
         }
         else{
@@ -99,7 +109,7 @@ public class UserBean {
     }
 
     public void setDateOfBirth(String dateOfBirth) throws InvalidFieldFormatException, RequiredFieldException {
-        if(dateOfBirth == null || dateOfBirth.isEmpty()){
+        if(dateOfBirth == null || dateOfBirth.isBlank()){
             throw new RequiredFieldException(UserField.DATE_OF_BIRTH);
         }
         else if (this.isValidDate(dateOfBirth)){
@@ -124,7 +134,7 @@ public class UserBean {
     }
 
     public void setEmail(String email) throws InvalidFieldFormatException, RequiredFieldException {
-        if (email == null || email.isEmpty()){
+        if (email == null || email.isBlank()){
             throw new RequiredFieldException(UserField.EMAIL);
         }
         else if (this.isValidEmail(email)){
@@ -150,7 +160,7 @@ public class UserBean {
     }
 
     public void setPassword(String password) throws InvalidFieldFormatException, RequiredFieldException {
-        if (password == null || password.isEmpty()){
+        if (password == null || password.isBlank()){
             throw new RequiredFieldException(UserField.PASSWORD);
         }
         else if (this.isValidPwd(password)){

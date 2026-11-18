@@ -3,7 +3,7 @@ package it.uniroma2.partyflow.utilities.navigators;
 import it.uniroma2.partyflow.enums.AccountType;
 import it.uniroma2.partyflow.graphic_controllers.cli.PHomePageGraphicControllerCLI;
 import it.uniroma2.partyflow.graphic_controllers.cli.PpHomePageGraphicControllerCLI;
-import it.uniroma2.partyflow.utilities.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsolePrinter;
 
 /**
  * Singleton responsible for managing navigation between CLI pages.
@@ -15,7 +15,7 @@ public class CLINavigatorSingleton {
     private final ConsolePrinter printer = ConsolePrinter.getInstance();
     private CLINavigatorSingleton(){}
 
-    // guarantee singleton
+    // Ensures a single instance
     public static CLINavigatorSingleton getInstance(){
         if(instance == null){
             instance = new CLINavigatorSingleton();

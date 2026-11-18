@@ -93,9 +93,19 @@ public class UserDaoMySQL implements UserDaoInterface {
 
         PreparedStatement stmt = null;
 
+        /*
+         * Tracks the transaction lifecycle to ensure that auto-commit
+         * is restored only after a successful commit or rollback.
+         * This prevents unintentional commits of partially executed
+         * operations if an exception occurs during the transaction.
+         */
+        boolean transactionStarted = false;
+        boolean transactionCompleted = false;
+
         try{
             this.connect();
             this.conn.setAutoCommit(false); // start transaction
+            transactionStarted = true;
 
             // insert the new account in the 'users' table
             String query = "insert into users (email, name, surname, password, dateOfBirth" +
@@ -125,6 +135,7 @@ public class UserDaoMySQL implements UserDaoInterface {
             }
 
             this.conn.commit(); // end transaction
+            transactionCompleted = true;
         }
 
         catch (InvalidPersistenceTypeException e){
@@ -172,7 +183,12 @@ public class UserDaoMySQL implements UserDaoInterface {
 
         finally {
             try{
-                if (this.conn != null){
+                if (this.conn != null && transactionStarted) {
+
+                    if (!transactionCompleted) {
+                        this.conn.rollback();
+                    }
+
                     this.conn.setAutoCommit(true);
                 }
             }

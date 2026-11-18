@@ -3,7 +3,7 @@ package it.uniroma2.partyflow.errorhandlers.handlerui;
 
 import it.uniroma2.partyflow.enums.UserField;
 import it.uniroma2.partyflow.exceptions.systemexception.ApplicationTerminationException;
-import it.uniroma2.partyflow.utilities.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsolePrinter;
 
 
 /**

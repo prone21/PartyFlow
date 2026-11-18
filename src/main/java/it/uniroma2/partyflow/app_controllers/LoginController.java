@@ -23,6 +23,24 @@ import it.uniroma2.partyflow.models.LoginCredential;
 public class LoginController {
     private static final String LOGIN_ERROR_STR = "Login failed: ";
 
+    /**
+     * Authenticates a user using the provided login credentials.
+     *
+     * <p>Converts the LoginCredentialsBean into a domain model and
+     * delegates authentication to the appropriate DAO, independently
+     * of the configured persistence technology.</p>
+     *
+     * <p>Handles persistence-related exceptions by logging errors
+     * and translating recoverable failures into application-level
+     * exceptions. Fatal errors are delegated to HandlerSystemError,
+     * which coordinates application termination.</p>
+     *
+     * @param cred the bean containing the user's login credentials
+     * @return the account type of the authenticated user
+     * @throws ApplicationException if the credentials are invalid,
+     * the persistence service is unavailable, or an unexpected
+     * persistence error occurs
+     */
     public AccountType login(LoginCredentialsBean cred) throws ApplicationException{
         try {
             // ----------- convert bean in model --------------
@@ -61,7 +79,6 @@ public class LoginController {
             handlerSystemError.logError(LOGIN_ERROR_STR + e.getMessage(), e);
 
             handlerSystemError.handleFatalError(e);
-
             return null;
         }
     }

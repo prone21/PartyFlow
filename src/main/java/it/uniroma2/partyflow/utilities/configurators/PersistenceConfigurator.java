@@ -36,7 +36,7 @@ public class PersistenceConfigurator {
         }
     }
 
-    // Guarantee Singleton
+    // Ensures a single instance
     public static PersistenceConfigurator getInstance() throws IOException {
         if(instance == null){
             instance = new PersistenceConfigurator();

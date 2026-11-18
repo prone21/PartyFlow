@@ -34,7 +34,7 @@ public class PasswordProtector {
 
     /**
      * Verifies a plaintext password against a hashed password.
-     * It's possibile because the salt is memorized in the hash.
+     * It's possible because the salt is stored in the hash.
      *
      * @param plainTextPassword The plaintext password to check
      * @param hashedPassword The hashed password to check against

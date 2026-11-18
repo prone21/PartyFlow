@@ -47,10 +47,20 @@ public class ConnectionFactory {
 
     public static Connection getConnection()  throws InvalidPersistenceTypeException, PersistenceServiceUnavailableException {
         try{
-            if(conn == null){
+            if (conn == null || conn.isClosed() || !conn.isValid(5)) {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                }
+
                 PersistenceConfigurator pc = PersistenceConfigurator.getInstance();
                 List<String> connProp = pc.getDBMSConnectionParameter();
-                conn = DriverManager.getConnection(connProp.get(0), connProp.get(1), connProp.get(2));
+
+                conn = DriverManager.getConnection(
+                        connProp.get(0),
+                        connProp.get(1),
+                        connProp.get(2)
+                );
             }
         }
         catch (InvalidPersistenceTypeException e){
@@ -84,9 +94,10 @@ public class ConnectionFactory {
         try{
             if(conn != null && !conn.isClosed()){
                 conn.close();
-                conn = null;
                 handlerSystemError.logInfo(("Database connection closed successfully"));
             }
+
+            conn = null;
         }
         catch (SQLException e) {
             handlerSystemError.logError("Error closing database connection", e);

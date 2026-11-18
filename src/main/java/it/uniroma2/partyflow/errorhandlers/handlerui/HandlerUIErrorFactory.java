@@ -24,7 +24,7 @@ public class HandlerUIErrorFactory {
 
     private HandlerUIErrorFactory(){}
 
-    // Guarantee Singleton
+    // Ensures a single instance
     public static HandlerUIErrorFactory getInstance(){
         if(instance == null){
             instance = new HandlerUIErrorFactory();

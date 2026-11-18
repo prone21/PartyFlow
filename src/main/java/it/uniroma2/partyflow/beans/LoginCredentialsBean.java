@@ -16,13 +16,18 @@ public class LoginCredentialsBean {
     private String email;
     private String password;
 
+    public LoginCredentialsBean(String email, String password) throws RequiredFieldException {
+        this.setEmail(email);
+        this.setPassword(password);
+    }
+
     // --------------------------Manage email--------------------------------
     public String getEmail() {
         return this.email;
     }
 
     public void setEmail(String email) throws RequiredFieldException {
-        if (email == null || email.isEmpty()){
+        if (email == null || email.isBlank()){
             throw new RequiredFieldException(UserField.EMAIL);
         }
         else{
@@ -38,7 +43,7 @@ public class LoginCredentialsBean {
     }
 
     public void setPassword(String password) throws RequiredFieldException {
-        if (password == null || password.isEmpty()){
+        if (password == null || password.isBlank()){
             throw new RequiredFieldException(UserField.PASSWORD);
         }
         else{

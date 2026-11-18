@@ -1,6 +1,6 @@
 package it.uniroma2.partyflow.graphic_controllers.cli;
 
-import it.uniroma2.partyflow.utilities.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsolePrinter;
 
 public class PpHomePageGraphicControllerCLI {
     private final ConsolePrinter printer = ConsolePrinter.getInstance();

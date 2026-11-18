@@ -20,7 +20,7 @@ public class UIApplicationFactory {
 
     private UIApplicationFactory(){}
 
-    // guarantee singleton
+    // Ensures a single instance
     public static UIApplicationFactory getInstance(){
         if(instance == null){
             instance = new UIApplicationFactory();

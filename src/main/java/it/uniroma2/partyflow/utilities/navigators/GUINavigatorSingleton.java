@@ -26,7 +26,7 @@ public class GUINavigatorSingleton {
     }
 
 
-    // guarantee singleton
+    // Ensures a single instance
     public static GUINavigatorSingleton getInstance(Stage stage){
         if(instance == null){
             instance = new GUINavigatorSingleton(stage);
@@ -88,9 +88,12 @@ public class GUINavigatorSingleton {
         this.stage.show();
     }
 
-    //It's used to go back at the precedent view
+    //It's used to go back at the previous view
     public void goBackward() {
-        this.goToScene(this.prevScene);
+
+        if(this.prevScene != null) {
+            this.goToScene(this.prevScene);
+        }
     }
 
 }

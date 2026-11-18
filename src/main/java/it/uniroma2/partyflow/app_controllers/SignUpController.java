@@ -26,6 +26,25 @@ import java.time.format.DateTimeFormatter;
 public class SignUpController {
     private static final String SIGN_UP_ERRSTR = "SignUp failed: ";
 
+
+    /**
+     * Creates a new user account using the provided registration data.
+     *
+     * <p>Converts the UserBean into a domain model by parsing the date
+     * of birth and hashing the password through PasswordProtector.
+     * Delegates account persistence to the appropriate DAO, independently
+     * of the configured persistence technology.</p>
+     *
+     * <p>Handles persistence-related exceptions by logging errors
+     * and translating recoverable failures into application-level
+     * exceptions. Fatal errors are delegated to HandlerSystemError,
+     * which coordinates application termination.</p>
+     *
+     * @param signUpBean the bean containing the user's registration data
+     * @throws ApplicationException if the account already exists,
+     * a persistence constraint is violated, the persistence service
+     * is unavailable, or an unexpected persistence error occurs
+     */
     public void createAccount(UserBean signUpBean) throws ApplicationException{
 
         try{

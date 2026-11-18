@@ -8,11 +8,9 @@ import it.uniroma2.partyflow.errorhandlers.handlerui.HandlerCLIError;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
 import it.uniroma2.partyflow.exceptions.uiexception.RequiredFieldException;
-import it.uniroma2.partyflow.utilities.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsolePrinter;
+import it.uniroma2.partyflow.utilities.console.ConsoleReader;
 import it.uniroma2.partyflow.utilities.navigators.CLINavigatorSingleton;
-
-import java.util.Scanner;
-
 
 /**
  * Graphic controller responsible for managing the CLI registration interface.
@@ -30,8 +28,7 @@ import java.util.Scanner;
 public class SignUpGraphicControllerCLI {
     private static final String SELECTION_CHOICE = "Choice";
     private final ConsolePrinter printer = ConsolePrinter.getInstance();
-    private final Scanner scanner = new Scanner(System.in);
-
+    private final ConsoleReader consoleReader = ConsoleReader.getInstance();
 
 
     /**
@@ -63,7 +60,6 @@ public class SignUpGraphicControllerCLI {
                     }
 
                     case "0" -> {
-                        this.exit();
                         return;
                     }
                     default -> throw new ApplicationException("Invalid choice");
@@ -77,13 +73,6 @@ public class SignUpGraphicControllerCLI {
 
     }
 
-    /**
-     * Displays a farewell message before exiting the CLI registration menu.
-     */
-
-    private void exit(){
-        printer.println("Goodbye!");
-    }
 
 
     /**
@@ -96,8 +85,21 @@ public class SignUpGraphicControllerCLI {
 
     private String readField(String field) {
         printer.println(field + ": ");
-        return scanner.nextLine();
+        return consoleReader.readLine();
     }
+
+
+    /**
+     * Displays a password field prompt and reads the user's password,
+     * hiding the entered characters when a system console is available.
+     *
+     * @return the password entered by the user
+     */
+    private String readPasswordField() {
+        printer.println("Password: ");
+        return consoleReader.readPassword();
+    }
+
 
 
     /**
@@ -167,25 +169,10 @@ public class SignUpGraphicControllerCLI {
 
     private boolean createAccount(){
         try{
-            // 1) create the bean where the user date will be memorized
-            UserBean signUpBean = new UserBean();
-
-            signUpBean.setName(readField("Name"));
-            signUpBean.setSurname(readField("Surname"));
-            signUpBean.setDateOfBirth(
-                    readField("Date of birth (DD/MM/YYYY)")
-            );
-
-            signUpBean.setEmail(readField("Email"));
-            signUpBean.setPassword(readField("Password"));
-
-            signUpBean.setGender(
-                    this.obtainSelectedGender()
-            );
-
-            signUpBean.setAccountType(
-                    this.obtainSelectedAccountType()
-            );
+            // 1) create the bean where the user data will be stored
+            UserBean signUpBean = new UserBean( readField("Name"),readField("Surname"),
+                    readField("Date of birth (DD/MM/YYYY)"), readField("Email"),
+                    readPasswordField(), this.obtainSelectedGender(), this.obtainSelectedAccountType() );
             //---------------------------------------------
 
             // 2) Pass the UserBean to the application controller

@@ -32,7 +32,7 @@ public class UIConfigurator {
         }
     }
 
-    // Guarantee Singleton
+    // Ensures a single instance
     public static UIConfigurator getInstance() throws IOException {
         if (instance == null){
             instance = new UIConfigurator();

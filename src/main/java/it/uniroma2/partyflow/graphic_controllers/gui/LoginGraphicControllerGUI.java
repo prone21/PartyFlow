@@ -80,10 +80,8 @@ public class LoginGraphicControllerGUI {
             String pwd = pwdField.getText();
             //---------------------------------------------
 
-            // 1) create the bean where the user date will be memorized
-            LoginCredentialsBean loginBean = new LoginCredentialsBean();
-            loginBean.setEmail(email);
-            loginBean.setPassword(pwd);
+            // 1) create the bean where the user data will be stored
+            LoginCredentialsBean loginBean = new LoginCredentialsBean(email,pwd);
             //---------------------------------------------
 
             // 2) pass the LoginCredentialsBean to the application controller

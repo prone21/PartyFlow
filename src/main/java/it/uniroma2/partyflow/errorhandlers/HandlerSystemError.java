@@ -43,7 +43,7 @@ public class HandlerSystemError {
         }
     }
 
-    // Guarantee Singleton
+    // Ensures a single instance
     public static HandlerSystemError getInstance(){
         if(instance == null){
             instance = new HandlerSystemError();
