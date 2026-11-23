@@ -112,5 +112,10 @@ public class UserDaoInMemory implements UserDaoInterface {
         }
     }
 
+    @Override
+    public User retriveUserByEmail(String email){
+        return null;
+    }
+
 
 }

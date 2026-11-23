@@ -287,4 +287,9 @@ public class UserDaoCSV implements UserDaoInterface {
 
     }
 
+    @Override
+    public User retriveUserByEmail(String email){
+        return null;
+    }
+
 }
