@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #153A5F; -fx-background-radius: 30 30 0 0;" BorderPane.alignment="CENTER">
+      <!-- Header -->
+      <AnchorPane prefHeight="100.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="19.0" layoutY="1.0" style="-fx-font-weight: bold; -fx-font-size: 30px;" text="Party" textFill="#F6F7F9" />
-            <Label layoutX="38.0" layoutY="32.0" style="-fx-font-weight: bold; -fx-font-size: 30px;" text="Flow" textFill="#F6F7F9" />
-            <Label alignment="CENTER" layoutX="192.0" layoutY="28.0" prefWidth="410.0" style="-fx-font-weight: bold; -fx-font-size: 30px;" text="Ties occur: resolve them!" textFill="#F6F7F9" />
-            <Button layoutX="687.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="98.0" style="-fx-background-color: #2978DE; -fx-background-radius: 25; -fx-border-width: 0; -fx-font-size: 30px; -fx-font-weight: bold;" text="←" textFill="#F6F7F9" />
+            <fx:include source="../view_in_common/header.fxml" />
+
+            <Label layoutX="225.0" layoutY="27.0" style="-fx-font-weight: bold;" text="Ties occur: resolve them!" textAlignment="CENTER" textFill="#f6f7f9">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+
          </children>
       </AnchorPane>
    </top>
@@ -45,12 +46,7 @@
       </AnchorPane>
    </center>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0" style="-fx-background-color: #153A5F;" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="266.0" style="-fx-background-color: transparent; -fx-font-size: 25px; -fx-font-weight: bold; -fx-border-color: #F6F7F9; -fx-border-width: 0 2 0 0;" text="Home" textFill="#F6F7F9" />
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="268.0" style="-fx-background-color: transparent; -fx-font-size: 25px; -fx-font-weight: bold; -fx-border-color: #F6F7F9; -fx-border-width: 0 2 0 0;" text="My notifications" textFill="#F6F7F9" />
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="266.0" style="-fx-background-color: transparent; -fx-font-size: 25px; -fx-font-weight: bold; -fx-border-width: 0;" text="Profile" textFill="#F6F7F9" />
-         </children>
-      </HBox>
+      <!-- Navigation bar -->
+      <fx:include source="../view_in_common/navigationBar.fxml" />
    </bottom>
 </BorderPane>

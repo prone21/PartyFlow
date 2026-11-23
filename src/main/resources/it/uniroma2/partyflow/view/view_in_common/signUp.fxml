@@ -14,24 +14,16 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controllers.gui.graphic_controllers_in_common.SignUpGraphicControllerGUI">
    <top>
       <!-- Header -->
-      <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #153A5F; -fx-border-color: #153A5F; -fx-border-width: 3; -fx-border-radius: 25; -fx-background-radius: 30 30 0 0;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="100.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="19.0" layoutY="1.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party" textFill="#f6f7f9">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="38.0" layoutY="32.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow" textFill="#f6f7f9">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
+            <fx:include source="../view_in_common/header.fxml" />
+
             <Label layoutX="341.0" layoutY="27.0" style="-fx-font-weight: bold;" text="Sign up" textAlignment="CENTER" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Button fx:id="backwardButton" layoutX="687.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#goBackward" prefHeight="66.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-background-color: #2978DE; -fx-border-color: #f6f7f9; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 20; -fx-border-width: 0;" text="←" textFill="#f6f7f9" />
+
          </children>
       </AnchorPane>
    </top>

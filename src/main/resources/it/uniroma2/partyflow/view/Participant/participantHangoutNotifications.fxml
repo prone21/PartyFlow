@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane prefHeight="462.0" prefWidth="726.0" style="-fx-background-color: #F6F7F9;" BorderPane.alignment="CENTER">
          <children>
@@ -65,47 +62,21 @@
       </AnchorPane>
    </center>
    <bottom>
-     <!-- Navigation bar -->
-     <HBox prefHeight="0.0" prefWidth="800.0" style="-fx-border-color: #153a5f; -fx-border-width: 3; -fx-background-color: #153a5f;" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="106.0" prefWidth="276.0" style="-fx-font-weight: bold; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-background-color: transparent; -fx-font-size: 25;" text="Home" textFill="#f6f7f9">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="265.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-font-size: 25;" text="My notifications" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="284.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 0 0 0; -fx-font-size: 25;" text="Profile" textFill="#f6f7f9">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
+      <!-- Navigation bar -->
+      <fx:include source="../view_in_common/navigationBar.fxml" />
    </bottom>
    <top>
-     <!-- Header -->
-      <AnchorPane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #153A5F; -fx-border-color: #153A5F; -fx-border-width: 3; -fx-border-radius: 25; -fx-background-radius: 30 30 0 0;" BorderPane.alignment="CENTER">
+      <!-- Header -->
+      <AnchorPane prefHeight="100.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="19.0" layoutY="1.0" prefHeight="46.0" prefWidth="84.0" style="-fx-font-weight: bold;" text="Party" textFill="#f6f7f9">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="38.0" layoutY="32.0" prefHeight="46.0" prefWidth="72.0" style="-fx-font-weight: bold;" text="Flow" textFill="#f6f7f9">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
+            <fx:include source="../view_in_common/header.fxml" />
+
             <Label layoutX="216.0" layoutY="27.0" style="-fx-font-weight: bold;" text="My Hangout Notifications" textAlignment="CENTER" textFill="#f6f7f9">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Button fx:id="backwardButton" layoutX="687.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#goBackward" prefHeight="66.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-background-color: #2978DE; -fx-border-color: #f6f7f9; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 20; -fx-border-width: 0;" text="←" textFill="#f6f7f9" />
+
          </children>
       </AnchorPane>
    </top>

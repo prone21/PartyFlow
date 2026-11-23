@@ -88,5 +88,7 @@
         </HBox>
     </center>
     <bottom>
+        <!-- Navigation bar -->
+        <fx:include source="../view_in_common/navigationBar.fxml" />
     </bottom>
 </BorderPane>
