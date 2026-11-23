@@ -6,8 +6,7 @@ import it.uniroma2.partyflow.models.LoginCredential;
 import it.uniroma2.partyflow.models.User;
 
 /**
- * Defines the operations for managing user persistence,
- * including account registration and authentication.
+ * Defines the operations for managing user persistence.
  * Implementations provide the persistence-specific logic.
  */
 
@@ -53,4 +52,18 @@ public interface UserDaoInterface {
      */
     AccountType login(LoginCredential cred) throws PersistenceServiceUnavailableException, EntityNotFound, PersistenceConstraintViolationException,
             PersistenceGenericException, InvalidPersistenceTypeException;
+
+    /**
+     * Retrieves a user from the persistence layer using their email address.
+     *
+     * @param email the email address identifying the user
+     * @return the User corresponding to the specified email
+     * @throws PersistenceServiceUnavailableException if the persistence service is unavailable
+     * @throws InvalidPersistenceTypeException if the configured persistence type is incompatible with the type
+     * required by the operation
+     * @throws PersistenceGenericException if an unexpected persistence error occurs
+     * @throws EntityNotFound if no matching account is found
+     */
+
+    User retriveUserByEmail(String email) throws PersistenceServiceUnavailableException, InvalidPersistenceTypeException, PersistenceGenericException, EntityNotFound;
 }

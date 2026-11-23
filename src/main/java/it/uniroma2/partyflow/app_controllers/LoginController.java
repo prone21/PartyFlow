@@ -8,6 +8,7 @@ import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.models.LoginCredential;
+import it.uniroma2.partyflow.utilities.UserSession;
 
 
 /**
@@ -51,7 +52,12 @@ public class LoginController {
             DaoAbstractFactory factory = DaoAbstractFactory.getFactory();
             UserDaoInterface loginDao = factory.getUserDao();
             // -----------------------------------------------
-            return loginDao.login(usCred);
+
+            // instance the user session
+            AccountType at = loginDao.login(usCred);
+            UserSession.initializeSession(usCred.getEmail(), at);
+
+            return at;
 
         } catch (PersistenceGenericException | PersistenceConstraintViolationException e) {
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();

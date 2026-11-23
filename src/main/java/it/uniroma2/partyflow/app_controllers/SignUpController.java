@@ -8,6 +8,7 @@ import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.models.User;
 import it.uniroma2.partyflow.utilities.PasswordProtector;
+import it.uniroma2.partyflow.utilities.UserSession;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -77,6 +78,9 @@ public class SignUpController {
             UserDaoInterface signUpDao = factory.getUserDao();
             signUpDao.signUp(user);
             // ------------------------------------------------
+
+            // instance the user session
+            UserSession.initializeSession(user.getEmail(),user.getAccountType());
         }
 
         catch (PersistenceGenericException e){

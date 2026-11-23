@@ -3,20 +3,19 @@ package it.uniroma2.partyflow.daos.dao_mysql;
 import it.uniroma2.partyflow.daos.ConnectionFactory;
 import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
+import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.models.LoginCredential;
 import it.uniroma2.partyflow.models.User;
 import it.uniroma2.partyflow.utilities.PasswordProtector;
-
 import java.sql.*;
 
 /**
  * MySQL implementation of the Data Access Object (DAO) responsible
  * for managing user persistence.
  *
- * <p>Provides operations for user registration and authentication
- * using JDBC. Manages database transactions during account creation
+ * <p>Manages database transactions during account creation
  * and translates SQL exceptions into application-specific
  * persistence exceptions.</p>
  */
@@ -25,8 +24,6 @@ import java.sql.*;
 public class UserDaoMySQL implements UserDaoInterface {
 
     private Connection conn = null;
-
-
 
     /**
      * Retrieves the shared JDBC connection through ConnectionFactory.
@@ -228,6 +225,7 @@ public class UserDaoMySQL implements UserDaoInterface {
      * @throws EntityNotFound if the user does not exist or the password is incorrect
      * @throws PersistenceServiceUnavailableException if the database is unavailable
      * @throws InvalidPersistenceTypeException if MySQL is not the configured persistence type
+     * @throws EntityNotFound if no matching account is found
      */
 
     @Override
@@ -294,6 +292,98 @@ public class UserDaoMySQL implements UserDaoInterface {
                 handlerSystemError.logError(e2);
             }
         }
+    }
+
+
+    /**
+     * Retrieves a user from the MySQL database using their email address.
+     *
+     * <p>Retrieves the user's personal information and determines their
+     * account type through the corresponding DAOs. Constructs and
+     * returns the User domain model.</p>
+     *
+     * @param email the email address identifying the user
+     * @return the corresponding User, or null if no user is found
+     * @throws PersistenceGenericException if an unexpected SQL error occurs
+     * @throws PersistenceServiceUnavailableException if the database is unavailable
+     * @throws InvalidPersistenceTypeException if MySQL is not the configured persistence type
+     */
+    @Override
+    public User retriveUserByEmail(String email) throws PersistenceGenericException, PersistenceServiceUnavailableException, InvalidPersistenceTypeException, EntityNotFound {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        AccountType accountType = null;
+        User user;
+
+        try{
+            this.connect();
+
+            // ---- obtain email, name, surname, dateOfBirth, password and gender ----
+            String query = "select email, name, surname, dateOfBirth, password, gender from\n" +
+                    "users  where email = ?";
+            stmt = this.conn.prepareStatement(query);
+
+            stmt.setString(1,email);
+
+            rs = stmt.executeQuery();
+            // ----------------------------------------------------------
+
+            // -------------- obtain user account type ------------------
+            ParticipantDaoMySQL participantDaoMySQL = new ParticipantDaoMySQL();
+            PartyPlannerDaoMySQL partyPlannerDaoMySQL = new PartyPlannerDaoMySQL();
+            if(participantDaoMySQL.existsParticipant(email)){
+                accountType = AccountType.PARTICIPANT;
+            } else if (partyPlannerDaoMySQL.existsPartyPlanner(email)) {
+                accountType = AccountType.PARTY_PLANNER;
+
+            }
+            // ----------------------------------------------------------
+
+            // --------------- define the model user --------------------
+            if(rs.next()){
+                user = new User( rs.getString("name"),rs.getString("surname"),
+                        rs.getString("email"),
+                        rs.getString("password"), rs.getDate("dateOfBirth").toLocalDate(),
+                        accountType, Gender.valueOf(rs.getString("gender")) );
+
+                return user;
+            }
+            else{
+                throw new EntityNotFound();
+            }
+
+        }
+
+        catch (PersistenceServiceUnavailableException | EntityNotFound | InvalidPersistenceTypeException e){
+            // log the error
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            // throw the exception
+            throw e;
+        }
+
+        catch (SQLException e){
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            throw new PersistenceGenericException();
+        }
+
+        finally{
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+
+                if(rs != null){
+                    rs.close();
+                }
+            }
+            catch (SQLException e2){
+                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+                handlerSystemError.logError(e2);
+            }
+        }
+
     }
 
 }

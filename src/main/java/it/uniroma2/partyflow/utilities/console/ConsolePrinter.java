@@ -6,7 +6,7 @@ import java.io.PrintWriter;
  * Singleton responsible for centralizing the management of CLI output.
  *
  * <p>Encapsulates access to the standard output stream ({@code System.out})
- * through a shared PrintWriter, avoiding direct calls to System.out
+ * through a shared PrintWriter, avoiding direct calls to 'System.out'
  * scattered throughout the application.</p>
  *
  * <p>This centralized approach simplifies debugging, troubleshooting,

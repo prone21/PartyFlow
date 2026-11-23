@@ -4,46 +4,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controllers.gui.PpHomePageGraphicControllerGUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controllers.gui.pp_graphic_controllers.PpHomePageGraphicControllerGUI">
    <bottom>
       <!-- Navigation bar -->
-      <HBox prefHeight="0.0" prefWidth="800.0" style="-fx-border-color: #153a5f; -fx-border-width: 3; -fx-background-color: #153a5f;" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="106.0" prefWidth="276.0" style="-fx-font-weight: bold; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-background-color: transparent; -fx-font-size: 25;" text="Home" textFill="#f6f7f9">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="265.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 3 0 0; -fx-font-size: 25;" text="My notifications" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="104.0" prefWidth="284.0" style="-fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: #F6F7F9; -fx-border-width: 0 0 0 0; -fx-font-size: 25;" text="Profile" textFill="#f6f7f9">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
+      <fx:include source="../view_in_common/navigationBar.fxml" />
    </bottom>
    <center>
       <AnchorPane prefHeight="462.0" prefWidth="726.0" style="-fx-background-color: #F6F7F9;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="540.0" layoutY="128.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-background-color: #2978DE; -fx-background-radius: 15; -fx-font-size: 27; -fx-border-radius: 15;" text="Create Public Event" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
+            <Button layoutX="540.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#createPublicEvent" prefHeight="142.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-background-color: #2978DE; -fx-background-radius: 15; -fx-font-size: 27; -fx-border-radius: 15;" text="Create Public Event" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
                <font>
                   <Font size="27.0" />
                </font>
             </Button>
-            <Button layoutX="85.0" layoutY="128.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-background-color: #2978DE; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-size: 27;" text="Create Hangout" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
+            <Button layoutX="85.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#createHangout" prefHeight="142.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-background-color: #2978DE; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-size: 27;" text="Create Hangout" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
                <font>
                   <Font size="27.0" />
                </font>
             </Button>
-            <Button layoutX="313.0" layoutY="128.0" mnemonicParsing="false" prefHeight="142.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-background-color: #2978DE; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-size: 27;" text="My events" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
+            <Button layoutX="313.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#myEvents" prefHeight="142.0" prefWidth="173.0" style="-fx-font-weight: bold; -fx-background-color: #2978DE; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-size: 27;" text="My events" textAlignment="CENTER" textFill="#f6f7f9" wrapText="true">
                <font>
                   <Font size="27.0" />
                </font>

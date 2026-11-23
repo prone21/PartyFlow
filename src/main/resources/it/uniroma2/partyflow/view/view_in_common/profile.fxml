@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F6F7F9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uniroma2.partyflow.graphic_controllers.gui.graphic_controllers_in_common.ProfileGraphicControllerGUI">
+    <top>
+        <AnchorPane prefHeight="100.0" style="-fx-background-color: #153A5F; -fx-background-radius: 30 30 0 0;">
+            <children>
+                <Label layoutX="19.0" layoutY="1.0" prefHeight="46.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-text-fill: #F6F7F9;" text="Party" />
+                <Label layoutX="38.0" layoutY="32.0" prefHeight="46.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-text-fill: #F6F7F9;" text="Flow" />
+                <Label alignment="CENTER" layoutX="156.2" mouseTransparent="true" prefHeight="100.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-text-fill: #F6F7F9;" text="My Profile" AnchorPane.leftAnchor="156.2" AnchorPane.rightAnchor="144.60000000000014" />
+                <Button fx:id="logoutButton" layoutX="666.0" layoutY="25.0" onMouseClicked="#logOut" prefHeight="61.0" prefWidth="120.0" style="-fx-background-color: #2978DE; -fx-border-radius: 9; -fx-background-radius: 9; -fx-text-fill: #F6F7F9; -fx-font-size: 23; -fx-font-weight: bold; -fx-cursor: hand;" text="Log out" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="25.0" />
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <HBox alignment="CENTER" spacing="22.0" style="-fx-background-color: #F6F7F9;">
+            <padding><Insets bottom="28.0" left="30.0" right="30.0" top="28.0" /></padding>
+            <VBox alignment="CENTER" maxWidth="220.0" prefWidth="220.0" spacing="13.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #E5EAF0; -fx-border-radius: 15;">
+                <padding><Insets bottom="24.0" left="14.0" right="14.0" top="24.0" /></padding>
+                <StackPane maxHeight="104.0" maxWidth="104.0" prefHeight="104.0" prefWidth="104.0">
+                    <Circle fill="#E5EFFC" radius="49.0" />
+                    <Label fx:id="initialsLabel" style="-fx-font-size: 34; -fx-font-weight: bold; -fx-text-fill: #2978DE;" text="" />
+                </StackPane>
+                <Label fx:id="fullNameLabel" alignment="CENTER" maxWidth="192.0" style="-fx-font-size: 23; -fx-font-weight: bold; -fx-text-fill: #153A5F;" text="" textAlignment="CENTER" wrapText="true" />
+                <Label fx:id="roleBadgeLabel" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2978DE; -fx-background-color: #E5EFFC; -fx-background-radius: 15; -fx-padding: 6 15 6 15;" text="" />
+                <Region prefHeight="5.0" />
+                <Label alignment="CENTER" style="-fx-font-size: 14; -fx-text-fill: #60758C;" text="Your PartyFlow account" textAlignment="CENTER" wrapText="true" />
+                <Region VBox.vgrow="ALWAYS" />
+                <Label style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #153A5F;" text="Account security" />
+                <Button fx:id="changePasswordButton" maxWidth="Infinity" onMouseClicked="#changePassword" prefHeight="42.0" style="-fx-background-color: #2978DE; -fx-background-radius: 9; -fx-text-fill: #F6F7F9; -fx-font-size: 15; -fx-font-weight: bold; -fx-cursor: hand;" text="Change password" />
+            </VBox>
+            <VBox alignment="TOP_LEFT" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #E5EAF0; -fx-border-radius: 15;" HBox.hgrow="ALWAYS">
+                <padding><Insets bottom="20.0" left="24.0" right="24.0" top="20.0" /></padding>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #153A5F;" text="Personal information" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button fx:id="editProfileButton" onMouseClicked="#editProfile" prefHeight="35.0" style="-fx-background-color: #2978DE; -fx-background-radius: 9; -fx-text-fill: #F6F7F9; -fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand;" text="Edit profile" />
+                </HBox>
+                <Label style="-fx-font-size: 14; -fx-text-fill: #60758C;" text="Details associated with your account." />
+                <Region prefHeight="3.0" />
+                <GridPane hgap="16.0" vgap="13.0">
+                    <columnConstraints><ColumnConstraints percentWidth="50.0" /><ColumnConstraints percentWidth="50.0" /></columnConstraints>
+                    <VBox spacing="3.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #60758C;" text="Name" />
+                        <Label fx:id="nameLabel" maxWidth="Infinity" minHeight="32.0" style="-fx-font-size: 16; -fx-text-fill: #153A5F; -fx-background-color: #F6F7F9; -fx-background-radius: 5; -fx-padding: 5 10 5 10;" text="" />
+                    </VBox>
+                    <VBox spacing="3.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #60758C;" text="Surname" />
+                        <Label fx:id="surnameLabel" maxWidth="Infinity" minHeight="32.0" style="-fx-font-size: 16; -fx-text-fill: #153A5F; -fx-background-color: #F6F7F9; -fx-background-radius: 5; -fx-padding: 5 10 5 10;" text="" />
+                    </VBox>
+                    <VBox spacing="3.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                        <Label style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #60758C;" text="Email" />
+                        <Label fx:id="emailLabel" maxWidth="Infinity" minHeight="32.0" style="-fx-font-size: 16; -fx-text-fill: #153A5F; -fx-background-color: #F6F7F9; -fx-background-radius: 5; -fx-padding: 5 10 5 10;" text="" />
+                    </VBox>
+                    <VBox spacing="3.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                        <Label style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #60758C;" text="Account type" />
+                        <Label fx:id="accountTypeLabel" maxWidth="Infinity" minHeight="32.0" style="-fx-font-size: 16; -fx-text-fill: #153A5F; -fx-background-color: #F6F7F9; -fx-background-radius: 5; -fx-padding: 5 10 5 10;" text="" />
+                    </VBox>
+                    <VBox spacing="3.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                        <Label style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #60758C;" text="Date of birth" />
+                        <Label fx:id="dateOfBirthLabel" maxWidth="Infinity" minHeight="32.0" style="-fx-font-size: 16; -fx-text-fill: #153A5F; -fx-background-color: #F6F7F9; -fx-background-radius: 5; -fx-padding: 5 10 5 10;" text="" />
+                    </VBox>
+                    <VBox spacing="3.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #60758C;" text="Gender" />
+                        <Label fx:id="genderLabel" maxWidth="Infinity" minHeight="32.0" style="-fx-font-size: 16; -fx-text-fill: #153A5F; -fx-background-color: #F6F7F9; -fx-background-radius: 5; -fx-padding: 5 10 5 10;" text="" />
+                    </VBox>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+            </VBox>
+        </HBox>
+    </center>
+    <bottom>
+    </bottom>
+</BorderPane>
