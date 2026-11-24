@@ -6,6 +6,7 @@ import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -85,4 +86,64 @@ public class QueryMySQLManager {
             }
         }
     }
+
+    /**
+     * Checks whether a participant/party planner with the specified email exists
+     * in the MySQL database.
+     *
+     * @param email the email address identifying the participant/party planner
+     * @return true if the participant/party planner exists, false otherwise
+     * @throws PersistenceGenericException if an unexpected SQL error occurs
+     * @throws PersistenceServiceUnavailableException if the database is unavailable
+     * @throws InvalidPersistenceTypeException if MySQL is not the configured persistence type
+     */
+    public static boolean exists(String email, AccountType at) throws PersistenceServiceUnavailableException, InvalidPersistenceTypeException, PersistenceGenericException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // connect to db
+            Connection conn = ConnectionFactory.getConnection();
+
+            // Checks whether a party planner/participant with the specified email exists.
+            // Returns 1 for each matching record, without retrieving user data.
+            String query = null;
+            switch (at){
+                case PARTY_PLANNER -> query = "select 1 from partyplanner where email = ?";
+                case PARTICIPANT -> query = "select 1 from participant where email = ?";
+            }
+
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (PersistenceServiceUnavailableException | InvalidPersistenceTypeException e) {
+            // log the error
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            // throw the exception
+            throw e;
+        } catch (SQLException e) {
+            HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+            handlerSystemError.logError(e);
+            throw new PersistenceGenericException();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e2) {
+                HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
+                handlerSystemError.logError(e2);
+            }
+        }
+    }
+
+
+
 }
