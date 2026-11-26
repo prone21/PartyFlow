@@ -65,5 +65,5 @@ public interface UserDaoInterface {
      * @throws EntityNotFound if no matching account is found
      */
 
-    User retriveUserByEmail(String email) throws PersistenceServiceUnavailableException, InvalidPersistenceTypeException, PersistenceGenericException, EntityNotFound;
+    User retriveUserByEmail(String email) throws PersistenceServiceUnavailableException, InvalidPersistenceTypeException, PersistenceGenericException, EntityNotFound, PersistenceConstraintViolationException;
 }

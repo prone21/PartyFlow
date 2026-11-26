@@ -5,6 +5,7 @@ import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.enums.AccountType;
+import it.uniroma2.partyflow.enums.Gender;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
 import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.models.LoginCredential;
@@ -15,6 +16,8 @@ import it.uniroma2.partyflow.utilities.configurators.PersistenceConfigurator;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 
@@ -194,7 +197,9 @@ public class UserDaoCSV implements UserDaoInterface {
                     user.getName(),
                     user.getSurname(),
                     user.getPwd(),
-                    user.getDateOfBirth().toString(),
+                    user.getDateOfBirth().format(
+                            DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                    ),
                     user.getGender().name(),
                     user.getAccountType().name()
             };
@@ -288,8 +293,46 @@ public class UserDaoCSV implements UserDaoInterface {
     }
 
     @Override
-    public User retriveUserByEmail(String email){
-        return null;
+    public User retriveUserByEmail(String email) throws EntityNotFound, PersistenceServiceUnavailableException, InvalidPersistenceTypeException, PersistenceConstraintViolationException {
+        try{
+            this.initialize();
+            Map<String, String> csvUser = this.findUserByEmail(email);
+            if(csvUser.isEmpty()){
+                throw new EntityNotFound();
+            }
+
+            // ------------- converts the date --------------
+            // defines the pattern
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("dd/MM/uuuu");
+
+            LocalDate date =
+                    LocalDate.parse(csvUser.get("dateOfBirth"), formatter);
+            // -----------------------------------------------
+
+
+            return new User(csvUser.get("name"), csvUser.get("surname"),
+                    csvUser.get("email"), csvUser.get("password"), date,
+                    AccountType.valueOf(csvUser.get("account_type")),
+                    Gender.valueOf(csvUser.get("gender"))
+            );
+        }
+        catch (PersistenceServiceUnavailableException |
+               InvalidPersistenceTypeException | EntityNotFound e) {
+
+            UserDaoCSV.stdLog(e);
+            throw e;
+        }
+        catch (IOException e){
+            UserDaoCSV.logIOException(e);
+            throw new PersistenceServiceUnavailableException();
+        }
+        catch (CsvValidationException e){
+            UserDaoCSV.logCsvValidationException(e);
+            throw new PersistenceConstraintViolationException();
+        }
+
+
     }
 
 }

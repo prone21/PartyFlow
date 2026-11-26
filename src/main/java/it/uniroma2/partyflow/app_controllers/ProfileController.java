@@ -4,10 +4,7 @@ import it.uniroma2.partyflow.beans.UserBean;
 import it.uniroma2.partyflow.daos.dao_factories.DaoAbstractFactory;
 import it.uniroma2.partyflow.daos.dao_interfaces.UserDaoInterface;
 import it.uniroma2.partyflow.errorhandlers.HandlerSystemError;
-import it.uniroma2.partyflow.exceptions.daoexception.EntityNotFound;
-import it.uniroma2.partyflow.exceptions.daoexception.InvalidPersistenceTypeException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceGenericException;
-import it.uniroma2.partyflow.exceptions.daoexception.PersistenceServiceUnavailableException;
+import it.uniroma2.partyflow.exceptions.daoexception.*;
 import it.uniroma2.partyflow.exceptions.systemexception.InternalException;
 import it.uniroma2.partyflow.exceptions.uiexception.ApplicationException;
 import it.uniroma2.partyflow.exceptions.uiexception.InvalidFieldFormatException;
@@ -77,7 +74,7 @@ public class ProfileController {
                     user.getEmail(), user.getPwd(), user.getGender(), user.getAccountType());
             // -----------------------------------
         }
-        catch (PersistenceGenericException e){
+        catch (PersistenceGenericException | PersistenceConstraintViolationException e){
             HandlerSystemError handlerSystemError = HandlerSystemError.getInstance();
             handlerSystemError.logError(PROFILE_ERRSTR + e.getMessage(),e);
 
