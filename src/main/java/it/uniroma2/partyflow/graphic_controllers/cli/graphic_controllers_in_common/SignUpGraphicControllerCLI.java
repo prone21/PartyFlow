@@ -1,4 +1,4 @@
-package it.uniroma2.partyflow.graphic_controllers.cli;
+package it.uniroma2.partyflow.graphic_controllers.cli.graphic_controllers_in_common;
 
 import it.uniroma2.partyflow.app_controllers.SignUpController;
 import it.uniroma2.partyflow.beans.UserBean;

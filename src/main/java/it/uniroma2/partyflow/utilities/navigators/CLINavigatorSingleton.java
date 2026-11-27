@@ -1,8 +1,8 @@
 package it.uniroma2.partyflow.utilities.navigators;
 
 import it.uniroma2.partyflow.enums.AccountType;
-import it.uniroma2.partyflow.graphic_controllers.cli.PHomePageGraphicControllerCLI;
-import it.uniroma2.partyflow.graphic_controllers.cli.PpHomePageGraphicControllerCLI;
+import it.uniroma2.partyflow.graphic_controllers.cli.p_graphic_controllers.PHomePageGraphicControllerCLI;
+import it.uniroma2.partyflow.graphic_controllers.cli.pp_graphic_controllers.PpHomePageGraphicControllerCLI;
 import it.uniroma2.partyflow.utilities.console.ConsolePrinter;
 
 /**
